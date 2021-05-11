@@ -1,0 +1,6 @@
+<div *ngIf="themesService.selectedTheme" [@pageAnimations]="themesService.selectedTheme">
+  <app-menubar></app-menubar>
+  <p-scrollTop></p-scrollTop>
+  <p-toast></p-toast>
+  <router-outlet></router-outlet>
+</div>

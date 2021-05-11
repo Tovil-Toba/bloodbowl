@@ -1,0 +1,23 @@
+<p-dropdown
+  [options]="groupedThemes"
+  [(ngModel)]="themesService.selectedTheme"
+  placeholder="Выберите тему"
+  [group]="true"
+  (onChange)="changeTheme($event)"
+>
+  <ng-template let-group pTemplate="group">
+    <div class="p-d-flex p-ai-center">
+      <span>{{group.label | uppercase}}</span>
+    </div>
+  </ng-template>
+  <ng-template let-theme pTemplate="item">
+    <div class="p-d-flex p-ai-center">
+      <img
+        src="assets/images/themes/{{theme.icon}}"
+        [alt]="theme.label"
+        class="icon p-mr-3"
+      />
+      <span>{{theme.label}}</span>
+    </div>
+  </ng-template>
+</p-dropdown>

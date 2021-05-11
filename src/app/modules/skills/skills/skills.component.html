@@ -1,0 +1,7 @@
+<div *ngIf="!loading" [@pageAnimations]="!loading">
+  <p-breadcrumb [model]="breadcrumbItems" [home]="{ icon: 'pi pi-home', routerLink: '/' }" styleClass="p-mb-3 animation"></p-breadcrumb>
+
+  <p-panel header="Skills" styleClass="animation">
+    {{id}}
+  </p-panel>
+</div>

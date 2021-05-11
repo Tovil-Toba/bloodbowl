@@ -1,0 +1,9 @@
+<p-breadcrumb [home]="home" styleClass="p-mb-3 animation"></p-breadcrumb>
+
+<p-panel header="Blood Bowl" styleClass="animation">
+  <p-galleria [value]="galleriaImages" [circular]="true" [showItemNavigators]="true" [showThumbnails]="false">
+    <ng-template pTemplate="item" let-item>
+      <img [src]="item.previewImageSrc" [alt]="item.alt" style="width: 100%;"/>
+    </ng-template>
+  </p-galleria>
+</p-panel>

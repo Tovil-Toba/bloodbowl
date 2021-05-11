@@ -1,0 +1,8 @@
+.bio {
+  white-space: pre-wrap;
+}
+
+.photo {
+  min-width: 300px;
+  max-width: 100%;
+}

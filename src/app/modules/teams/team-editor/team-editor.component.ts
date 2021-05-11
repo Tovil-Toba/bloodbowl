@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormBuilder } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
 
-import { base64toFile } from '../shared/base64toFile';
+import { base64toFile } from '../../../utils/base64toFile';
 import { TeamsService } from '../shared/teams.service';
 import { TeamModel } from '../shared/team.model';
 import { enterPageAnimation } from '../../../shared/animations';

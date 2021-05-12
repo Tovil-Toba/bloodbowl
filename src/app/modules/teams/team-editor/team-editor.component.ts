@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
 
 import { base64toFile } from '../../../shared/base64toFile';
@@ -15,6 +14,7 @@ import { enterPageAnimation } from '../../../shared/animations';
   animations: [enterPageAnimation]
 })
 export class TeamEditorComponent implements OnInit {
+
   team: TeamModel;
   logo: string;
   photo: string;
@@ -22,11 +22,9 @@ export class TeamEditorComponent implements OnInit {
   photos: File[] = [];
   breadcrumbItems: MenuItem[];
   loading = false;
-  submitLoading = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
     private teamsService: TeamsService
   ) { }
 
@@ -69,42 +67,4 @@ export class TeamEditorComponent implements OnInit {
     this.getTeam(this.urlId);
   }
 
-  onLogoSelect(event) {
-    for (const file of event.files) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        this.logo = reader.result.toString();
-      };
-    }
-  }
-
-  onPhotoSelect(event) {
-    for (const file of event.files) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        this.photo = reader.result.toString();
-      };
-    }
-  }
-
-  onLogoClear() {
-    this.logo = '';
-  }
-
-  onPhotoClear() {
-    this.photo = '';
-  }
-
-  onSubmit() {
-    this.submitLoading = true;
-    this.team.logo = this.logo;
-    this.team.photo = this.photo;
-    this.teamsService.updateItem(this.team)
-      .subscribe(() => {
-        this.teamsService.reloadTeams();
-        this.submitLoading = false;
-      });
-  }
 }

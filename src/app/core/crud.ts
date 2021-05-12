@@ -4,7 +4,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from 'primeng/api';
 
 interface Item {
-  id: string;
+  id: number;
 }
 
 export abstract class Crud<T extends Item> {
@@ -29,7 +29,7 @@ export abstract class Crud<T extends Item> {
   }
 
   /** GET item by id. Return `undefined` when id not found */
-  getItemNo404<Data>(id: string): Observable<T> {
+  getItemNo404<Data>(id: number): Observable<T> {
     const url = `${this.apiUrl}/?id=${id}`;
     return this.http.get<T[]>(url)
       .pipe(
@@ -43,7 +43,7 @@ export abstract class Crud<T extends Item> {
   }
 
   /** GET item by id. Will 404 if id not found */
-  getItem(id: string): Observable<T> {
+  getItem(id: number): Observable<T> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.get<T>(url).pipe(
       tap(_ => this.log(`fetched getItem url=${this.apiUrl} id=${id}`)),
@@ -84,12 +84,18 @@ export abstract class Crud<T extends Item> {
   }
 
   /** DELETE: delete the item from the server */
-  deleteItem(id: string): Observable<T> {
+  deleteItem(id: number): Observable<T> {
     const url = `${this.apiUrl}/${id}`;
 
     return this.http.delete<T>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted item url=${this.apiUrl} id=${id}`)),
-      catchError(this.handleError<T>(`deleteItem url=${this.apiUrl} id=${id}`))
+      tap(_ => {
+        this.log(`deleted item url=${this.apiUrl} id=${id}`);
+        this.showSuccessToast('Data is deleted');
+      }),
+      catchError(this.handleError<T>(
+        `deleteItem url=${this.apiUrl} id=${id}`,
+        'Data is not deleted'
+      ))
     );
   }
 

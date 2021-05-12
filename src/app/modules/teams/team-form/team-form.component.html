@@ -1,0 +1,131 @@
+<div class="p-grid">
+  <div class="p-col" style="min-width: 470px;">
+    <p-fileUpload
+      name="logo"
+      [files]="logos"
+      (onSelect)="onLogoSelect($event)"
+      (onClear)="onLogoClear()"
+      accept="image/*"
+      maxFileSize="1000000"
+      fileLimit="1"
+      [showUploadButton]="false"
+      styleClass="p-mb-3"
+    >
+      <ng-template let-file pTemplate="file">
+        <img *ngIf="file" [src]="file.objectURL" width="124" alt="Logo of the team" />
+      </ng-template>
+      <ng-template pTemplate="content" let-files>
+        <div>Drag and drop team logo here.</div>
+      </ng-template>
+    </p-fileUpload>
+
+    <p-fileUpload
+      name="photo"
+      [files]="photos"
+      (onSelect)="onPhotoSelect($event)"
+      (onClear)="onPhotoClear()"
+      accept="image/*"
+      maxFileSize="1000000"
+      fileLimit="1"
+      [showUploadButton]="false"
+      styleClass="p-mb-3"
+    >
+      <ng-template let-file pTemplate="file">
+        <img *ngIf="file" [src]="file.objectURL" width="470" alt="Photo of the team" />
+      </ng-template>
+      <ng-template pTemplate="content" let-files>
+        <div>Drag and drop team photo here.</div>
+      </ng-template>
+    </p-fileUpload>
+  </div>
+
+  <div class="p-col">
+    <form (ngSubmit)="onSubmit()" #teamForm="ngForm">
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+          <input id="urlId" type="text" pInputText required appUniqueUrlId [(ngModel)]="team.urlId" name="urlId">
+          <label for="urlId">Url Id</label>
+        </span>
+      </div>
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+          <input id="name" type="text" pInputText required [(ngModel)]="team.name" name="name">
+          <label for="name">Team Name</label>
+        </span>
+      </div>
+
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+          <input id="colours" type="text" pInputText [(ngModel)]="team.colours" name="colours">
+          <label for="colours">Team Colours</label>
+        </span>
+      </div>
+
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+          <input id="owner" type="text" pInputText required [(ngModel)]="team.owner" name="owner">
+          <label for="owner">Owner</label>
+        </span>
+      </div>
+
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+          <input id="headCoach" type="text" pInputText [(ngModel)]="team.headCoach" name="headCoach">
+          <label for="headCoach">Head Coach</label>
+        </span>
+      </div>
+
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+          <input id="homeStadium" type="text" pInputText [(ngModel)]="team.homeStadium" name="homeStadium">
+          <label for="homeStadium">Home Stadium</label>
+        </span>
+      </div>
+
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+          <input id="players" type="text" pInputText required [(ngModel)]="team.players" name="players">
+          <label for="players">Players</label>
+        </span>
+      </div>
+
+      <div class="p-field p-col-12">
+        <span class="p-float-label">
+          <textarea id="honours" rows="3" cols="60" pInputTextarea [(ngModel)]="team.honours" name="honours"></textarea>
+          <label for="honours">Team Honours</label>
+        </span>
+      </div>
+
+      <div class="p-field p-col-12">
+        <span class="p-float-label">
+          <textarea id="hallOfFamePlayers" rows="3" cols="60" pInputTextarea [(ngModel)]="team.hallOfFamePlayers" name="hallOfFamePlayers"></textarea>
+          <label for="hallOfFamePlayers">Hall of Fame Players</label>
+        </span>
+      </div>
+
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
+          <input id="spikeMagazineRating" type="text" pInputText [(ngModel)]="team.spikeMagazineRating" name="spikeMagazineRating">
+          <label for="spikeMagazineRating">Spike! Magazine Team Rating</label>
+        </span>
+      </div>
+
+      <div class="p-col-12">
+        <span class="p-float-label">
+          <textarea id="bio" rows="6" cols="60" pInputTextarea [(ngModel)]="team.bio" name="bio"></textarea>
+          <label for="bio">Team Bio</label>
+        </span>
+      </div>
+
+      <div class="p-col-12">
+        <p-button
+          type="submit"
+          [disabled]="!teamForm.form.valid"
+          [loading]="submitLoading"
+          label="Submit"
+          icon="pi pi-check"
+        ></p-button>
+      </div>
+    </form>
+  </div>
+</div>

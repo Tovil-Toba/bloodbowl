@@ -1,0 +1,11 @@
+<div *ngIf="!loading" [@pageAnimations]="!loading">
+  <p-breadcrumb
+    [model]="breadcrumbItems"
+    [home]="{ icon: 'pi pi-home', routerLink: '/' }"
+    styleClass="p-mb-3 animation"
+  ></p-breadcrumb>
+
+  <p-panel header="Team Rosters" styleClass="animation">
+    {{urlId}}
+  </p-panel>
+</div>

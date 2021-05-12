@@ -5,3 +5,12 @@ body {
   font-family: var(--font-family);
   padding: var(--content-padding);
 }
+
+.p-menubar .p-submenu-list {
+  width: auto;
+}
+
+.p-menubar .p-menuitem {
+  position: relative;
+  white-space: nowrap;
+}

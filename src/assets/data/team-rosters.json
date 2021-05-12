@@ -1,0 +1,139 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "urlId": "amazon",
+      "name": "Amazon"
+    },
+    {
+      "id": 2,
+      "urlId": "black-ork",
+      "name": "Black Ork"
+    },
+    {
+      "id": 3,
+      "urlId": "chaos-chosen",
+      "name": "Chaos Chosen"
+    },
+    {
+      "id": 4,
+      "urlId": "chaos-dwarf",
+      "name": "Chaos Dwarf"
+    },
+    {
+      "id": 5,
+      "urlId": "chaos-renegade",
+      "name": "Chaos Renegade"
+    },
+    {
+      "id": 6,
+      "urlId": "dark-elf",
+      "name": "Dark Elf"
+    },
+    {
+      "id": 7,
+      "urlId": "dwarf",
+      "name": "Dwarf"
+    },
+    {
+      "id": 8,
+      "urlId": "elven-union",
+      "name": "Elven Union"
+    },
+    {
+      "id": 9,
+      "urlId": "goblin",
+      "name": "Goblin"
+    },
+    {
+      "id": 10,
+      "urlId": "halfling",
+      "name": "Halfling"
+    },
+    {
+      "id": 11,
+      "urlId": "high-elf",
+      "name": "High Elf"
+    },
+    {
+      "id": 12,
+      "urlId": "human",
+      "name": "Human"
+    },
+    {
+      "id": 13,
+      "urlId": "imperial-nobility",
+      "name": "Imperial Nobility"
+    },
+    {
+      "id": 14,
+      "urlId": "lizardmen",
+      "name": "Lizardmen"
+    },
+    {
+      "id": 15,
+      "urlId": "necromantic-horror",
+      "name": "Necromantic Horror"
+    },
+    {
+      "id": 16,
+      "urlId": "norse",
+      "name": "Norse"
+    },
+    {
+      "id": 17,
+      "urlId": "nurgle",
+      "name": "Nurgle"
+    },
+    {
+      "id": 18,
+      "urlId": "ogre",
+      "name": "Ogre"
+    },
+    {
+      "id": 19,
+      "urlId": "old-world-alliance",
+      "name": "Old World Alliance"
+    },
+    {
+      "id": 20,
+      "urlId": "orc",
+      "name": "Orc"
+    },
+    {
+      "id": 21,
+      "urlId": "shambling-undead",
+      "name": "Shambling Undead"
+    },
+    {
+      "id": 22,
+      "urlId": "skaven",
+      "name": "Skaven"
+    },
+    {
+      "id": 23,
+      "urlId": "snotling",
+      "name": "Snotling"
+    },
+    {
+      "id": 24,
+      "urlId": "tomb-kings",
+      "name": "Tomb Kings"
+    },
+    {
+      "id": 25,
+      "urlId": "underworld-denizens",
+      "name": "Underworld Denizens"
+    },
+    {
+      "id": 26,
+      "urlId": "vampire",
+      "name": "Vampire"
+    },
+    {
+      "id": 27,
+      "urlId": "wood-elf",
+      "name": "Wood Elf"
+    }
+  ]
+}

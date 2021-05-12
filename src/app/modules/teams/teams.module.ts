@@ -6,13 +6,15 @@ import { TeamComponent } from './team/team.component';
 import { TeamEditorComponent } from './team-editor/team-editor.component';
 import { TeamsComponent } from './teams/teams.component';
 import { UniqueUrlIdValidatorDirective } from './shared/id.directive';
+import { TeamFormComponent } from './team-form/team-form.component';
 
 @NgModule({
   declarations: [
     TeamComponent,
     TeamEditorComponent,
     TeamsComponent,
-    UniqueUrlIdValidatorDirective
+    UniqueUrlIdValidatorDirective,
+    TeamFormComponent
   ],
   imports: [SharedModule],
   providers: [MessageService]

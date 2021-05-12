@@ -10,16 +10,62 @@
   ></p-breadcrumb>
 
   <p-panel header="Teams" styleClass="animation">
-    <div class="p-grid">
-      <div
-        *ngFor="let team of teams"
-        class="p-offset-4 p-text-center p-text-uppercase p-d-flex p-align-center p-justify-center"
-      >
-        <button (click)="goToTeam(team.urlId)" pButton pRipple type="button" class="p-button-text p-button-lg">
-          <img *ngIf="team.logo" [src]="team.logo" [alt]="team.name" class="p-d-inline-block p-mr-3" height="60" />
-          <span>{{team.name}}</span>
-        </button>
-      </div>
-    </div>
+    <p-table
+      #teamsTable
+      [value]="teams"
+      [rows]="10"
+      [paginator]="true"
+      [globalFilterFields]="['name','rank']"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+    >
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <button pButton pRipple label="New Team" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+          <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="teamsTable.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
+        </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Logo</th>
+          <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+          <th pSortableColumn="spikeMagazineRating">Rating <p-sortIcon field="spikeMagazineRating"></p-sortIcon></th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-team>
+        <tr>
+          <td><img *ngIf="team.logo" [src]="team.logo" [alt]="team.name" width="60" /></td>
+          <td>
+            <a [routerLink]="'/teams/' + team.urlId" [ngStyle]="{color:'var(--primary-color)'}">
+              {{team.name}}
+            </a>
+          </td>
+          <td>{{team.spikeMagazineRating}}</td>
+          <td>
+            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editTeam(team)"></button>
+            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteTeam(team)"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{teams ? teams.length : 0 }} teams.
+        </div>
+      </ng-template>
+    </p-table>
   </p-panel>
+
+  <p-dialog [(visible)]="teamDialog" [style]="{width: '600px'}" header="Team Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+      <app-team-form [team]="team"></app-team-form>
+    </ng-template>
+  </p-dialog>
+
+  <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 </div>

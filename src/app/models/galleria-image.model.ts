@@ -1,5 +1,5 @@
 export interface GalleriaImageModel {
-  id: string;
+  id: number;
   previewImageSrc: string;
   thumbnailImageSrc?: string;
   alt?: string;

@@ -47,7 +47,7 @@ export class TeamsComponent implements OnInit, DoCheck {
 
   deleteTeam(team: TeamModel): void {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + team.name + '?',
+      message: 'Are you sure you want to delete team "' + team.name + '"?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {

@@ -25,7 +25,8 @@ export class TeamsComponent implements OnInit, DoCheck {
   team: TeamModel;
   breadcrumbItems: MenuItem[];
   loading = false;
-  teamDialog = false;
+  teamFormDialog = false;
+  teamInfoDialog = false;
 
   constructor(
     private confirmationService: ConfirmationService,
@@ -42,7 +43,7 @@ export class TeamsComponent implements OnInit, DoCheck {
 
   editTeam(team: TeamModel): void {
     this.team = team;
-    this.teamDialog = true;
+    this.teamFormDialog = true;
   }
 
   deleteTeam(team: TeamModel): void {
@@ -67,23 +68,20 @@ export class TeamsComponent implements OnInit, DoCheck {
       });
   }
 
-  goToTeam(id: string): void {
-    this.router.navigate([`teams/${id}`]);
-  }
-
-  hideDialog(): void {
-    this.teamDialog = false;
-  }
-
   ngOnInit(): void {
     this.breadcrumbItems = [
       { label: 'Teams' }
     ];
   }
 
-  openNew() {
+  openNewTeamDialog(): void {
     this.team = {} as TeamModel;
-    this.teamDialog = true;
+    this.teamFormDialog = true;
+  }
+
+  openTeamInfoDialog(team: TeamModel): void {
+    this.team = team;
+    this.teamInfoDialog = true;
   }
 
 }

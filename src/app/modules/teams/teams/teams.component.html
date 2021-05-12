@@ -23,7 +23,7 @@
     >
       <ng-template pTemplate="caption">
         <div class="p-d-flex p-ai-center p-jc-between">
-          <button pButton pRipple label="New Team" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+          <button pButton pRipple label="New Team" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNewTeamDialog()"></button>
           <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
           <input pInputText type="text" (input)="teamsTable.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
@@ -32,22 +32,27 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th>Logo</th>
+          <th style="width: 100px;">Logo</th>
           <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
           <th pSortableColumn="spikeMagazineRating">Rating <p-sortIcon field="spikeMagazineRating"></p-sortIcon></th>
-          <th></th>
+          <th style="width: 9rem;"></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-team>
         <tr>
-          <td><img *ngIf="team.logo" [src]="team.logo" [alt]="team.name" width="60" /></td>
-          <td>
-            <a [routerLink]="'/teams/' + team.urlId" [ngStyle]="{color:'var(--primary-color)'}">
-              {{team.name}}
-            </a>
+          <td style="width: 100px;"><img *ngIf="team.logo" [src]="team.logo" [alt]="team.name" width="60" /></td>
+          <td class="p-pl-0">
+            <button
+              pButton
+              type="button"
+              [label]="team.name"
+              (click)="openTeamInfoDialog(team)"
+              class="p-button-text"
+              style="white-space: nowrap"
+            ></button>
           </td>
           <td>{{team.spikeMagazineRating}}</td>
-          <td>
+          <td class="p-text-right" style="width: 9rem;">
             <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editTeam(team)"></button>
             <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteTeam(team)"></button>
           </td>
@@ -61,9 +66,30 @@
     </p-table>
   </p-panel>
 
-  <p-dialog [(visible)]="teamDialog" [style]="{width: '600px'}" header="Team Details" [modal]="true" styleClass="p-fluid">
+  <p-dialog
+    [(visible)]="teamFormDialog"
+    [header]="team && team.id ? team.name : 'New Team'"
+    [modal]="true"
+    [maximizable]="true"
+    [style]="{width: '575px'}"
+    styleClass="p-fluid"
+  >
     <ng-template pTemplate="content">
       <app-team-form [team]="team"></app-team-form>
+    </ng-template>
+  </p-dialog>
+
+  <p-dialog
+    *ngIf="team"
+    [(visible)]="teamInfoDialog"
+    [header]="team.name"
+    [modal]="true"
+    [maximizable]="true"
+    [style]="{width: '720px'}"
+    styleClass="p-fluid"
+  >
+    <ng-template pTemplate="content">
+      <app-team-info [team]="team"></app-team-info>
     </ng-template>
   </p-dialog>
 

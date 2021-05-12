@@ -11,44 +11,7 @@
       <button pButton class="p-panel-header-icon p-link" icon="pi pi-pencil" (click)="editTeam()" pTooltip="Edit Team" tooltipPosition="top"></button>
     </ng-template>
 
-    <div class="p-text-center p-text-uppercase p-d-flex p-align-center p-justify-center p-mb-3">
-      <img *ngIf="team.logo" [src]="team.logo" class="p-d-inline-block p-mr-3" alt="Team logo" height="60" />
-      <h2 class="p-d-inline-block">{{team.name}}</h2>
-    </div>
-
-    <div class="p-grid p-ai-start vertical-container">
-      <div class="p-col">
-        <img *ngIf="team.photo" [src]="team.photo" alt="Team photo" class="photo" />
-      </div>
-      <div class="p-col-6">
-        <div *ngIf="team.colours" class="p-mb-3">
-          <span class="p-text-bold">Team Colours:</span> {{team.colours}}
-        </div>
-        <div *ngIf="team.owner" class="p-mb-3">
-          <span class="p-text-bold">Owner:</span> {{team.owner}}
-        </div>
-        <div *ngIf="team.headCoach" class="p-mb-3">
-          <span class="p-text-bold">Head Coach:</span> {{team.headCoach}}
-        </div>
-        <div *ngIf="team.homeStadium" class="p-mb-3">
-          <span class="p-text-bold">Home Stadium:</span> {{team.homeStadium}}
-        </div>
-        <div *ngIf="team.players" class="p-mb-3">
-          <span class="p-text-bold">Players:</span> {{team.players}}
-        </div>
-        <div *ngIf="team.honours" class="p-mb-3">
-          <span class="p-text-bold">Team Honours:</span> {{team.honours}}
-        </div>
-        <div *ngIf="team.hallOfFamePlayers" class="p-mb-3">
-          <span class="p-text-bold">Hall of Fame Players:</span> {{team.hallOfFamePlayers}}
-        </div>
-        <div *ngIf="team.spikeMagazineRating" class="p-mb-3">
-          <span class="p-text-bold">Spike! Magazine Team Rating:</span> {{team.spikeMagazineRating}}
-        </div>
-      </div>
-    </div>
-
-    <div *ngIf="team.bio" class="bio">{{team.bio}}</div>
+    <app-team-info [team]="team"></app-team-info>
   </p-panel>
 
   <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

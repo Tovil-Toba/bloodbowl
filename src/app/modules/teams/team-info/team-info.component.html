@@ -4,10 +4,10 @@
 </div>
 
 <div class="p-grid p-ai-start vertical-container">
-  <div class="p-col">
+  <div class="p-col p-text-center">
     <img *ngIf="team.photo" [src]="team.photo" alt="Team photo" class="photo" />
   </div>
-  <div class="p-col-6">
+  <div class="p-col">
     <div *ngIf="team.colours" class="p-mb-3">
       <span class="p-text-bold">Team Colours:</span> {{team.colours}}
     </div>
@@ -32,7 +32,7 @@
     <div *ngIf="team.spikeMagazineRating" class="p-mb-3">
       <span class="p-text-bold">Spike! Magazine Team Rating:</span> {{team.spikeMagazineRating}}
     </div>
+    <div *ngIf="team.bio" class="bio">{{team.bio}}</div>
   </div>
 </div>
 
-<div *ngIf="team.bio" class="bio">{{team.bio}}</div>

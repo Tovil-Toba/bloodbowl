@@ -12,10 +12,12 @@
       styleClass="p-mb-3"
     >
       <ng-template let-file pTemplate="file">
-        <img *ngIf="file" [src]="file.objectURL" width="124" alt="Logo of the team" />
+        <div class="p-text-center">
+          <img *ngIf="file" [src]="file.objectURL" width="124" alt="Logo of the team" />
+        </div>
       </ng-template>
       <ng-template pTemplate="content" let-files>
-        <div>Drag and drop team logo here.</div>
+        <div *ngIf="!files.length" class="p-text-center">Drag and drop team logo here.</div>
       </ng-template>
     </p-fileUpload>
 
@@ -31,10 +33,12 @@
       styleClass="p-mb-3"
     >
       <ng-template let-file pTemplate="file">
-        <img *ngIf="file" [src]="file.objectURL" width="470" alt="Photo of the team" />
+        <div class="p-text-center">
+          <img *ngIf="file" [src]="file.objectURL" width="470" alt="Photo of the team" />
+        </div>
       </ng-template>
       <ng-template pTemplate="content" let-files>
-        <div>Drag and drop team photo here.</div>
+        <div *ngIf="!files.length" class="p-text-center">Drag and drop team photo here.</div>
       </ng-template>
     </p-fileUpload>
   </div>

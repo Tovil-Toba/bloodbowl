@@ -1,7 +1,7 @@
 import { DBConfig } from 'ngx-indexed-db';
 
 export const DB_CONFIG: DBConfig = {
-  name: 'BloodBowlDb',
+  name: 'BloodBowlDB',
   version: 1,
   objectStoresMeta: [
     {

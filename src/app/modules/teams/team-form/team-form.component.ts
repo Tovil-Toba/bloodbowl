@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { TeamModel } from '../shared/team.model';
-import { ActivatedRoute } from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import * as _ from 'lodash';
 
+import { TeamModel } from '../shared/team.model';
 import { TeamsService } from '../shared/teams.service';
 import { base64toFile } from '../../../shared/base64toFile';
 
@@ -13,7 +13,9 @@ import { base64toFile } from '../../../shared/base64toFile';
 export class TeamFormComponent implements OnInit {
 
   @Input() team: TeamModel;
+  @Output() submittedTeam = new EventEmitter<TeamModel>();
 
+  clonedTeam: TeamModel;
   logo: string;
   photo: string;
   logos: File[] = [];
@@ -21,12 +23,10 @@ export class TeamFormComponent implements OnInit {
   loading = false;
   submitLoading = false;
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private teamsService: TeamsService
-  ) { }
+  constructor(private teamsService: TeamsService) { }
 
   ngOnInit(): void {
+    this.clonedTeam = _.clone(this.team);
     this.teamsService.selectedTeamUrlId = this.team.urlId;
     this.logo = this.team.logo;
     this.photo = this.team.photo;
@@ -68,18 +68,27 @@ export class TeamFormComponent implements OnInit {
 
   onSubmit() {
     this.submitLoading = true;
-    this.team.logo = this.logo;
-    this.team.photo = this.photo;
-    if (!this.team.id) {
-      this.teamsService.addItem(this.team)
-        .subscribe(() => {
-          this.teamsService.reloadTeams();
+    this.clonedTeam.logo = this.logo;
+    this.clonedTeam.photo = this.photo;
+    if (!this.clonedTeam.id) {
+      this.teamsService.addItem(this.clonedTeam)
+        .subscribe((team: TeamModel) => {
+          this.submittedTeam.emit(team);
+          this.clonedTeam = _.clone(team);
+          const clonedTeams = _.clone(this.teamsService.teams);
+          clonedTeams.push(this.clonedTeam);
+          this.teamsService.teams = clonedTeams;
           this.submitLoading = false;
         });
     } else {
-      this.teamsService.updateItem(this.team)
+      this.teamsService.updateItem(this.clonedTeam)
         .subscribe(() => {
-          this.teamsService.reloadTeams();
+          this.submittedTeam.emit(this.clonedTeam);
+          this.clonedTeam = _.clone(this.clonedTeam);
+          const index = _.findIndex(this.teamsService.teams, { id: this.clonedTeam.id });
+          const clonedTeams = _.clone(this.teamsService.teams);
+          clonedTeams.splice(index, 1, this.clonedTeam);
+          this.teamsService.teams = clonedTeams;
           this.submitLoading = false;
         });
     }

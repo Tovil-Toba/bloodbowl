@@ -1,6 +1,13 @@
-<div *ngIf="themesService.selectedTheme" [@pageAnimations]="themesService.selectedTheme">
-  <app-menubar></app-menubar>
-  <p-scrollTop></p-scrollTop>
-  <p-toast></p-toast>
-  <router-outlet></router-outlet>
+<div *ngIf="themesService.selectedTheme">
+  <app-loading-screen
+    *ngIf="teamsService.loading || skillsService.loading; else elseBlock"
+  ></app-loading-screen>
+  <ng-template #elseBlock>
+    <div [@pageAnimations]="themesService.selectedTheme">
+      <app-menubar></app-menubar>
+      <p-scrollTop></p-scrollTop>
+      <p-toast></p-toast>
+      <router-outlet></router-outlet>
+    </div>
+  </ng-template>
 </div>

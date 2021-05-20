@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import * as _ from 'lodash';
 
-import { base64toFile } from '../../../shared/base64toFile';
 import { TeamsService } from '../shared/teams.service';
 import { TeamModel } from '../shared/team.model';
 import { enterPageAnimation } from '../../../shared/animations';
@@ -16,46 +16,28 @@ import { enterPageAnimation } from '../../../shared/animations';
 export class TeamEditorComponent implements OnInit {
 
   team: TeamModel;
-  logo: string;
-  photo: string;
-  logos: File[] = [];
-  photos: File[] = [];
   breadcrumbItems: MenuItem[];
   loading = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private teamsService: TeamsService
+    public teamsService: TeamsService
   ) { }
 
   get urlId(): string {
     return this.activatedRoute.snapshot.paramMap.get('urlId');
   }
 
-  getTeam(urlId: string) {
-    this.loading = true;
-    this.teamsService.getItemsByField('urlId', urlId)
-      .subscribe((teams: TeamModel[]) => {
-        if (teams.length) {
-          const team = teams[0];
-          this.teamsService.selectedTeamUrlId = team.urlId;
-          this.team = team;
-          this.logo = team.logo;
-          this.photo = team.photo;
-          if (team.logo) {
-            this.logos.push(base64toFile(team.logo, 'logo'));
-          }
-          if (team.photo) {
-            this.photos.push(base64toFile(team.photo, 'photo'));
-          }
-          this.breadcrumbItems = [
-            { label: 'Teams', routerLink: '/teams' },
-            { label: this.team.name, routerLink: `/teams/${this.urlId}` },
-            { label: 'Edit' }
-          ];
-        }
-        this.loading = false;
-      });
+  getTeam(urlId: string): void {
+    const index = _.findIndex(this.teamsService.teams, { urlId });
+    if (index !== -1) {
+      this.team = this.teamsService.teams[index];
+      this.breadcrumbItems = [
+        { label: 'Teams', routerLink: '/teams' },
+        { label: this.team.name, routerLink: `/teams/${this.urlId}` },
+        { label: 'Edit' }
+      ];
+    }
   }
 
   ngOnInit(): void {
@@ -65,6 +47,15 @@ export class TeamEditorComponent implements OnInit {
       { label: 'Add' }
     ];
     this.getTeam(this.urlId);
+  }
+
+  onTeamFormSubmit(team: TeamModel): void {
+    this.team = team;
+    this.breadcrumbItems = [
+      { label: 'Teams', routerLink: '/teams' },
+      { label: this.team.name, routerLink: `/teams/${this.urlId}` },
+      { label: 'Edit' }
+    ];
   }
 
 }

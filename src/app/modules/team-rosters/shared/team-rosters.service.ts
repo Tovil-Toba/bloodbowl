@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { MessageService } from 'primeng/api';
 
 import { Crud } from '../../../core/crud';
@@ -10,7 +11,8 @@ import { TeamRosterModel } from './team-roster.model';
 })
 export class TeamRostersService extends Crud<TeamRosterModel> {
 
-  reloadTeamRostersTrigger = 0;
+  teamRosters: TeamRosterModel[] = [];
+  loading = false;
   selectedTeamRosterUrlId: string;
 
   constructor(
@@ -20,7 +22,9 @@ export class TeamRostersService extends Crud<TeamRosterModel> {
     super('api/teamRosters', http, messageService);
   }
 
-  reloadTeamRosters(): void {
-    this.reloadTeamRostersTrigger = Date.now();
+  getTeamRostersByUrlId$(urlId: string): Observable<TeamRosterModel[]> {
+    const url = `api/teamRosters/?urlId=^${urlId}$`;
+    return this.http.get<TeamRosterModel[]>(url);
   }
+
 }

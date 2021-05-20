@@ -1,11 +1,11 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
+import { MenuItem } from 'primeng/api';
+import * as _ from 'lodash';
 
 import { TeamsService } from '../shared/teams.service';
 import { TeamModel } from '../shared/team.model';
-import { MenuItem } from 'primeng/api';
 import { enterPageAnimation } from '../../../shared/animations';
 
 @Component({
@@ -18,9 +18,8 @@ import { enterPageAnimation } from '../../../shared/animations';
     MessageService
   ]
 })
-export class TeamsComponent implements OnInit, DoCheck {
+export class TeamsComponent implements OnInit {
 
-  oldReloadTeamsTrigger: number;
   teams: TeamModel[];
   team: TeamModel;
   breadcrumbItems: MenuItem[];
@@ -30,16 +29,8 @@ export class TeamsComponent implements OnInit, DoCheck {
 
   constructor(
     private confirmationService: ConfirmationService,
-    private router: Router,
-    private teamsService: TeamsService
+    public teamsService: TeamsService
   ) { }
-
-  ngDoCheck(): void {
-    if (this.teamsService.reloadTeamsTrigger !== this.oldReloadTeamsTrigger) {
-      this.oldReloadTeamsTrigger = this.teamsService.reloadTeamsTrigger;
-      this.getTeams();
-    }
-  }
 
   editTeam(team: TeamModel): void {
     this.team = team;
@@ -53,25 +44,20 @@ export class TeamsComponent implements OnInit, DoCheck {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.teamsService.deleteItem(team.id).subscribe(() => {
-          this.teams = this.teams.filter(val => val.id !== team.id);
+          this.teamsService.teams = this.teamsService.teams.filter(val => val.id !== team.id);
         });
       }
     });
-  }
-
-  getTeams(): void {
-    this.loading = true;
-    this.teamsService.getItems()
-      .subscribe((teams: TeamModel[]) => {
-        this.teams = teams;
-        this.loading = false;
-      });
   }
 
   ngOnInit(): void {
     this.breadcrumbItems = [
       { label: 'Teams' }
     ];
+  }
+
+  onTeamFormSubmit(team: TeamModel): void {
+    this.teamFormDialog = false;
   }
 
   openNewTeamDialog(): void {

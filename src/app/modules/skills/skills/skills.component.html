@@ -1,7 +1,105 @@
-<div *ngIf="!loading" [@pageAnimations]="!loading">
-  <p-breadcrumb [model]="breadcrumbItems" [home]="{ icon: 'pi pi-home', routerLink: '/' }" styleClass="p-mb-3 animation"></p-breadcrumb>
+<div
+  *ngIf="!skillsService.loading && skillsService.skills"
+  [@pageAnimations]="!skillsService.loading && skillsService.skills"
+>
+  <p-breadcrumb
+    [model]="breadcrumbItems"
+    [home]="{ icon: 'pi pi-home', routerLink: '/' }"
+    styleClass="p-mb-3 animation"
+  ></p-breadcrumb>
 
   <p-panel header="Skills" styleClass="animation">
-    {{id}}
+    <p-table
+      #skillsTable
+      [value]="skillsService.skills"
+      [rows]="10"
+      [paginator]="true"
+      [globalFilterFields]="['name','rank']"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+    >
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <button
+            pButton
+            pRipple
+            label="New Skill"
+            icon="pi pi-plus"
+            class="p-button-success p-mr-2"
+            (click)="openNewSkillDialog()"
+          ></button>
+          <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="skillsTable.filterGlobal($event.target.value, 'contains')"
+            placeholder="Search..."
+          />
+        </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="name" style="width: 9rem;">Name <p-sortIcon field="name"></p-sortIcon></th>
+          <th pSortableColumn="category" style="width: 9rem;">Category <p-sortIcon field="category"></p-sortIcon></th>
+          <th>Description</th>
+          <th style="width: 9rem;"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-skill>
+        <tr>
+          <td style="vertical-align: top;">
+            <p>{{skill.name}}<span *ngIf="skill.compulsory">*</span></p>
+          </td>
+          <td style="vertical-align: top; width: 9rem;">
+            <p>{{skill.category}}</p>
+          </td>
+          <td [innerHTML]="skill.description"></td>
+          <td class="p-text-right" style="width: 9rem;">
+            <button
+              pButton
+              pRipple
+              icon="pi pi-pencil"
+              class="p-button-rounded p-button-success p-mr-2"
+              (click)="editSkill(skill)"
+              pTooltip="Edit Skill"
+              tooltipPosition="top"
+            ></button>
+            <button
+              pButton
+              pRipple
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-warning"
+              (click)="deleteSkill(skill)"
+              pTooltip="Delete Skill"
+              tooltipPosition="top"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{skillsService.skills ? skillsService.skills.length : 0 }} skills.
+        </div>
+      </ng-template>
+    </p-table>
   </p-panel>
+
+  <p-dialog
+    [(visible)]="skillFormDialog"
+    [header]="skill && skill.id ? skill.name : 'New Team'"
+    [modal]="true"
+    [maximizable]="true"
+    [style]="{width: '575px'}"
+    styleClass="p-fluid"
+  >
+    <ng-template pTemplate="content">
+      <app-skill-form [skill]="skill" (submittedSkill)="onSkillFormSubmit($event)"></app-skill-form>
+    </ng-template>
+  </p-dialog>
+
+  <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 </div>

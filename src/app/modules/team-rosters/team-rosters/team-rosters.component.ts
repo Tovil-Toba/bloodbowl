@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { ActivatedRoute } from '@angular/router';
 
+import { TeamRostersService } from '../shared/team-rosters.service';
+import { TeamRosterModel } from '../shared/team-roster.model';
 import { enterPageAnimation } from '../../../shared/animations';
 
 @Component({
@@ -15,11 +16,9 @@ export class TeamRostersComponent implements OnInit {
   breadcrumbItems: MenuItem[];
   loading = false;
 
-  constructor(private route: ActivatedRoute) { }
-
-  get urlId(): string {
-    return this.route.snapshot.paramMap.get('urlId');
-  }
+  constructor(
+    public teamRostersService: TeamRostersService
+  ) { }
 
   ngOnInit(): void {
     this.breadcrumbItems = [

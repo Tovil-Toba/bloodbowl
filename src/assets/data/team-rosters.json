@@ -3,7 +3,37 @@
     {
       "id": 1,
       "urlId": "amazon",
-      "name": "Amazon"
+      "name": "Amazon",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 16,
+          "position": "Tribal Linewomen",
+          "cost": 50000,
+          "movementAllowance": 6,
+          "strength": 3,
+          "agility": 3,
+          "passingAbility": 4,
+          "armourValue": 8,
+          "skillsAndTraits": "Dodge",
+          "primary": "G",
+          "secondary": "AS"
+        },
+        {
+          "id": 2,
+          "quantity": 2,
+          "position": "Eagle Warrior Throwers",
+          "cost": 75000,
+          "movementAllowance": 6,
+          "strength": 3,
+          "agility": 3,
+          "passingAbility": 3,
+          "armourValue": 8,
+          "skillsAndTraits": "Dodge, Pass",
+          "primary": "GP",
+          "secondary": "AS"
+        }
+      ]
     },
     {
       "id": 2,

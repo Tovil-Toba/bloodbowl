@@ -10,7 +10,9 @@ import { TeamModel } from './team.model';
   providedIn: 'root'
 })
 export class TeamsService extends Crud<TeamModel> {
-  reloadTeamsTrigger = 0;
+
+  teams: TeamModel[] = [];
+  loading = false;
   selectedTeamUrlId: string;
 
   constructor(
@@ -25,7 +27,4 @@ export class TeamsService extends Crud<TeamModel> {
     return this.http.get<TeamModel[]>(url);
   }
 
-  reloadTeams(): void {
-    this.reloadTeamsTrigger = Date.now();
-  }
 }

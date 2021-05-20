@@ -1,8 +1,4 @@
-<div *ngIf="loading" class="p-text-center">
-  <p-progressSpinner></p-progressSpinner>
-</div>
-
-<div *ngIf="!loading && team" [@pageAnimations]="!loading && team">
+<div *ngIf="!teamsService.loading && team" [@pageAnimations]="!teamsService.loading && team">
   <p-breadcrumb
     [model]="breadcrumbItems"
     [home]="{ icon: 'pi pi-home', routerLink: '/' }"
@@ -10,6 +6,6 @@
   ></p-breadcrumb>
 
   <p-panel [header]="team.name" styleClass="animation">
-    <app-team-form [team]="team"></app-team-form>
+    <app-team-form [team]="team" (submittedTeam)="onTeamFormSubmit($event)"></app-team-form>
   </p-panel>
 </div>

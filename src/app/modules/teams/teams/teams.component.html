@@ -1,8 +1,7 @@
-<div *ngIf="loading" class="p-text-center">
-  <p-progressSpinner></p-progressSpinner>
-</div>
-
-<div *ngIf="!loading && teams" [@pageAnimations]="!loading && teams">
+<div
+  *ngIf="!teamsService.loading && teamsService.teams"
+  [@pageAnimations]="!teamsService.loading && teamsService.teams"
+>
   <p-breadcrumb
     [model]="breadcrumbItems"
     [home]="{ icon: 'pi pi-home', routerLink: '/' }"
@@ -12,7 +11,7 @@
   <p-panel header="Teams" styleClass="animation">
     <p-table
       #teamsTable
-      [value]="teams"
+      [value]="teamsService.teams"
       [rows]="10"
       [paginator]="true"
       [globalFilterFields]="['name','rank']"
@@ -23,11 +22,23 @@
     >
       <ng-template pTemplate="caption">
         <div class="p-d-flex p-ai-center p-jc-between">
-          <button pButton pRipple label="New Team" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNewTeamDialog()"></button>
+          <button
+            pButton
+            pRipple
+            label="New Team"
+            icon="pi pi-plus"
+            class="p-button-success p-mr-2"
+            (click)="openNewTeamDialog()"
+          ></button>
           <span class="p-input-icon-left">
-          <i class="pi pi-search"></i>
-          <input pInputText type="text" (input)="teamsTable.filterGlobal($event.target.value, 'contains')" placeholder="Search..." />
-        </span>
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              (input)="teamsTable.filterGlobal($event.target.value, 'contains')"
+              placeholder="Search..."
+            />
+          </span>
         </div>
       </ng-template>
       <ng-template pTemplate="header">
@@ -53,14 +64,30 @@
           </td>
           <td>{{team.spikeMagazineRating}}</td>
           <td class="p-text-right" style="width: 9rem;">
-            <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editTeam(team)"></button>
-            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteTeam(team)"></button>
+            <button
+              pButton
+              pRipple
+              icon="pi pi-pencil"
+              class="p-button-rounded p-button-success p-mr-2"
+              (click)="editTeam(team)"
+              pTooltip="Edit Team"
+              tooltipPosition="top"
+            ></button>
+            <button
+              pButton
+              pRipple
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-warning"
+              (click)="deleteTeam(team)"
+              pTooltip="Delete Team"
+              tooltipPosition="top"
+            ></button>
           </td>
         </tr>
       </ng-template>
       <ng-template pTemplate="summary">
         <div class="p-d-flex p-ai-center p-jc-between">
-          In total there are {{teams ? teams.length : 0 }} teams.
+          In total there are {{teamsService.teams ? teamsService.teams.length : 0 }} teams.
         </div>
       </ng-template>
     </p-table>
@@ -75,7 +102,7 @@
     styleClass="p-fluid"
   >
     <ng-template pTemplate="content">
-      <app-team-form [team]="team"></app-team-form>
+      <app-team-form [team]="team" (submittedTeam)="onTeamFormSubmit($event)"></app-team-form>
     </ng-template>
   </p-dialog>
 

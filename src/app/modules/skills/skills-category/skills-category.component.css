@@ -1,0 +1,4 @@
+::ng-deep .skill-category .p-panel .p-panel-content {
+  padding-top: 1px;
+  padding-bottom: 0;
+}

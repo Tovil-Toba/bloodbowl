@@ -1,0 +1,54 @@
+<form (ngSubmit)="onSubmit()" #skillForm="ngForm">
+  <div class="p-field p-col-12 p-md-6 p-mt-3">
+    <span class="p-float-label">
+      <p-dropdown
+        inputId="category"
+        [options]="skillCategories"
+        [(ngModel)]="clonedSkill.category"
+        name="category"
+        optionLabel="name"
+        optionValue="name"
+      ></p-dropdown>
+      <label for="category">Skill Category</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12 p-md-6">
+    <span class="p-float-label">
+      <input id="name" type="text" pInputText required [(ngModel)]="clonedSkill.name" name="name">
+      <label for="name">Name</label>
+    </span>
+  </div>
+
+  <div class="p-field p-col-12">
+    <p-editor
+      id="description"
+      [(ngModel)]="clonedSkill.description"
+      name="description"
+      [style]="{'height':'320px'}"
+      required
+    >
+      <ng-template pTemplate="header">
+        <span class="ql-formats">
+          <button type="button" class="ql-bold" aria-label="Bold"></button>
+          <button value="bullet" type="button" class="ql-list" aria-label="Unordered List"></button>
+        </span>
+      </ng-template>
+    </p-editor>
+  </div>
+
+  <div class="p-field-checkbox p-col-12">
+    <p-checkbox inputId="compulsory" [binary]="true" [(ngModel)]="clonedSkill.compulsory" name="compulsory"></p-checkbox>
+    <label for="compulsory">Compulsory</label>
+  </div>
+
+  <div class="p-col-12">
+    <p-button
+      type="submit"
+      [disabled]="!skillForm.form.valid"
+      [loading]="submitLoading"
+      label="Submit"
+      icon="pi pi-check"
+    ></p-button>
+  </div>
+</form>

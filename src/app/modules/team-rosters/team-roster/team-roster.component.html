@@ -1,0 +1,236 @@
+<div
+  *ngIf="!teamRostersService.loading && teamRoster"
+  [@pageAnimations]="!teamRostersService.loading && teamRoster"
+>
+  <p-breadcrumb
+    [model]="breadcrumbItems"
+    [home]="{ icon: 'pi pi-home', routerLink: '/' }"
+    styleClass="p-mb-3 animation"
+  ></p-breadcrumb>
+
+  <p-panel [header]="teamRoster.name" styleClass="animation">
+    <p-table
+      [value]="teamRoster.playerProfiles"
+      dataKey="id"
+      editMode="row"
+      #teamRosterTable
+      [editingRowKeys]="editingRowKeys"
+      [resizableColumns]="true"
+    >
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <button
+            pButton
+            pRipple
+            label="New Player Profile"
+            icon="pi pi-plus"
+            class="p-button-success p-mr-2"
+            (click)="addNewPlayerProfile()"
+          ></button>
+          <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="teamRosterTable.filterGlobal($event.target.value, 'contains')"
+            placeholder="Search..."
+          />
+        </span>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 5rem;" class="p-text-center">QTY</th>
+          <th style="width: 50%;">POSITION</th>
+          <th style="width: 4rem;" class="p-text-center">COST</th>
+          <th style="width: 4rem;" class="p-text-center">MA</th>
+          <th style="width: 4rem;" class="p-text-center">ST</th>
+          <th style="width: 4rem;" class="p-text-center">AG</th>
+          <th style="width: 4rem;" class="p-text-center">PA</th>
+          <th style="width: 4rem;" class="p-text-center">AV</th>
+          <th style="width: 50%;">SKILLS & TRAITS</th>
+          <th style="width: 7rem;" class="p-text-center">PRIMARY</th>
+          <th style="width: 7rem;" class="p-text-center">SECONDARY</th>
+          <th style="width: 8rem"></th>
+        </tr>
+      </ng-template>
+      <ng-template
+        pTemplate="body"
+        let-playerProfile
+        let-editing="editing"
+        let-ri="rowIndex"
+      >
+        <tr [pEditableRow]="playerProfile">
+          <td class="p-text-center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="playerProfile.quantity" class="p-text-center" style="width: 4rem;" required>
+              </ng-template>
+              <ng-template pTemplate="output">
+                <span *ngIf="playerProfile.quantity">0-{{playerProfile.quantity}}</span>
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="playerProfile.position" required style="width: 100%;">
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{playerProfile.position}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td class="p-text-center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="playerProfile.cost" class="p-text-center" style="width: 100%;" required>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{playerProfile.cost}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td class="p-text-center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="playerProfile.movementAllowance" class="p-text-center" style="width: 3rem;" required>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{playerProfile.movementAllowance}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td class="p-text-center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="playerProfile.strength" class="p-text-center" style="width: 3rem;" required>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{playerProfile.strength}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td class="p-text-center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="playerProfile.agility" class="p-text-center" style="width: 3rem;" required>
+              </ng-template>
+              <ng-template pTemplate="output">
+                <span *ngIf="playerProfile.agility">
+                  {{playerProfile.agility}}+
+                </span>
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="playerProfile.passingAbility" class="p-text-center" style="width: 3rem;" required>
+              </ng-template>
+              <ng-template pTemplate="output">
+                <span *ngIf="playerProfile.passingAbility">
+                  {{playerProfile.passingAbility}}+
+                </span>
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td class="p-text-center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="playerProfile.armourValue" class="p-text-center" style="width: 3rem;" required>
+              </ng-template>
+              <ng-template pTemplate="output">
+                <span *ngIf="playerProfile.armourValue">
+                  {{playerProfile.armourValue}}+
+                </span>
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="playerProfile.skillsAndTraits" style="width: 100%;" required >
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{playerProfile.skillsAndTraits}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td class="p-text-center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="playerProfile.primary" class="p-text-center" style="width: 3rem;" required>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{playerProfile.primary}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td class="p-text-center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="playerProfile.secondary" class="p-text-center" style="width: 3rem;" required>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{playerProfile.secondary}}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td style="text-align:center">
+            <button
+              *ngIf="!editing"
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-trash"
+              (click)="onRowDelete(playerProfile)"
+              class="p-button-rounded p-button-text"
+              pTooltip="Delete Player Profile"
+              tooltipPosition="top"
+            ></button>
+            <button
+              *ngIf="editing"
+              pButton
+              pRipple
+              type="button"
+              pSaveEditableRow
+              icon="pi pi-check"
+              (click)="onRowEditSave(playerProfile)"
+              class="p-button-rounded p-button-text p-button-success p-mr-2"
+              pTooltip="Save Player Profile"
+              tooltipPosition="top"
+            ></button>
+            <button
+              *ngIf="editing"
+              pButton
+              pRipple
+              type="button"
+              pCancelEditableRow
+              icon="pi pi-times"
+              (click)="onRowEditCancel(playerProfile, ri)"
+              class="p-button-rounded p-button-text p-button-danger"
+              pTooltip="Cancel"
+              tooltipPosition="top"
+            ></button>
+            <button
+              *ngIf="!editing"
+              pButton
+              pRipple
+              type="button"
+              pInitEditableRow
+              icon="pi pi-pencil"
+              (click)="onRowEditInit(playerProfile)"
+              class="p-button-rounded p-button-text"
+              pTooltip="Edit Player Profile"
+              tooltipPosition="top"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-panel>
+
+  <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+</div>

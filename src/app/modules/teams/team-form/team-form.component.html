@@ -47,76 +47,76 @@
     <form (ngSubmit)="onSubmit()" #teamForm="ngForm">
       <div class="p-field p-col-12 p-md-6">
         <span class="p-float-label">
-          <input id="urlId" type="text" pInputText required appUniqueUrlId [(ngModel)]="team.urlId" name="urlId">
+          <input id="urlId" type="text" pInputText required appUniqueUrlId [(ngModel)]="clonedTeam.urlId" name="urlId">
           <label for="urlId">Url Id</label>
         </span>
       </div>
       <div class="p-field p-col-12 p-md-6">
         <span class="p-float-label">
-          <input id="name" type="text" pInputText required [(ngModel)]="team.name" name="name">
+          <input id="name" type="text" pInputText required [(ngModel)]="clonedTeam.name" name="name">
           <label for="name">Team Name</label>
         </span>
       </div>
 
       <div class="p-field p-col-12 p-md-6">
         <span class="p-float-label">
-          <input id="colours" type="text" pInputText [(ngModel)]="team.colours" name="colours">
+          <input id="colours" type="text" pInputText [(ngModel)]="clonedTeam.colours" name="colours">
           <label for="colours">Team Colours</label>
         </span>
       </div>
 
       <div class="p-field p-col-12 p-md-6">
         <span class="p-float-label">
-          <input id="owner" type="text" pInputText required [(ngModel)]="team.owner" name="owner">
+          <input id="owner" type="text" pInputText required [(ngModel)]="clonedTeam.owner" name="owner">
           <label for="owner">Owner</label>
         </span>
       </div>
 
       <div class="p-field p-col-12 p-md-6">
         <span class="p-float-label">
-          <input id="headCoach" type="text" pInputText [(ngModel)]="team.headCoach" name="headCoach">
+          <input id="headCoach" type="text" pInputText [(ngModel)]="clonedTeam.headCoach" name="headCoach">
           <label for="headCoach">Head Coach</label>
         </span>
       </div>
 
       <div class="p-field p-col-12 p-md-6">
         <span class="p-float-label">
-          <input id="homeStadium" type="text" pInputText [(ngModel)]="team.homeStadium" name="homeStadium">
+          <input id="homeStadium" type="text" pInputText [(ngModel)]="clonedTeam.homeStadium" name="homeStadium">
           <label for="homeStadium">Home Stadium</label>
         </span>
       </div>
 
       <div class="p-field p-col-12 p-md-6">
         <span class="p-float-label">
-          <input id="players" type="text" pInputText required [(ngModel)]="team.players" name="players">
+          <input id="players" type="text" pInputText required [(ngModel)]="clonedTeam.players" name="players">
           <label for="players">Players</label>
         </span>
       </div>
 
       <div class="p-field p-col-12">
         <span class="p-float-label">
-          <textarea id="honours" rows="3" cols="60" pInputTextarea [(ngModel)]="team.honours" name="honours"></textarea>
+          <textarea id="honours" rows="3" cols="60" pInputTextarea [(ngModel)]="clonedTeam.honours" name="honours"></textarea>
           <label for="honours">Team Honours</label>
         </span>
       </div>
 
       <div class="p-field p-col-12">
         <span class="p-float-label">
-          <textarea id="hallOfFamePlayers" rows="3" cols="60" pInputTextarea [(ngModel)]="team.hallOfFamePlayers" name="hallOfFamePlayers"></textarea>
+          <textarea id="hallOfFamePlayers" rows="3" cols="60" pInputTextarea [(ngModel)]="clonedTeam.hallOfFamePlayers" name="hallOfFamePlayers"></textarea>
           <label for="hallOfFamePlayers">Hall of Fame Players</label>
         </span>
       </div>
 
       <div class="p-field p-col-12 p-md-6">
         <span class="p-float-label">
-          <input id="spikeMagazineRating" type="text" pInputText [(ngModel)]="team.spikeMagazineRating" name="spikeMagazineRating">
+          <input id="spikeMagazineRating" type="text" pInputText [(ngModel)]="clonedTeam.spikeMagazineRating" name="spikeMagazineRating">
           <label for="spikeMagazineRating">Spike! Magazine Team Rating</label>
         </span>
       </div>
 
       <div class="p-col-12">
         <span class="p-float-label">
-          <textarea id="bio" rows="6" cols="60" pInputTextarea [(ngModel)]="team.bio" name="bio"></textarea>
+          <textarea id="bio" rows="6" cols="60" pInputTextarea [(ngModel)]="clonedTeam.bio" name="bio"></textarea>
           <label for="bio">Team Bio</label>
         </span>
       </div>

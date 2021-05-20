@@ -1,4 +1,7 @@
-<div *ngIf="!loading" [@pageAnimations]="!loading">
+<div
+  *ngIf="!teamRostersService.loading && teamRostersService.teamRosters"
+  [@pageAnimations]="!teamRostersService.loading && teamRostersService.teamRosters"
+>
   <p-breadcrumb
     [model]="breadcrumbItems"
     [home]="{ icon: 'pi pi-home', routerLink: '/' }"
@@ -6,6 +9,6 @@
   ></p-breadcrumb>
 
   <p-panel header="Team Rosters" styleClass="animation">
-    {{urlId}}
+
   </p-panel>
 </div>

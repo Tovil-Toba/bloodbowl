@@ -1,9 +1,9 @@
-<div *ngIf="loading" class="p-text-center">
-  <p-progressSpinner></p-progressSpinner>
-</div>
-
-<div *ngIf="!loading && team" [@pageAnimations]="!loading && team">
-  <p-breadcrumb [model]="breadcrumbItems" [home]="{ icon: 'pi pi-home', routerLink: '/' }" styleClass="p-mb-3 animation"></p-breadcrumb>
+<div *ngIf="!teamsService.loading && team" [@pageAnimations]="!teamsService.loading && team">
+  <p-breadcrumb
+    [model]="breadcrumbItems"
+    [home]="{ icon: 'pi pi-home', routerLink: '/' }"
+    styleClass="p-mb-3 animation"
+  ></p-breadcrumb>
 
   <p-panel [header]="team.name" styleClass="animation">
     <ng-template pTemplate="icons">
@@ -11,7 +11,34 @@
       <button pButton class="p-panel-header-icon p-link" icon="pi pi-pencil" (click)="editTeam()" pTooltip="Edit Team" tooltipPosition="top"></button>
     </ng-template>
 
-    <app-team-info [team]="team"></app-team-info>
+    <div class="p-text-center">
+      <img
+        *ngFor="let team of teamsService.teams; let i=index;"
+        [src]="team.logo"
+        [alt]="team.name"
+        width="54"
+        height="54"
+        (click)="getTeam(team.urlId)"
+        [pTooltip]="team.name"
+        tooltipPosition="bottom"
+        class="p-mx-1 team-icon"
+        [style.opacity]="i === carouselPage ? 1 : 0.7"
+      >
+    </div>
+
+    <p-divider></p-divider>
+
+    <p-carousel
+      [value]="this.teamsService.teams"
+      [showIndicators]="false"
+      [page]="carouselPage"
+      [circular]="true"
+      (onPage)="onCarouselPage($event)"
+    >
+      <ng-template let-team pTemplate="item">
+        <app-team-info [team]="team"></app-team-info>
+      </ng-template>
+    </p-carousel>
   </p-panel>
 
   <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

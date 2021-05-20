@@ -25,13 +25,15 @@ import { ThemesDropdownComponent } from './components/themes-dropdown/themes-dro
 import { InMemoryDataService } from './in-memory-data.service';
 
 import { DB_CONFIG } from './constants/db-config';
+import { LoadingScreenComponent } from './components/loading-screen/loading-screen.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MenubarComponent,
-    ThemesDropdownComponent
+    ThemesDropdownComponent,
+    LoadingScreenComponent
   ],
   imports: [
     AppRoutingModule,

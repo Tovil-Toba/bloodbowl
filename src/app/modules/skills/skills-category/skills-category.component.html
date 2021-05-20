@@ -1,0 +1,27 @@
+<div
+  *ngIf="!skillsService.loading && skillsService.skills"
+  [@pageAnimations]="!skillsService.loading && skillsService.skills"
+>
+  <p-breadcrumb
+    [model]="breadcrumbItems"
+    [home]="{ icon: 'pi pi-home', routerLink: '/' }"
+    styleClass="p-mb-3 animation"
+  ></p-breadcrumb>
+
+  <p-panel [header]="skillCategory.name" styleClass="animation skill-category">
+    <p-tabView [(activeIndex)]="tabIndex" (onChange)="onTabChange($event)" styleClass="p-mt-3">
+      <p-tabPanel
+        [header]="skillCategory.name"
+        *ngFor="let skillCategory of skillCategories"
+      >
+        <div class="p-grid">
+          <div class="p-col-4" *ngFor="let skill of skillsByCategories[skillCategory.urlId]">
+            <p-panel [header]="skill.name + (skill.compulsory ? '*' : '')">
+              <div [innerHTML]="skill.description"></div>
+            </p-panel>
+          </div>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </p-panel>
+</div>

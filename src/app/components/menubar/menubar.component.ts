@@ -32,7 +32,7 @@ export class MenubarComponent implements OnInit, DoCheck {
   private get skillCategoriesItems(): MenuItem[] {
     const menuItems: MenuItem[] = [
       {
-        label: 'All Skills',
+        label: 'Table',
         routerLink: ['/skills']
       },
       {
@@ -85,7 +85,7 @@ export class MenubarComponent implements OnInit, DoCheck {
   private get teamsItems(): MenuItem[] {
     const menuItems: MenuItem[] = [
       {
-        label: 'All Teams',
+        label: 'Table',
         routerLink: ['/teams']
       },
       {

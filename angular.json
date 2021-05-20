@@ -33,6 +33,9 @@
             ],
             "scripts": [
               "node_modules/quill/dist/quill.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "lodash"
             ]
           },
           "configurations": {

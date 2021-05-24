@@ -8,7 +8,135 @@
     styleClass="p-mb-3 animation"
   ></p-breadcrumb>
 
-  <p-panel header="Team Rosters" styleClass="animation">
-
+  <p-panel header="Teams" styleClass="animation">
+    <p-table
+      #teamRostersTable
+      [value]="teamRostersService.teamRosters"
+      [rows]="10"
+      [paginator]="true"
+      [globalFilterFields]="['name']"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+    >
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <button
+            pButton
+            pRipple
+            label="New Team Roster"
+            icon="pi pi-plus"
+            class="p-button-success p-mr-2"
+            (click)="openNewTeamRosterDialog()"
+          ></button>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              (input)="teamRostersTable.filterGlobal($event.target.value, 'contains')"
+              placeholder="Search..."
+            />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+          <th>Positions</th>
+          <th pSortableColumn="tier">Tier <p-sortIcon field="tier"></p-sortIcon></th>
+          <th pSortableColumn="reRollCost">Re-roll Cost <p-sortIcon field="reRollCost"></p-sortIcon></th>
+          <th pSortableColumn="apothecary">Apothecary <p-sortIcon field="apothecary"></p-sortIcon></th>
+          <th style="width: 9rem;"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-teamRoster>
+        <tr>
+          <td class="p-pl-0">
+            <button
+              pButton
+              type="button"
+              [label]="teamRoster.name"
+              (click)="openTeamRosterInfoDialog(teamRoster)"
+              class="p-button-text"
+              style="white-space: nowrap"
+            ></button>
+          </td>
+          <td>
+            <ng-container *ngFor="let playerProfile of teamRoster.playerProfiles; last as isLast">
+              <span
+                [pTooltip]="getPositionTooltip(playerProfile)"
+                tooltipPosition="right"
+                [escape]="false"
+                class="position"
+              >{{playerProfile.position}}</span>
+              <br *ngIf="!isLast" />
+            </ng-container>
+          </td>
+          <td>{{teamRoster.tier}}</td>
+          <td>{{teamRoster.reRollCost}}</td>
+          <td>
+<!--            <i class="pi pi-check" *ngIf="teamRoster.apothecary"></i>-->
+            {{teamRoster.apothecary ? 'Yes' : 'No'}}
+          </td>
+          <td class="p-text-right" style="width: 9rem;">
+            <button
+              pButton
+              pRipple
+              icon="pi pi-pencil"
+              class="p-button-rounded p-button-success p-mr-2"
+              (click)="editTeamRoster(teamRoster)"
+              pTooltip="Edit Team"
+              tooltipPosition="top"
+            ></button>
+            <button
+              pButton
+              pRipple
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-warning"
+              (click)="deleteTeamRoster(teamRoster)"
+              pTooltip="Delete Team"
+              tooltipPosition="top"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{teamRostersService.teamRosters ? teamRostersService.teamRosters.length : 0 }} team rosters.
+        </div>
+      </ng-template>
+    </p-table>
   </p-panel>
+
+  <p-dialog
+    [(visible)]="teamRosterFormDialog"
+    [header]="teamRoster && teamRoster.id ? teamRoster.name : 'New Team Roster'"
+    [modal]="true"
+    [maximizable]="true"
+    [style]="{width: '90%'}"
+  >
+    <ng-template pTemplate="content">
+      <app-team-roster-form
+        [teamRoster]="teamRoster"
+        (submittedTeamRoster)="onTeamRosterFormSubmit($event)"
+      ></app-team-roster-form>
+    </ng-template>
+  </p-dialog>
+
+  <p-dialog
+    *ngIf="teamRoster"
+    [(visible)]="teamRosterInfoDialog"
+    [header]="teamRoster.name"
+    [modal]="true"
+    [maximizable]="true"
+    [style]="{width: '90%'}"
+  >
+    <ng-template pTemplate="content">
+      <app-team-roster-info [teamRoster]="teamRoster"></app-team-roster-info>
+    </ng-template>
+  </p-dialog>
+
+  <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 </div>

@@ -1,0 +1,17 @@
+<div
+  *ngIf="!teamRostersService.loading && teamRoster"
+  [@pageAnimations]="!teamRostersService.loading && teamRoster"
+>
+  <p-breadcrumb
+    [model]="breadcrumbItems"
+    [home]="{ icon: 'pi pi-home', routerLink: '/' }"
+    styleClass="p-mb-3 animation"
+  ></p-breadcrumb>
+
+  <p-panel [header]="teamRoster.name" styleClass="animation">
+    <app-team-roster-form
+      [teamRoster]="teamRoster"
+      (submittedTeamRoster)="onTeamRosterFormSubmit($event)"
+    ></app-team-roster-form>
+  </p-panel>
+</div>

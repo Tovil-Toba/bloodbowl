@@ -6,9 +6,10 @@ export interface PlayerProfileModel {
   movementAllowance: number;
   strength: number;
   agility: number;
-  passingAbility: number;
+  passingAbility?: number;
   armourValue: number;
   skillsAndTraits: string;
   primary: string;
   secondary: string;
+  bigGuy?: boolean;
 }

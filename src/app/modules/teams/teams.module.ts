@@ -2,23 +2,25 @@ import { NgModule } from '@angular/core';
 import { MessageService } from 'primeng/api';
 
 import { SharedModule } from '../../shared/shared.module';
+import { SharedCommonModule} from '../shared/shared-common.module';
 import { TeamComponent } from './team/team.component';
 import { TeamEditorComponent } from './team-editor/team-editor.component';
 import { TeamsComponent } from './teams/teams.component';
-import { UniqueUrlIdValidatorDirective } from './shared/id.directive';
 import { TeamFormComponent } from './team-form/team-form.component';
-import { TeamInfoComponent } from './team-info/team-info.component';
+import { UniqueUrlIdValidatorDirective } from './shared/url-id.directive';
 
 @NgModule({
   declarations: [
     TeamComponent,
     TeamEditorComponent,
     TeamsComponent,
-    UniqueUrlIdValidatorDirective,
     TeamFormComponent,
-    TeamInfoComponent
+    UniqueUrlIdValidatorDirective
   ],
-  imports: [SharedModule],
+  imports: [
+    SharedModule,
+    SharedCommonModule
+  ],
   providers: [MessageService]
 })
 export class TeamsModule { }

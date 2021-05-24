@@ -9,14 +9,43 @@
   ></p-breadcrumb>
 
   <p-panel [header]="skillCategory.name" styleClass="animation skill-category">
+    <div class="p-col-12">
+      <button
+        pButton
+        pRipple
+        label="New Skill"
+        icon="pi pi-plus"
+        class="p-button-success p-mr-2"
+        (click)="openNewSkillDialog()"
+      ></button>
+    </div>
     <p-tabView [(activeIndex)]="tabIndex" (onChange)="onTabChange($event)" styleClass="p-mt-3">
       <p-tabPanel
         [header]="skillCategory.name"
         *ngFor="let skillCategory of skillCategories"
       >
         <div class="p-grid">
-          <div class="p-col-4" *ngFor="let skill of skillsByCategories[skillCategory.urlId]">
+          <div class="p-lg-4 p-md-6" *ngFor="let skill of skillsByCategories[skillCategory.urlId]">
             <p-panel [header]="skill.name + (skill.compulsory ? '*' : '')">
+              <ng-template pTemplate="icons">
+                <button
+                  pButton
+                  class="p-panel-header-icon p-link"
+                  icon="pi pi-trash"
+                  (click)="deleteSkill(skill)"
+                  pTooltip="Delete Skill"
+                  tooltipPosition="top"
+                ></button>
+                <button
+                  pButton
+                  class="p-panel-header-icon p-link"
+                  icon="pi pi-pencil"
+                  (click)="editSkill(skill)"
+                  pTooltip="Edit Skill"
+                  tooltipPosition="left"
+                ></button>
+              </ng-template>
+
               <div [innerHTML]="skill.description"></div>
             </p-panel>
           </div>
@@ -24,4 +53,12 @@
       </p-tabPanel>
     </p-tabView>
   </p-panel>
+
+  <app-skill-form-dialog
+    [(visible)]="skillFormDialog"
+    [skill]="skill"
+    (submittedSkill)="onSkillFormSubmit($event)"
+  ></app-skill-form-dialog>
+
+  <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 </div>

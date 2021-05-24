@@ -128,7 +128,7 @@ export class MenubarComponent implements OnInit, DoCheck {
   private get teamRostersItems(): MenuItem[] {
     const menuItems: MenuItem[] = [
       {
-        label: 'All Team Rosters',
+        label: 'Table',
         routerLink: ['/team-rosters']
       },
       {

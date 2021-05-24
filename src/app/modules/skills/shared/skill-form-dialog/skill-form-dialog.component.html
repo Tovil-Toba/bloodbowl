@@ -1,0 +1,12 @@
+<p-dialog
+  [(visible)]="visible"
+  [header]="skill && skill.id ? skill.name : 'New Team'"
+  [modal]="true"
+  [maximizable]="true"
+  [style]="{width: '575px'}"
+  (onHide)="onHide()"
+>
+  <ng-template pTemplate="content">
+    <app-skill-form [skill]="skill" (submittedSkill)="onSkillFormSubmit($event)"></app-skill-form>
+  </ng-template>
+</p-dialog>

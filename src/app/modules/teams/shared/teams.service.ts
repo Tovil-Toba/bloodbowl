@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MessageService } from 'primeng/api';
+import * as _ from 'lodash';
 
 import { Crud } from '../../../core/crud';
 import { TeamModel } from './team.model';
@@ -27,4 +28,7 @@ export class TeamsService extends Crud<TeamModel> {
     return this.http.get<TeamModel[]>(url);
   }
 
+  getTeamByName(name: string): TeamModel {
+    return _.find<TeamModel>(this.teams, { name });
+  }
 }

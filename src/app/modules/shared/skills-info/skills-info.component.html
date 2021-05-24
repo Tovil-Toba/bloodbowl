@@ -1,0 +1,14 @@
+<ng-container *ngFor="let skill of skillsInfo; last as isLast">
+  <span
+    *ngIf="skill.description; else elseBlock"
+    [pTooltip]="skill.description"
+    tooltipPosition="top"
+    [escape]="false"
+    (click)="onSkillClick(skill)"
+    class="skill"
+  >{{skill.name}}</span>
+  <ng-template #elseBlock>
+    <span>{{skill.name}}</span>
+  </ng-template>
+  <span *ngIf="!isLast">, </span>
+</ng-container>

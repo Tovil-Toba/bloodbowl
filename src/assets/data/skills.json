@@ -59,7 +59,7 @@
     {
       "id": 9,
       "category": "Agility",
-      "name": "Sidestep",
+      "name": "Side Step",
       "description": "<p>If this player is pushed back for any reason, they are not moved into a square chosen by the opposing coach. Instead you may choose any unoccupied square adjacent to this player. This player is pushed back into that square instead. If there are no unoccupied squares adjacent to this player, this Skill cannot be used.</p>",
       "compulsory": false
     },

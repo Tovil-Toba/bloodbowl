@@ -6,13 +6,15 @@ import { SkillsComponent } from './skills/skills.component';
 import { SkillCategoriesComponent } from './skill-categories/skill-categories.component';
 import { SkillFormComponent } from './skill-form/skill-form.component';
 import { SkillsCategoryComponent } from './skills-category/skills-category.component';
+import { SkillFormDialogComponent } from './shared/skill-form-dialog/skill-form-dialog.component';
 
 @NgModule({
   declarations: [
     SkillsComponent,
     SkillCategoriesComponent,
     SkillFormComponent,
-    SkillsCategoryComponent
+    SkillsCategoryComponent,
+    SkillFormDialogComponent
   ],
   imports: [SharedModule],
   providers: [MessageService]

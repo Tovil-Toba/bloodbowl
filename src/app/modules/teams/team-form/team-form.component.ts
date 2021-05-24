@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as _ from 'lodash';
 
+import { base64toFile } from '../../../shared/base64toFile';
 import { TeamModel } from '../shared/team.model';
 import { TeamsService } from '../shared/teams.service';
-import { base64toFile } from '../../../shared/base64toFile';
+import { TeamRostersService } from '../../team-rosters/shared/team-rosters.service';
 
 @Component({
   selector: 'app-team-form',
@@ -23,7 +24,10 @@ export class TeamFormComponent implements OnInit {
   loading = false;
   submitLoading = false;
 
-  constructor(private teamsService: TeamsService) { }
+  constructor(
+    private teamsService: TeamsService,
+    public teamRostersService: TeamRostersService
+  ) { }
 
   ngOnInit(): void {
     this.clonedTeam = _.clone(this.team);
@@ -38,7 +42,7 @@ export class TeamFormComponent implements OnInit {
     }
   }
 
-  onLogoSelect(event) {
+  onLogoSelect(event): void {
     for (const file of event.files) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -48,7 +52,7 @@ export class TeamFormComponent implements OnInit {
     }
   }
 
-  onPhotoSelect(event) {
+  onPhotoSelect(event): void {
     for (const file of event.files) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -58,15 +62,15 @@ export class TeamFormComponent implements OnInit {
     }
   }
 
-  onLogoClear() {
+  onLogoClear(): void {
     this.logo = '';
   }
 
-  onPhotoClear() {
+  onPhotoClear(): void {
     this.photo = '';
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.submitLoading = true;
     this.clonedTeam.logo = this.logo;
     this.clonedTeam.photo = this.photo;

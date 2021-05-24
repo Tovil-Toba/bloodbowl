@@ -5,7 +5,6 @@ import { ConfirmationService, MenuItem } from 'primeng/api';
 import * as _ from 'lodash';
 
 import { TeamRosterModel } from '../shared/team-roster.model';
-import { PlayerProfileModel } from '../shared/player-profile.model';
 import { TeamRostersService } from '../shared/team-rosters.service';
 import { enterPageAnimation } from '../../../shared/animations';
 
@@ -20,11 +19,8 @@ export class TeamRosterComponent implements OnInit, DoCheck {
 
   oldUrlId: string;
   teamRoster: TeamRosterModel;
-  clonedPlayerProfiles: { [s: string]: PlayerProfileModel; } = {};
   breadcrumbItems: MenuItem[];
   loading = false;
-  statuses: any[];
-  editingRowKeys: { [s: string]: boolean; } = {};
 
   constructor(
     private router: Router,
@@ -35,12 +31,6 @@ export class TeamRosterComponent implements OnInit, DoCheck {
 
   get urlId(): string {
     return this.activatedRoute.snapshot.paramMap.get('urlId');
-  }
-
-  addNewPlayerProfile(): void {
-    const newPlayerProfile = { id: this.teamRoster.playerProfiles.length + 1 } as PlayerProfileModel;
-    this.teamRoster.playerProfiles.push(newPlayerProfile);
-    this.onRowEditInit(newPlayerProfile);
   }
 
   getTeamRoster(urlId: string): void {
@@ -64,30 +54,27 @@ export class TeamRosterComponent implements OnInit, DoCheck {
   ngOnInit(): void {
   }
 
-  onRowEditInit(playerProfile: PlayerProfileModel): void {
-    this.clonedPlayerProfiles[playerProfile.id.toString()] = _.clone(playerProfile);
-    this.editingRowKeys[playerProfile.id.toString()] = true;
-  }
-
-  onRowEditSave(playerProfile: PlayerProfileModel): void {
-    console.log('onRowEditSave', playerProfile);
-  }
-
-  onRowEditCancel(playerProfile: PlayerProfileModel, index: number): void {
-    this.teamRoster.playerProfiles[index] = this.clonedPlayerProfiles[playerProfile.id];
-    delete this.clonedPlayerProfiles[playerProfile.id];
-  }
-
-  onRowDelete(playerProfile: PlayerProfileModel): void {
+  deleteTeamRoster(): void {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete player profile "' + playerProfile.position + '"?',
+      message: `Are you sure you want to delete team roster "${this.teamRoster.name}"?`,
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        const clonedPlayerProfiles: PlayerProfileModel[] = _.clone(this.teamRoster.playerProfiles);
-        this.teamRoster.playerProfiles = clonedPlayerProfiles
-          .filter((profile: PlayerProfileModel) => profile.id !== playerProfile.id);
+        this.teamRostersService.deleteItem(this.teamRoster.id).subscribe(() => {
+          const index = _.findIndex(this.teamRostersService.teamRosters, { id: this.teamRoster.id });
+          // _.remove(this.teamRostersService.teamRosters, { id: this.teamRoster.id });
+          this.teamRostersService.teamRosters.splice(index, 1);
+        });
       }
     });
   }
+
+  editTeamRoster(): void {
+    this.router.navigate([`team-rosters/${this.urlId}/edit`]);
+  }
+
+  navigateToTeamRoster(urlId: string): void {
+    this.router.navigate([`team-rosters/${urlId}`]);
+  }
+
 }

@@ -88,18 +88,11 @@
     </p-table>
   </p-panel>
 
-  <p-dialog
+  <app-skill-form-dialog
     [(visible)]="skillFormDialog"
-    [header]="skill && skill.id ? skill.name : 'New Team'"
-    [modal]="true"
-    [maximizable]="true"
-    [style]="{width: '575px'}"
-    styleClass="p-fluid"
-  >
-    <ng-template pTemplate="content">
-      <app-skill-form [skill]="skill" (submittedSkill)="onSkillFormSubmit($event)"></app-skill-form>
-    </ng-template>
-  </p-dialog>
+    [skill]="skill"
+    (submittedSkill)="onSkillFormSubmit($event)"
+  ></app-skill-form-dialog>
 
   <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 </div>

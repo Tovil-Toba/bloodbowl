@@ -47,10 +47,26 @@
     <form (ngSubmit)="onSubmit()" #teamForm="ngForm">
       <div class="p-field p-col-12 p-md-6">
         <span class="p-float-label">
+          <p-dropdown
+            inputId="roster"
+            [options]="teamRostersService.teamRosters"
+            [(ngModel)]="clonedTeam.roster"
+            name="roster"
+            optionLabel="name"
+            optionValue="name"
+            required
+          ></p-dropdown>
+          <label for="roster">Roster</label>
+        </span>
+      </div>
+
+      <div class="p-field p-col-12 p-md-6">
+        <span class="p-float-label">
           <input id="urlId" type="text" pInputText required appUniqueUrlId [(ngModel)]="clonedTeam.urlId" name="urlId">
           <label for="urlId">Url Id</label>
         </span>
       </div>
+
       <div class="p-field p-col-12 p-md-6">
         <span class="p-float-label">
           <input id="name" type="text" pInputText required [(ngModel)]="clonedTeam.name" name="name">

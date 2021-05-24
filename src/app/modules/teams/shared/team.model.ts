@@ -1,5 +1,6 @@
 export interface TeamModel {
   id: number;
+  roster: string;
   urlId: string;
   rank?: number; // для сортировки
   logo?: string;

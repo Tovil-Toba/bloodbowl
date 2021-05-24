@@ -4,5 +4,12 @@ export interface TeamRosterModel {
   id: number;
   urlId: string;
   name: string;
-  playerProfiles?: PlayerProfileModel[]; // TODO сделать обязательным, убрать ?
+  notableExamples?: string;
+  description: string;
+  playerProfiles: PlayerProfileModel[];
+  bigGuyRules?: string;
+  reRollCost: number;
+  tier: number;
+  specialRules: string;
+  apothecary: boolean;
 }

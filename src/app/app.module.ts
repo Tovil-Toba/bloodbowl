@@ -8,6 +8,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { ScrollTopModule } from 'primeng/scrolltop';
 
 import { SharedModule } from './shared/shared.module';
+import { SharedCommonModule } from './modules/shared/shared-common.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SkillsRoutingModule } from './modules/skills/skills-routing.module';
@@ -49,6 +50,7 @@ import { LoadingScreenComponent } from './components/loading-screen/loading-scre
     MenubarModule,
     NgxIndexedDBModule.forRoot(DB_CONFIG),
     SharedModule,
+    SharedCommonModule,
     SkillsModule,
     SkillsRoutingModule,
     ScrollTopModule,

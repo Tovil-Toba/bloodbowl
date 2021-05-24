@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import * as _ from 'lodash';
 
-import { enterPageAnimation } from '../../../shared/animations';
 import { SkillModel } from '../shared/skill.model';
+import { Skill } from '../shared/skill';
 import { SkillsService } from '../shared/skills.service';
+import { enterPageAnimation } from '../../../shared/animations';
 
 @Component({
   selector: 'app-skills',
@@ -36,7 +37,7 @@ export class SkillsComponent implements OnInit {
 
   deleteSkill(skill: SkillModel): void {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete skill "' + skill.name + '"?',
+      message: `Are you sure you want to delete skill "${skill.name}"?`,
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
@@ -49,13 +50,6 @@ export class SkillsComponent implements OnInit {
 
   onSkillFormSubmit(skill: SkillModel): void {
     const index = _.findIndex(this.skillsService.skills, { id: skill.id });
-    if (index === -1) {
-      const clonedSkills = _.clone(this.skillsService.skills);
-      clonedSkills.push(skill);
-      this.skillsService.skills = clonedSkills;
-    } else {
-      this.skillsService.skills.splice(index, 1, skill);
-    }
     this.skillFormDialog = false;
   }
 
@@ -66,7 +60,7 @@ export class SkillsComponent implements OnInit {
   }
 
   openNewSkillDialog(): void {
-    this.skill = {} as SkillModel;
+    this.skill = new Skill();
     this.skillFormDialog = true;
   }
 

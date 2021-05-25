@@ -2,7 +2,7 @@ import { Component, Input, OnInit, DoCheck } from '@angular/core';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
 
-import { PlayerProfileModel } from '../../team-rosters/shared/player-profile.model';
+import { PlayerProfileModel } from '../player-profile.model';
 import { SkillModel } from '../../skills/shared/skill.model';
 import { TeamRosterModel } from '../../team-rosters/shared/team-roster.model';
 import { TeamsService } from '../../teams/shared/teams.service';

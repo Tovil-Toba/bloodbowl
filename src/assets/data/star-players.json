@@ -1,0 +1,109 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "urlId": "the-black-gobbo",
+      "name": "The Black Gobbo",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "position": "The Black Gobbo",
+          "cost": 225000,
+          "movementAllowance": 6,
+          "strength": 2,
+          "agility": 3,
+          "passingAbility": 3,
+          "armourValue": 9,
+          "skillsAndTraits": "Bombardier, Disturbing Presence, Dodge, Loner (3+), Side Step, Sneaky Git, Stab, Stunty"
+        }
+      ],
+      "playsFor": "Any team with either the ‘Badlands Brawl’ or ‘Underworld Challenge’ special rules.",
+      "specialRules": "Sneakiest of the Lot: If your team includes the Black Gobbo, you may commit two Foul actions per team turn, provided one of your Foul actions is committed by the Black Gobbo himself."
+    },
+    {
+      "id": 2,
+      "urlId": "deeproot-strongbranch",
+      "name": "Deeproot Strongbranch",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "position": "Deeproot Strongbranch",
+          "cost": 280000,
+          "movementAllowance": 2,
+          "strength": 7,
+          "agility": 5,
+          "passingAbility": 4,
+          "armourValue": 11,
+          "skillsAndTraits": "Block, Loner (4+), Mighty Blow (+2), Stand Firm, Strong Arm, Thick Skull, Throw Team-mate, Timmm-ber!"
+        }
+      ],
+      "playsFor": "Any team with either the ‘Halfling Thimble Cup’ or ‘Old World Classic’ special rules.",
+      "specialRules": "Reliable: If Deeproot fumbles a Throw Team-mate action, the player that was to be thrown will bounce as normal but will automatically land safely."
+    },
+    {
+      "id": 3,
+      "urlId": "eldril-sidewinder",
+      "name": "Eldril Sidewinder",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "position": "Eldril Sidewinder",
+          "cost": 230000,
+          "movementAllowance": 8,
+          "strength": 3,
+          "agility": 2,
+          "passingAbility": 5,
+          "armourValue": 8,
+          "skillsAndTraits": "Catch, Dodge, Hypnotic Gaze, Loner (4+), Nerves of Steel, On the Ball",
+          "bigGuy": true
+        }
+      ],
+      "playsFor": "Any team with the ‘Elven Kingdoms League’ special rule.",
+      "specialRules": "Mesmerizing Dance: Once per game, Eldril may re-roll a failed Agility test when attempting to use the Hypnotic Gaze trait."
+    },
+    {
+      "id": 4,
+      "urlId": "glart-smashrip",
+      "name": "Glart Smashrip",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "position": "Glart Smashrip",
+          "cost": 195000,
+          "movementAllowance": 5,
+          "strength": 4,
+          "agility": 4,
+          "armourValue": 9,
+          "skillsAndTraits": "Block, Claw, Grab, Juggernaut, Loner (4+), Stand Firm"
+        }
+      ],
+      "playsFor": "Any team with either the ‘Favoured Of...’ or ‘Underworld Challenge’ special rules.",
+      "specialRules": "Frenzied Rush: Once per game, when Glart performs a Blitz action, he may gain the Frenzy skill. You must declare this special rule is being used when Glart is activated. Glart may not use the Grab skill during a turn in which he uses this special rule."
+    },
+    {
+      "id": 5,
+      "urlId": "gloriel-summerbloom",
+      "name": "Gloriel Summerbloom",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "position": "Gloriel Summerbloom",
+          "cost": 150000,
+          "movementAllowance": 7,
+          "strength": 2,
+          "agility": 2,
+          "passingAbility": 2,
+          "armourValue": 8,
+          "skillsAndTraits": "Accurate, Dodge, Loner (3+), Pass, Side Step, Sure Hands"
+        }
+      ],
+      "playsFor": "Any team with the ‘Elven Kingdoms League’ special rule.",
+      "specialRules": "Shot to Nothing: Once per game, when Gloriel performs a Pass action, she may gain the Hail Mary Pass skill. You must declare this special rule is being used when Gloriel is activated."
+    }
+  ]
+}

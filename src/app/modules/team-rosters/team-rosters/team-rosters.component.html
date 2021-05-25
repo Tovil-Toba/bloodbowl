@@ -70,12 +70,13 @@
                 tooltipPosition="right"
                 [escape]="false"
                 class="position"
+                tooltipStyleClass="position-tooltip"
               >{{playerProfile.position}}</span>
               <br *ngIf="!isLast" />
             </ng-container>
           </td>
           <td>{{teamRoster.tier}}</td>
-          <td>{{teamRoster.reRollCost}}</td>
+          <td>{{teamRoster.reRollCost | currency:' ':'symbol':'1.0-0'}}</td>
           <td>
 <!--            <i class="pi pi-check" *ngIf="teamRoster.apothecary"></i>-->
             {{teamRoster.apothecary ? 'Yes' : 'No'}}
@@ -87,7 +88,7 @@
               icon="pi pi-pencil"
               class="p-button-rounded p-button-success p-mr-2"
               (click)="editTeamRoster(teamRoster)"
-              pTooltip="Edit Team"
+              pTooltip="Edit Team Roster"
               tooltipPosition="top"
             ></button>
             <button
@@ -96,7 +97,7 @@
               icon="pi pi-trash"
               class="p-button-rounded p-button-warning"
               (click)="deleteTeamRoster(teamRoster)"
-              pTooltip="Delete Team"
+              pTooltip="Delete Team Roster"
               tooltipPosition="top"
             ></button>
           </td>

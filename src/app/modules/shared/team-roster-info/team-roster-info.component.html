@@ -38,14 +38,28 @@
 
     <ng-template pTemplate="header">
       <tr>
-        <th style="width: 5rem;" class="p-text-center">QTY</th>
+        <th pSortableColumn="quantity" style="width: 6rem;" class="p-text-center text-nowrap">
+          QTY <p-sortIcon field="quantity"></p-sortIcon>
+        </th>
         <th style="min-width: 8rem;">POSITION</th>
-        <th style="width: 4rem;" class="p-text-center">COST</th>
-        <th style="width: 4rem;" class="p-text-center">MA</th>
-        <th style="width: 4rem;" class="p-text-center">ST</th>
-        <th style="width: 4rem;" class="p-text-center">AG</th>
-        <th style="width: 4rem;" class="p-text-center">PA</th>
-        <th style="width: 4rem;" class="p-text-center">AV</th>
+        <th pSortableColumn="cost" style="width: 6.5rem;" class="p-text-center text-nowrap">
+          COST <p-sortIcon field="cost"></p-sortIcon>
+        </th>
+        <th pSortableColumn="movementAllowance" style="width: 5.5rem;" class="p-text-center text-nowrap">
+          MA<p-sortIcon field="movementAllowance"></p-sortIcon>
+        </th>
+        <th pSortableColumn="strength" style="width: 5rem;" class="p-text-center text-nowrap">
+          ST <p-sortIcon field="strength"></p-sortIcon>
+        </th>
+        <th pSortableColumn="agility" style="width: 5.5rem;" class="p-text-center text-nowrap">
+          AG <p-sortIcon field="agility"></p-sortIcon>
+        </th>
+        <th pSortableColumn="passingAbility" style="width: 5.5rem;" class="p-text-center text-nowrap">
+          PA <p-sortIcon field="passingAbility"></p-sortIcon>
+        </th>
+        <th pSortableColumn="armourValue" style="width: 5.5rem;" class="p-text-center text-nowrap">
+          AV <p-sortIcon field="armourValue"></p-sortIcon>
+        </th>
         <th style="min-width: 8rem;">SKILLS & TRAITS</th>
         <th style="width: 7rem;" class="p-text-center">PRIMARY</th>
         <th style="width: 7rem;" class="p-text-center">SECONDARY</th>
@@ -79,10 +93,13 @@
             {{playerProfile.agility}}+
           </span>
         </td>
-        <td>
-          <span *ngIf="playerProfile.passingAbility">
+        <td class="p-text-center">
+          <span *ngIf="playerProfile.passingAbility; else elseBlock">
             {{playerProfile.passingAbility}}+
           </span>
+          <ng-template #elseBlock>
+            <span>-</span>
+          </ng-template>
         </td>
         <td class="p-text-center">
           <span *ngIf="playerProfile.armourValue">

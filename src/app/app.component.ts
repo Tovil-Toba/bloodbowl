@@ -9,6 +9,8 @@ import { SkillsService } from './modules/skills/shared/skills.service';
 import { TeamModel } from './modules/teams/shared/team.model';
 import { TeamRosterModel } from './modules/team-rosters/shared/team-roster.model';
 import { SkillModel } from './modules/skills/shared/skill.model';
+import { StarPlayersService } from './modules/star-players/shared/star-players.service';
+import { StarPlayerModel } from './modules/star-players/shared/star-player.model';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +32,8 @@ export class AppComponent implements OnInit {
     public themesService: ThemesService,
     public teamsService: TeamsService,
     public teamRostersService: TeamRostersService,
-    public skillsService: SkillsService
+    public skillsService: SkillsService,
+    public starPlayersService: StarPlayersService
   ) {
   }
 
@@ -40,6 +43,7 @@ export class AppComponent implements OnInit {
     this.teamsService.loading = true;
     this.teamRostersService.loading = true;
     this.skillsService.loading = true;
+    this.starPlayersService.loading = true;
 
     this.teamsService.getItems().subscribe((teams: TeamModel[]) => {
       this.teamsService.teams = teams;
@@ -54,6 +58,11 @@ export class AppComponent implements OnInit {
     this.skillsService.getItems().subscribe((skills: SkillModel[]) => {
       this.skillsService.skills = skills;
       this.skillsService.loading = false;
+    });
+
+    this.starPlayersService.getItems().subscribe((starPlayers: StarPlayerModel[]) => {
+      this.starPlayersService.starPlayers = starPlayers;
+      this.starPlayersService.loading = false;
     });
   }
 }

@@ -4,6 +4,8 @@ import * as _ from 'lodash';
 
 import { SKILL_CATEGORIES } from '../../modules/skills/shared/skill-categories';
 import { SkillCategoryModel } from '../../modules/skills/shared/skill-category.model';
+import { StarPlayersService } from '../../modules/star-players/shared/star-players.service';
+import { StarPlayerModel } from '../../modules/star-players/shared/star-player.model';
 import { ThemesService } from '../../core/themes.service';
 import { ThemeModel } from '../../models/theme.model';
 import { ThemeFilenameModel } from '../../models/theme-filename.model';
@@ -20,13 +22,15 @@ import { TeamRosterModel } from '../../modules/team-rosters/shared/team-roster.m
 export class MenubarComponent implements OnInit, DoCheck {
 
   items: MenuItem[];
+  oldStarPlayers: StarPlayerModel[];
   oldTeams: TeamModel[];
   oldTeamRosters: TeamRosterModel[];
 
   constructor(
     public themesService: ThemesService,
     private teamsService: TeamsService,
-    private teamRostersService: TeamRostersService
+    private teamRostersService: TeamRostersService,
+    private starPlayersService: StarPlayersService
   ) { }
 
   private get skillCategoriesItems(): MenuItem[] {
@@ -47,6 +51,29 @@ export class MenubarComponent implements OnInit, DoCheck {
         }
       );
     });
+    return menuItems;
+  }
+
+  private get starPlayersItems(): MenuItem[] {
+    const menuItems: MenuItem[] = [
+      {
+        label: 'Table',
+        routerLink: ['/star-players']
+      },
+      {
+        separator: true
+      }
+    ];
+
+    this.starPlayersService.starPlayers.forEach((starPlayer: StarPlayerModel) => {
+      menuItems.push(
+        {
+          label: starPlayer.name,
+          routerLink: [`/star-players/${starPlayer.urlId}`]
+        }
+      );
+    });
+
     return menuItems;
   }
 
@@ -159,6 +186,7 @@ export class MenubarComponent implements OnInit, DoCheck {
     ) {
       this.oldTeams = _.clone(this.teamsService.teams);
       this.oldTeamRosters = _.clone(this.teamRostersService.teamRosters);
+      this.oldStarPlayers = _.clone(this.starPlayersService.starPlayers);
 
       this.items = [
         {
@@ -174,7 +202,7 @@ export class MenubarComponent implements OnInit, DoCheck {
         {
           label: 'Star Players',
           icon: 'pi pi-fw pi-star',
-          items: []
+          items: this.starPlayersItems
         },
         {
           label: 'Skills',

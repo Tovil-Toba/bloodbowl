@@ -1,6 +1,6 @@
 <div *ngIf="themesService.selectedTheme">
   <app-loading-screen
-    *ngIf="teamsService.loading || skillsService.loading; else elseBlock"
+    *ngIf="teamsService.loading || teamRostersService.loading || skillsService.loading || starPlayersService.loading; else elseBlock"
   ></app-loading-screen>
   <ng-template #elseBlock>
     <div [@pageAnimations]="themesService.selectedTheme">

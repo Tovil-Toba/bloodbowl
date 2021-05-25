@@ -17,7 +17,7 @@ export class PlayerProfile implements PlayerProfileModel {
 
   constructor(playerProfile?: Record<string, any>) {
     this.id = playerProfile?.id;
-    this.quantity = playerProfile?.quantity ?? 2;
+    this.quantity = playerProfile?.quantity ?? 1;
     this.position = playerProfile?.position ?? '';
     this.cost = playerProfile?.cost ?? 50000;
     this.movementAllowance = playerProfile?.movementAllowance ?? 6;
@@ -26,8 +26,8 @@ export class PlayerProfile implements PlayerProfileModel {
     this.passingAbility = playerProfile?.passingAbility ?? 4;
     this.armourValue = playerProfile?.armourValue ?? 8;
     this.skillsAndTraits = playerProfile?.skillsAndTraits ?? '';
-    this.primary = playerProfile?.primary ?? '';
-    this.secondary = playerProfile?.secondary ?? '';
+    this.primary = playerProfile?.primary;
+    this.secondary = playerProfile?.secondary;
     this.bigGuy = !!playerProfile?.bigGuy;
   }
 }

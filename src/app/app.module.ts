@@ -12,10 +12,12 @@ import { SharedCommonModule } from './modules/shared/shared-common.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SkillsRoutingModule } from './modules/skills/skills-routing.module';
+import { StarPlayersRoutingModule } from './modules/star-players/star-players-routing.module';
 import { TeamsRoutingModule } from './modules/teams/teams-routing.module';
 import { TeamRostersRoutingModule } from './modules/team-rosters/team-rosters-routing.module';
 
 import { SkillsModule } from './modules/skills/skills.module';
+import { StarPlayersModule } from './modules/star-players/star-players.module';
 import { TeamsModule } from './modules/teams/teams.module';
 import { TeamRostersModule } from './modules/team-rosters/team-rosters.module';
 
@@ -54,6 +56,8 @@ import { LoadingScreenComponent } from './components/loading-screen/loading-scre
     SkillsModule,
     SkillsRoutingModule,
     ScrollTopModule,
+    StarPlayersModule,
+    StarPlayersRoutingModule,
     TeamsModule,
     TeamRostersModule,
     TeamsRoutingModule,

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TeamRosterInfoComponent } from './team-roster-info.component';
+import { StarPlayersComponent } from './star-players.component';
 
-describe('TeamRosterInfoComponent', () => {
-  let component: TeamRosterInfoComponent;
-  let fixture: ComponentFixture<TeamRosterInfoComponent>;
+describe('StarPlayersComponent', () => {
+  let component: StarPlayersComponent;
+  let fixture: ComponentFixture<StarPlayersComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TeamRosterInfoComponent ]
+      declarations: [ StarPlayersComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TeamRosterInfoComponent);
+    fixture = TestBed.createComponent(StarPlayersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

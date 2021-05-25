@@ -5,8 +5,8 @@ import { ConfirmationService, MenuItem } from 'primeng/api';
 import * as _ from 'lodash';
 
 import { TeamRosterModel } from '../shared/team-roster.model';
-import { PlayerProfileModel } from '../shared/player-profile.model';
-import { PlayerProfile } from '../shared/player-profile';
+import { PlayerProfileModel } from '../../shared/player-profile.model';
+import { PlayerProfile } from '../../shared/player-profile';
 import { TeamRostersService } from '../shared/team-rosters.service';
 import { enterPageAnimation } from '../../../shared/animations';
 

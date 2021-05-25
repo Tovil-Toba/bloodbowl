@@ -1,15 +1,10 @@
 import { PlayerProfileModel } from '../../shared/player-profile.model';
 
-export interface TeamRosterModel {
+export interface StarPlayerModel {
   id: number;
   urlId: string;
   name: string;
-  notableExamples?: string;
-  description: string;
   playerProfiles: PlayerProfileModel[];
-  bigGuyRules?: string;
-  reRollCost: number;
-  tier: number;
+  playsFor: string;
   specialRules: string;
-  apothecary: boolean;
 }

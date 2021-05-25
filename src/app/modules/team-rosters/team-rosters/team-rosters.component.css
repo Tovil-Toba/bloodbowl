@@ -1,21 +1,21 @@
-::ng-deep .p-tooltip {
-  max-width: 100%;
-}
-
-::ng-deep .p-tooltip .p-tooltip-text {
-  white-space: normal;
-}
-
 .position:hover {
   cursor: pointer;
   color: var(--primary-color);
 }
 
-::ng-deep .p-tooltip-text > p:first-child {
+::ng-deep .position-tooltip {
+  max-width: 100%;
+}
+
+::ng-deep .position-tooltip .p-tooltip-text {
+  white-space: normal;
+}
+
+::ng-deep .position-tooltip .p-tooltip-text > p:first-child {
   margin-block-start: 0;
   margin-block-end: 0;
 }
 
-::ng-deep .p-tooltip-text > p:last-child {
+::ng-deep .position-tooltip .p-tooltip-text > p:last-child {
   margin-block-end: 0;
 }

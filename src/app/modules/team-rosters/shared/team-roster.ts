@@ -1,5 +1,5 @@
 import { TeamRosterModel } from './team-roster.model';
-import { PlayerProfileModel } from './player-profile.model';
+import { PlayerProfileModel } from '../../shared/player-profile.model';
 
 export class TeamRoster implements TeamRosterModel {
   id: number;

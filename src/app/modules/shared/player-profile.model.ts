@@ -1,7 +1,8 @@
 export interface PlayerProfileModel {
   id: number;
   quantity: number;
-  position: string;
+  name?: string;
+  position?: string;
   cost: number;
   movementAllowance: number;
   strength: number;

@@ -3,7 +3,8 @@ import { PlayerProfileModel } from './player-profile.model';
 export class PlayerProfile implements PlayerProfileModel {
   id: number;
   quantity: number;
-  position: string;
+  name?: string;
+  position?: string;
   cost: number;
   movementAllowance: number;
   strength: number;
@@ -18,7 +19,8 @@ export class PlayerProfile implements PlayerProfileModel {
   constructor(playerProfile?: Record<string, any>) {
     this.id = playerProfile?.id;
     this.quantity = playerProfile?.quantity ?? 1;
-    this.position = playerProfile?.position ?? '';
+    this.name = playerProfile?.name;
+    this.position = playerProfile?.position;
     this.cost = playerProfile?.cost ?? 50000;
     this.movementAllowance = playerProfile?.movementAllowance ?? 6;
     this.strength = playerProfile?.strength ?? 3;

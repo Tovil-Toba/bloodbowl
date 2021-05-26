@@ -7,6 +7,11 @@
   margin-block-end: 0;
 }
 
+.quantity-button {
+  padding: revert;
+  min-width: auto;
+}
+
 .team {
   cursor: pointer;
 }
@@ -16,6 +21,14 @@
   text-decoration: underline;
 }
 
-.text-nowrap {
-  white-space: nowrap;
+.text-danger {
+  color: #FF5252;
+}
+
+.text-warning {
+  color: var(--orange-500);
+}
+
+.text-top {
+  vertical-align: top;
 }

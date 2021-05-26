@@ -8,7 +8,7 @@
         {
           "id": 1,
           "quantity": 1,
-          "position": "The Black Gobbo",
+          "name": "The Black Gobbo",
           "cost": 225000,
           "movementAllowance": 6,
           "strength": 2,
@@ -29,7 +29,7 @@
         {
           "id": 1,
           "quantity": 1,
-          "position": "Deeproot Strongbranch",
+          "name": "Deeproot Strongbranch",
           "cost": 280000,
           "movementAllowance": 2,
           "strength": 7,
@@ -50,7 +50,7 @@
         {
           "id": 1,
           "quantity": 1,
-          "position": "Eldril Sidewinder",
+          "name": "Eldril Sidewinder",
           "cost": 230000,
           "movementAllowance": 8,
           "strength": 3,
@@ -72,7 +72,7 @@
         {
           "id": 1,
           "quantity": 1,
-          "position": "Glart Smashrip",
+          "name": "Glart Smashrip",
           "cost": 195000,
           "movementAllowance": 5,
           "strength": 4,
@@ -92,7 +92,7 @@
         {
           "id": 1,
           "quantity": 1,
-          "position": "Gloriel Summerbloom",
+          "name": "Gloriel Summerbloom",
           "cost": 150000,
           "movementAllowance": 7,
           "strength": 2,
@@ -104,6 +104,40 @@
       ],
       "playsFor": "Any team with the ‘Elven Kingdoms League’ special rule.",
       "specialRules": "Shot to Nothing: Once per game, when Gloriel performs a Pass action, she may gain the Hail Mary Pass skill. You must declare this special rule is being used when Gloriel is activated."
+    },
+    {
+      "id": 6,
+      "urlId": "grak-and-crumbleberry",
+      "name": "Grak and Crumbleberry",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Grak",
+          "cost": 250000,
+          "movementAllowance": 5,
+          "strength": 5,
+          "agility": 4,
+          "passingAbility": 4,
+          "armourValue": 10,
+          "skillsAndTraits": "Bone Head, Kick Team-mate, Loner (4+), Mighty Blow (+1), Thick Skull",
+          "bigGuy": true
+        },
+        {
+          "id": 2,
+          "quantity": 1,
+          "name": "Crumbleberry",
+          "cost": 0,
+          "movementAllowance": 5,
+          "strength": 2,
+          "agility": 3,
+          "passingAbility": 6,
+          "armourValue": 7,
+          "skillsAndTraits": "Dodge, Loner (4+), Right Stuff, Stunty, Sure Hands"
+        }
+      ],
+      "playsFor": "Any team.",
+      "specialRules": "Two for One: Grak and Crumbleberry must be hired as a pair and count as two Star Players. However, if either Grak or Crumbleberry is removed from play due to suffering a KO’d or Casualty! result on the Injury table, the other replaces the Loner (4+) trait with the Loner (2+) trait."
     }
   ]
 }

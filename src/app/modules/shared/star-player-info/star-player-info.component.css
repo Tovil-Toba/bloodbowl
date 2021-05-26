@@ -1,0 +1,12 @@
+::ng-deep .skill-description > p:first-child {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+::ng-deep .skill-description > p:last-child {
+  margin-block-end: 0;
+}
+
+.text-top {
+  vertical-align: top;
+}

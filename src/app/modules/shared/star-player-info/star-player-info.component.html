@@ -1,0 +1,103 @@
+<div class="team-roster-info">
+  <p-table
+    [value]="starPlayer.playerProfiles"
+    dataKey="id"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="min-width: 8rem;">
+          NAME
+        </th>
+        <th style="width: 5.5rem;" class="p-text-center text-nowrap">
+          MA
+        </th>
+        <th style="width: 5rem;" class="p-text-center text-nowrap">
+          ST
+        </th>
+        <th style="width: 5.5rem;" class="p-text-center text-nowrap">
+          AG
+        </th>
+        <th style="width: 5.5rem;" class="p-text-center text-nowrap">
+          PA
+        </th>
+        <th style="width: 5.5rem;" class="p-text-center text-nowrap">
+          AV
+        </th>
+        <th style="min-width: 8rem;">
+          SKILLS & TRAITS
+        </th>
+        <th style="width: 9rem;" class="p-text-center">
+          GP TO INDUCE
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-playerProfile
+    >
+      <tr>
+        <td class="text-top">
+          <span class="p-text-bold">{{playerProfile.name}}</span>
+        </td>
+        <td class="p-text-center text-top">
+          {{playerProfile.movementAllowance}}
+        </td>
+        <td class="p-text-center text-top">
+          {{playerProfile.strength}}
+        </td>
+        <td class="p-text-center text-top">
+          <span *ngIf="playerProfile.agility">
+            {{playerProfile.agility}}+
+          </span>
+        </td>
+        <td class="p-text-center text-top">
+          <span *ngIf="playerProfile.passingAbility; else elseBlock">
+            {{playerProfile.passingAbility}}+
+          </span>
+          <ng-template #elseBlock>
+            <span>-</span>
+          </ng-template>
+        </td>
+        <td class="p-text-center text-top">
+          <span *ngIf="playerProfile.armourValue">
+            {{playerProfile.armourValue}}+
+          </span>
+        </td>
+        <td class="text-top">
+          <app-skills-info
+            [skills]="playerProfile.skillsAndTraits"
+            (clickedSkill)="openSkillInfoDialog($event)"
+          ></app-skills-info>
+        </td>
+        <td
+          *ngIf="playerProfile.id === 1"
+          [attr.rowspan]="starPlayer.playerProfiles.length"
+          class="p-text-center text-top"
+        >
+          <span *ngIf="playerProfile.cost">
+            {{playerProfile.cost | currency:' ':'symbol':'1.0-0'}}
+          </span>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <tr>
+        <td colspan="8">Plays for: <span class="p-text-normal">{{starPlayer.playsFor}}</span></td>
+      </tr>
+      <tr>
+        <td colspan="8">Special rules: <span class="p-text-normal">{{starPlayer.specialRules}}</span></td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-dialog
+    *ngIf="skill"
+    [(visible)]="skillInfoDialog"
+    [header]="skill.name"
+    [modal]="true"
+    [dismissableMask]="true"
+    [style]="{width: '640px'}"
+  >
+    <div [innerHTML]="skill.description" class="skill-description"></div>
+  </p-dialog>
+</div>

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import * as _ from 'lodash';
 
 import { SkillsService } from '../../skills/shared/skills.service';
 import { SkillModel } from '../../skills/shared/skill.model';
@@ -22,7 +23,7 @@ export class SkillsInfoComponent implements OnInit {
     const skillNames = this.skills.split(',');
     for (let skillName of skillNames) {
       skillName = skillName.trim();
-      let skill: SkillModel = this.skillsService.getSkillByName(skillName);
+      let skill: SkillModel = _.clone(this.skillsService.getSkillByName(skillName));
       if (!skill) {
         skill = new Skill();
       }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MessageService } from 'primeng/api';
+import * as _ from 'lodash';
 
 import { Crud } from '../../../core/crud';
 import { StarPlayerModel } from './star-player.model';
@@ -20,6 +21,17 @@ export class StarPlayersService extends Crud<StarPlayerModel> {
     public messageService: MessageService
   ) {
     super('api/starPlayers', http, messageService);
+  }
+
+  getStarPlayersBySpecialRules(teamRosterSpecialRules: string): StarPlayerModel[] {
+    const specialRulesArray = teamRosterSpecialRules.split(', ');
+    return _.filter<StarPlayerModel[]>(
+      this.starPlayers,
+      (starPlayer: StarPlayerModel) => {
+        return starPlayer.playsFor === 'Any team.' ||
+          new RegExp(specialRulesArray.join('|')).test(starPlayer.playsFor);
+      }
+    );
   }
 
   getStarPlayersByUrlId$(urlId: string): Observable<StarPlayerModel[]> {

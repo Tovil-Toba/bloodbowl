@@ -43,17 +43,17 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+          <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
           <th>Positions</th>
-          <th pSortableColumn="tier">Tier <p-sortIcon field="tier"></p-sortIcon></th>
-          <th pSortableColumn="reRollCost">Re-roll Cost <p-sortIcon field="reRollCost"></p-sortIcon></th>
-          <th pSortableColumn="apothecary">Apothecary <p-sortIcon field="apothecary"></p-sortIcon></th>
+          <th pSortableColumn="tier" class="p-text-center">Tier<p-sortIcon field="tier"></p-sortIcon></th>
+          <th pSortableColumn="reRollCost" class="p-text-center">Re-roll Cost<p-sortIcon field="reRollCost"></p-sortIcon></th>
+          <th pSortableColumn="apothecary" class="p-text-center">Apothecary<p-sortIcon field="apothecary"></p-sortIcon></th>
           <th style="width: 9rem;"></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-teamRoster>
         <tr>
-          <td class="p-pl-0">
+          <td class="p-pt-2 p-pl-2 text-top">
             <button
               pButton
               type="button"
@@ -63,7 +63,7 @@
               style="white-space: nowrap"
             ></button>
           </td>
-          <td>
+          <td class="text-top">
             <ng-container *ngFor="let playerProfile of teamRoster.playerProfiles; last as isLast">
               <span
                 [pTooltip]="getPositionTooltip(playerProfile)"
@@ -75,10 +75,9 @@
               <br *ngIf="!isLast" />
             </ng-container>
           </td>
-          <td>{{teamRoster.tier}}</td>
-          <td>{{teamRoster.reRollCost | currency:' ':'symbol':'1.0-0'}}</td>
-          <td>
-<!--            <i class="pi pi-check" *ngIf="teamRoster.apothecary"></i>-->
+          <td class="p-text-center text-top">{{teamRoster.tier}}</td>
+          <td class="p-text-center text-top">{{teamRoster.reRollCost | currency:' ':'symbol':'1.0-0'}}</td>
+          <td class="p-text-center text-top">
             {{teamRoster.apothecary ? 'Yes' : 'No'}}
           </td>
           <td class="p-text-right" style="width: 9rem;">

@@ -1,1 +1,188 @@
-<p>star-players works!</p>
+<div
+  *ngIf="!starPlayersService.loading && starPlayersService.starPlayers"
+  [@pageAnimations]="!starPlayersService.loading && starPlayersService.starPlayers"
+>
+  <p-breadcrumb
+    [model]="breadcrumbItems"
+    [home]="{ icon: 'pi pi-home', routerLink: '/' }"
+    styleClass="p-mb-3 animation"
+  ></p-breadcrumb>
+
+  <p-panel header="Star Players" styleClass="animation">
+    <p-table
+      #starPlayersTable
+      [value]="starPlayersTableRows"
+      [rows]="10"
+      [paginator]="true"
+      [globalFilterFields]="['name', 'skillsAndTraits']"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+    >
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <button
+            pButton
+            pRipple
+            label="New Star Player"
+            icon="pi pi-plus"
+            class="p-button-success p-mr-2"
+            (click)="openNewStarPlayerDialog()"
+          ></button>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              (input)="starPlayersTable.filterGlobal($event.target.value, 'contains')"
+              placeholder="Search..."
+            />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="name" style="min-width: 8rem;">
+            NAME<p-sortIcon field="name"></p-sortIcon>
+          </th>
+          <th pSortableColumn="movementAllowance" style="width: 5.5rem;" class="p-text-center text-nowrap">
+            MA<p-sortIcon field="movementAllowance"></p-sortIcon>
+          </th>
+          <th pSortableColumn="strength" style="width: 5rem;" class="p-text-center text-nowrap">
+            ST<p-sortIcon field="strength"></p-sortIcon>
+          </th>
+          <th pSortableColumn="agility" style="width: 5.5rem;" class="p-text-center text-nowrap">
+            AG<p-sortIcon field="agility"></p-sortIcon>
+          </th>
+          <th pSortableColumn="passingAbility" style="width: 5.5rem;" class="p-text-center text-nowrap">
+            PA<p-sortIcon field="passingAbility"></p-sortIcon>
+          </th>
+          <th pSortableColumn="armourValue" style="width: 5.5rem;" class="p-text-center text-nowrap">
+            AV<p-sortIcon field="armourValue"></p-sortIcon>
+          </th>
+          <th style="min-width: 8rem;">
+            SKILLS & TRAITS
+          </th>
+          <th pSortableColumn="cost" style="width: 11rem;" class="p-text-center">
+            GP TO INDUCE<p-sortIcon field="cost"></p-sortIcon>
+          </th>
+          <th pSortableColumn="bigGuy" style="width: 8rem;" class="p-text-center">
+            BIG GUY<p-sortIcon field="bigGuy"></p-sortIcon>
+          </th>
+          <th style="width: 9rem;"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-playerProfile>
+        <tr>
+          <td class="p-pt-2 p-pl-2 text-top">
+            <button
+              pButton
+              type="button"
+              [label]="playerProfile.name"
+              (click)="openStarPlayerInfoDialog(playerProfile.starPlayer)"
+              class="p-button-text p-text-nowrap"
+            ></button>
+          </td>
+          <td class="p-text-center text-top">
+            {{playerProfile.movementAllowance}}
+          </td>
+          <td class="p-text-center text-top">
+            {{playerProfile.strength}}
+          </td>
+          <td class="p-text-center text-top">
+            <span *ngIf="playerProfile.agility">
+              {{playerProfile.agility}}+
+            </span>
+          </td>
+          <td class="p-text-center text-top text-top">
+            <span *ngIf="playerProfile.passingAbility; else elseBlock">
+              {{playerProfile.passingAbility}}+
+            </span>
+            <ng-template #elseBlock>
+              <span>-</span>
+            </ng-template>
+          </td>
+          <td class="p-text-center text-top">
+          <span *ngIf="playerProfile.armourValue">
+            {{playerProfile.armourValue}}+
+          </span>
+          </td>
+          <td class="text-top">
+            <app-skills-info
+              [skills]="playerProfile.skillsAndTraits"
+              (clickedSkill)="openSkillInfoDialog($event)"
+            ></app-skills-info>
+          </td>
+          <td class="p-text-center text-top">
+            {{playerProfile.cost | currency:' ':'symbol':'1.0-0'}}
+            <span *ngIf="playerProfile.numberOfPlayers > 1"> / {{playerProfile.numberOfPlayers}}</span>
+          </td>
+          <td class="p-text-center text-top">
+            {{playerProfile.bigGuy ? 'Yes' : 'No'}}
+          </td>
+          <td class="p-text-right" style="width: 9rem;">
+            <button
+              pButton
+              pRipple
+              icon="pi pi-pencil"
+              class="p-button-rounded p-button-success p-mr-2"
+              (click)="editStarPlayer(playerProfile.starPlayer)"
+              pTooltip="Edit Star Player"
+              tooltipPosition="top"
+            ></button>
+            <button
+              pButton
+              pRipple
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-warning"
+              (click)="deleteStarPlayer(playerProfile.starPlayer)"
+              pTooltip="Delete Star Player"
+              tooltipPosition="top"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          In total there are {{starPlayersTableRows ? starPlayersTableRows.length : 0 }} star players.
+        </div>
+      </ng-template>
+    </p-table>
+  </p-panel>
+
+  <p-dialog
+    [(visible)]="starPlayerFormDialog"
+    [header]="starPlayer && starPlayer.id ? starPlayer.name : 'New Star Player'"
+    [modal]="true"
+    [maximizable]="true"
+    [style]="{width: '90%'}"
+  >
+    <ng-template pTemplate="content">
+      <app-star-player-form
+        [starPlayer]="starPlayer"
+        (submittedStarPlayer)="onStarPlayerFormSubmit($event)"
+      ></app-star-player-form>
+    </ng-template>
+  </p-dialog>
+
+  <p-dialog
+    *ngIf="starPlayer"
+    [(visible)]="starPlayerInfoDialog"
+    [header]="starPlayer.name"
+    [modal]="true"
+    [maximizable]="true"
+    [style]="{width: '90%'}"
+  >
+    <ng-template pTemplate="content">
+      <app-star-player-info [starPlayer]="starPlayer"></app-star-player-info>
+    </ng-template>
+  </p-dialog>
+
+  <app-skill-info-dialog
+    [(visible)]="skillInfoDialog"
+    [skill]="skill"
+  ></app-skill-info-dialog>
+
+  <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+</div>

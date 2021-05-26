@@ -1,9 +1,9 @@
 <p-table
-  [value]="clonedTeamRoster.playerProfiles"
+  [value]="clonedStarPlayer.playerProfiles"
   dataKey="id"
   editMode="row"
-  #teamRosterTable
-  [globalFilterFields]="['position', 'skillsAndTraits']"
+  #starPlayerTable
+  [globalFilterFields]="['name', 'skillsAndTraits']"
   [editingRowKeys]="editingRowKeys"
 >
   <ng-template pTemplate="caption">
@@ -17,31 +17,28 @@
         (click)="addNewPlayerProfile($event)"
       ></button>
       <span class="p-input-icon-left">
-        <i class="pi pi-search"></i>
-        <input
-          pInputText
-          type="text"
-          (input)="teamRosterTable.filterGlobal($event.target.value, 'contains')"
-          placeholder="Search..."
-        />
-      </span>
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (input)="starPlayerTable.filterGlobal($event.target.value, 'contains')"
+            placeholder="Search..."
+          />
+        </span>
     </div>
   </ng-template>
 
   <ng-template pTemplate="header">
     <tr>
       <th style="width: 3rem"></th>
-      <th style="width: 5rem;" class="p-text-center">QTY</th>
-      <th style="width: 10rem;" class="p-px-1">POSITION</th>
-      <th style="width: 6rem;" class="p-text-center p-px-1">COST</th>
+      <th style="width: 10rem;" class="p-px-1">NAME</th>
       <th style="width: 5rem;" class="p-text-center p-px-1">MA</th>
       <th style="width: 5rem;" class="p-text-center p-px-1">ST</th>
       <th style="width: 5rem;" class="p-text-center p-px-1">AG</th>
       <th style="width: 5rem;" class="p-text-center p-px-1">PA</th>
       <th style="width: 5rem;" class="p-text-center p-px-1">AV</th>
-      <th style="width: 10rem;" class="p-px-1">SKILLS & TRAITS</th>
-      <th style="width: 5rem;" class="p-text-center p-px-1">PRIMARY</th>
-      <th style="width: 7rem;" class="p-text-center p-px-1">SECONDARY</th>
+      <th style="width: 15rem;" class="p-px-1">SKILLS & TRAITS</th>
+      <th style="width: 6rem;" class="p-text-center p-px-1">GP TO INDUCE</th>
       <th style="width: 6rem;" class="p-text-center p-px-1">BIG GUY</th>
       <th style="width: 6rem;" class="p-px-0"></th>
     </tr>
@@ -56,55 +53,20 @@
       <td>
         <span class="pi pi-bars" pReorderableRowHandle></span>
       </td>
-      <td pEditableColumn class="p-text-center p-px-1">
-        <p-cellEditor>
-          <ng-template pTemplate="input">
-            <input
-              pInputText
-              type="number"
-              [(ngModel)]="playerProfile.quantity"
-              name="quantity"
-              class="p-text-center"
-              style="width: 5rem;"
-              required
-            >
-          </ng-template>
-          <ng-template pTemplate="output">
-            <span *ngIf="playerProfile.quantity">0-{{playerProfile.quantity}}</span>
-          </ng-template>
-        </p-cellEditor>
-      </td>
       <td pEditableColumn class="p-px-1">
         <p-cellEditor>
           <ng-template pTemplate="input">
             <input
               pInputText
               type="text"
-              [(ngModel)]="playerProfile.position"
-              name="position"
-              required style="width: 100%;"
-            >
-          </ng-template>
-          <ng-template pTemplate="output">
-            {{playerProfile.position}}
-          </ng-template>
-        </p-cellEditor>
-      </td>
-      <td pEditableColumn class="p-text-center p-px-1">
-        <p-cellEditor>
-          <ng-template pTemplate="input">
-            <input
-              pInputText
-              type="number"
-              [(ngModel)]="playerProfile.cost"
-              name="cost"
-              class="p-text-center"
-              style="width: 100%;"
+              [(ngModel)]="playerProfile.name"
+              name="name"
               required
+              style="width: 100%;"
             >
           </ng-template>
           <ng-template pTemplate="output">
-            {{playerProfile.cost | currency:' ':'symbol':'1.0-0'}}
+            {{playerProfile.name}}
           </ng-template>
         </p-cellEditor>
       </td>
@@ -117,7 +79,7 @@
               [(ngModel)]="playerProfile.movementAllowance"
               name="movementAllowance"
               class="p-text-center"
-              style="width: 100%;"
+              style="width: 5rem;"
               required
             >
           </ng-template>
@@ -135,7 +97,7 @@
               [(ngModel)]="playerProfile.strength"
               name="strength"
               class="p-text-center"
-              style="width: 100%;"
+              style="width: 5rem;"
               required
             >
           </ng-template>
@@ -153,7 +115,7 @@
               [(ngModel)]="playerProfile.agility"
               name="agility"
               class="p-text-center"
-              style="width: 100%;"
+              style="width: 5rem;"
               required
             >
           </ng-template>
@@ -173,14 +135,14 @@
               [(ngModel)]="playerProfile.passingAbility"
               name="passingAbility"
               class="p-text-center"
-              style="width: 100%;"
+              style="width: 5rem;"
               required
             >
           </ng-template>
           <ng-template pTemplate="output">
-              <span *ngIf="playerProfile.passingAbility">
-                {{playerProfile.passingAbility}}+
-              </span>
+            <span *ngIf="playerProfile.passingAbility">
+              {{playerProfile.passingAbility}}+
+            </span>
           </ng-template>
         </p-cellEditor>
       </td>
@@ -193,14 +155,14 @@
               [(ngModel)]="playerProfile.armourValue"
               name="armourValue"
               class="p-text-center"
-              style="width: 100%;"
+              style="width: 5rem;"
               required
             >
           </ng-template>
           <ng-template pTemplate="output">
-              <span *ngIf="playerProfile.armourValue">
-                {{playerProfile.armourValue}}+
-              </span>
+            <span *ngIf="playerProfile.armourValue">
+              {{playerProfile.armourValue}}+
+            </span>
           </ng-template>
         </p-cellEditor>
       </td>
@@ -223,39 +185,21 @@
           </ng-template>
         </p-cellEditor>
       </td>
-      <td pEditableColumn class="p-text-center">
+      <td pEditableColumn class="p-text-center p-px-1">
         <p-cellEditor>
           <ng-template pTemplate="input">
             <input
               pInputText
-              type="text"
-              [(ngModel)]="playerProfile.primary"
-              name="primary"
+              type="number"
+              [(ngModel)]="playerProfile.cost"
+              name="cost"
               class="p-text-center"
-              style="width: 4rem;"
+              style="width: 100%;"
               required
             >
           </ng-template>
           <ng-template pTemplate="output">
-            {{playerProfile.primary}}
-          </ng-template>
-        </p-cellEditor>
-      </td>
-      <td pEditableColumn class="p-text-center">
-        <p-cellEditor>
-          <ng-template pTemplate="input">
-            <input
-              pInputText
-              type="text"
-              [(ngModel)]="playerProfile.secondary"
-              name="secondary"
-              class="p-text-center"
-              style="width: 4rem;"
-              required
-            >
-          </ng-template>
-          <ng-template pTemplate="output">
-            {{playerProfile.secondary}}
+            {{playerProfile.cost | currency:' ':'symbol':'1.0-0'}}
           </ng-template>
         </p-cellEditor>
       </td>
@@ -269,7 +213,7 @@
           </ng-template>
         </p-cellEditor>
       </td>
-      <td class="p-text-center p-px-0  p-text-nowrap">
+      <td class="p-text-center p-px-0 p-text-nowrap">
         <button
           *ngIf="!editing"
           pButton
@@ -324,7 +268,7 @@
 
 <p></p>
 
-<form (ngSubmit)="onSubmit()" #teamRosterForm="ngForm">
+<form (ngSubmit)="onSubmit()" #starPlayerForm="ngForm">
   <div class="p-field p-sm-8 p-md-6 p-lg-4 p-xl-3">
     <span class="p-float-label">
       <input
@@ -333,7 +277,7 @@
         pInputText
         required
         appUniqueUrlId
-        [(ngModel)]="clonedTeamRoster.urlId"
+        [(ngModel)]="clonedStarPlayer.urlId"
         name="urlId"
         style="width: 100%;"
       >
@@ -348,39 +292,25 @@
         type="text"
         pInputText
         required
-        [(ngModel)]="clonedTeamRoster.name"
+        [(ngModel)]="clonedStarPlayer.name"
         name="name"
         style="width: 100%;"
       >
-      <label for="name">Team Roster Name</label>
-    </span>
-  </div>
-
-  <div class="p-col-12">
-    <span class="p-float-label">
-      <textarea
-        id="description"
-        rows="6"
-        pInputTextarea
-        [(ngModel)]="clonedTeamRoster.description"
-        name="description"
-        style="width: 100%;"
-      ></textarea>
-      <label for="description">Description</label>
+      <label for="name">Star Player Name</label>
     </span>
   </div>
 
   <div class="p-field p-col-12 p-mt-4">
     <span class="p-float-label">
       <input
-        id="bigGuyRules"
+        id="playsFor"
         type="text"
         pInputText
-        [(ngModel)]="clonedTeamRoster.bigGuyRules"
-        name="bigGuyRules"
+        [(ngModel)]="clonedStarPlayer.playsFor"
+        name="playsFor"
         style="width: 100%;"
       >
-      <label for="name">Big Guy Rules</label>
+      <label for="name">Plays for:</label>
     </span>
   </div>
 
@@ -390,7 +320,7 @@
         id="specialRules"
         type="text"
         pInputText
-        [(ngModel)]="clonedTeamRoster.specialRules"
+        [(ngModel)]="clonedStarPlayer.specialRules"
         name="specialRules"
         style="width: 100%;"
       >
@@ -398,48 +328,10 @@
     </span>
   </div>
 
-  <div class="p-field p-col">
-    <span class="p-float-label">
-      <input
-        id="reRollCost"
-        type="number"
-        step="10000"
-        pInputText
-        required
-        [(ngModel)]="clonedTeamRoster.reRollCost"
-        name="reRollCost"
-        style="width: 6rem;"
-      >
-      <label for="urlId">Re-roll Cost</label>
-    </span>
-  </div>
-
-  <div class="p-field p-col">
-    <span class="p-float-label">
-      <p-dropdown
-        inputId="tier"
-        [options]="[1, 2, 3]"
-        [(ngModel)]="clonedTeamRoster.tier"
-        name="tier"
-      ></p-dropdown>
-      <label for="tier">Tier</label>
-    </span>
-  </div>
-
-  <div class="p-field-checkbox p-col-12">
-    <p-checkbox
-      inputId="apothecary"
-      [binary]="true"
-      [(ngModel)]="clonedTeamRoster.apothecary"
-      name="apothecary"
-    ></p-checkbox>
-    <label for="apothecary">Apothecary</label>
-  </div>
-
   <div class="p-col-12">
     <p-button
       type="submit"
-      [disabled]="!teamRosterForm.form.valid"
+      [disabled]="!starPlayerForm.form.valid"
       [loading]="submitLoading"
       label="Submit"
       icon="pi pi-check"

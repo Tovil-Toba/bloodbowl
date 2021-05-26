@@ -1,0 +1,12 @@
+<p-dialog
+  *ngIf="skill"
+  [(visible)]="visible"
+  (onHide)="onHide()"
+  [header]="skill.name"
+  [modal]="true"
+  [draggable]="false"
+  [dismissableMask]="true"
+  [style]="{width: '640px'}"
+>
+  <div [innerHTML]="skill.description" class="skill-description"></div>
+</p-dialog>

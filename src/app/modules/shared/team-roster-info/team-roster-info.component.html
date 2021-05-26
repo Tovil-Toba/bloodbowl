@@ -59,26 +59,26 @@
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="quantity" style="width: 7rem;" class="p-text-center p-text-nowrap">
-          QTY <p-sortIcon field="quantity"></p-sortIcon>
+          QTY<p-sortIcon field="quantity"></p-sortIcon>
         </th>
         <th style="min-width: 8rem;">POSITION</th>
         <th pSortableColumn="cost" style="width: 6.5rem;" class="p-text-center p-text-nowrap">
-          COST <p-sortIcon field="cost"></p-sortIcon>
+          COST<p-sortIcon field="cost"></p-sortIcon>
         </th>
         <th pSortableColumn="movementAllowance" style="width: 5.5rem;" class="p-text-center p-text-nowrap">
           MA<p-sortIcon field="movementAllowance"></p-sortIcon>
         </th>
         <th pSortableColumn="strength" style="width: 5rem;" class="p-text-center p-text-nowrap">
-          ST <p-sortIcon field="strength"></p-sortIcon>
+          ST<p-sortIcon field="strength"></p-sortIcon>
         </th>
         <th pSortableColumn="agility" style="width: 5.5rem;" class="p-text-center p-text-nowrap">
-          AG <p-sortIcon field="agility"></p-sortIcon>
+          AG<p-sortIcon field="agility"></p-sortIcon>
         </th>
         <th pSortableColumn="passingAbility" style="width: 5.5rem;" class="p-text-center p-text-nowrap">
-          PA <p-sortIcon field="passingAbility"></p-sortIcon>
+          PA<p-sortIcon field="passingAbility"></p-sortIcon>
         </th>
         <th pSortableColumn="armourValue" style="width: 5.5rem;" class="p-text-center p-text-nowrap">
-          AV <p-sortIcon field="armourValue"></p-sortIcon>
+          AV<p-sortIcon field="armourValue"></p-sortIcon>
         </th>
         <th style="min-width: 8rem;">SKILLS & TRAITS</th>
         <th style="width: 7rem;" class="p-text-center">PRIMARY</th>
@@ -281,14 +281,8 @@
     </ng-template>
   </p-dialog>
 
-  <p-dialog
-    *ngIf="skill"
+  <app-skill-info-dialog
     [(visible)]="skillInfoDialog"
-    [header]="skill.name"
-    [modal]="true"
-    [dismissableMask]="true"
-    [style]="{width: '640px'}"
-  >
-    <div [innerHTML]="skill.description" class="skill-description"></div>
-  </p-dialog>
+    [skill]="skill"
+  ></app-skill-info-dialog>
 </div>

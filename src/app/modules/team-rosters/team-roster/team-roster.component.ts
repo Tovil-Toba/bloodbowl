@@ -64,6 +64,7 @@ export class TeamRosterComponent implements OnInit, DoCheck {
           const index = _.findIndex(this.teamRostersService.teamRosters, { id: this.teamRoster.id });
           // _.remove(this.teamRostersService.teamRosters, { id: this.teamRoster.id });
           this.teamRostersService.teamRosters.splice(index, 1);
+          this.navigateToTeamRoster(this.teamRostersService.teamRosters[0].urlId);
         });
       }
     });

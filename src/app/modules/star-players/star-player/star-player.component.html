@@ -1,1 +1,44 @@
-<p>star-player works!</p>
+<div
+  *ngIf="!starPlayersService.loading && starPlayer"
+  [@pageAnimations]="!starPlayersService.loading && starPlayer"
+>
+  <p-breadcrumb
+    [model]="breadcrumbItems"
+    [home]="{ icon: 'pi pi-home', routerLink: '/' }"
+    styleClass="p-mb-3 animation"
+  ></p-breadcrumb>
+
+  <p-panel [header]="starPlayer.name" styleClass="animation">
+    <ng-template pTemplate="icons">
+      <button
+        pButton
+        class="p-panel-header-icon p-link"
+        icon="pi pi-trash"
+        (click)="deleteStarPlayer()"
+        pTooltip="Delete Star Player"
+        tooltipPosition="top"
+      ></button>
+      <button
+        pButton
+        class="p-panel-header-icon p-link"
+        icon="pi pi-pencil"
+        (click)="editStarPlayer()"
+        pTooltip="Edit Star Player"
+        tooltipPosition="left"
+      ></button>
+    </ng-template>
+
+    <p-button
+      *ngFor="let starPlayer of starPlayersService.starPlayers"
+      (click)="navigateToStarPlayer(starPlayer.urlId)"
+      styleClass="p-button-text"
+      [label]="starPlayer.name"
+    ></p-button>
+
+    <p-divider></p-divider>
+
+    <app-star-player-info [starPlayer]="starPlayer"></app-star-player-info>
+  </p-panel>
+
+  <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+</div>

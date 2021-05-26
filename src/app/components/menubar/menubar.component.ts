@@ -182,7 +182,8 @@ export class MenubarComponent implements OnInit, DoCheck {
   ngDoCheck(): void {
     if (
       !_.isEqual(this.teamsService.teams, this.oldTeams) ||
-      !_.isEqual(this.teamRostersService.teamRosters, this.oldTeamRosters)
+      !_.isEqual(this.teamRostersService.teamRosters, this.oldTeamRosters) ||
+      !_.isEqual(this.starPlayersService.starPlayers, this.oldStarPlayers)
     ) {
       this.oldTeams = _.clone(this.teamsService.teams);
       this.oldTeamRosters = _.clone(this.teamRostersService.teamRosters);

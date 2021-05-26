@@ -1,1 +1,17 @@
-<p>star-player-editor works!</p>
+<div
+  *ngIf="!starPlayersService.loading && starPlayer"
+  [@pageAnimations]="!starPlayersService.loading && starPlayer"
+>
+  <p-breadcrumb
+    [model]="breadcrumbItems"
+    [home]="{ icon: 'pi pi-home', routerLink: '/' }"
+    styleClass="p-mb-3 animation"
+  ></p-breadcrumb>
+
+  <p-panel [header]="starPlayer.name" styleClass="animation">
+    <app-star-player-form
+      [starPlayer]="starPlayer"
+      (submittedStarPlayer)="onStarPlayerFormSubmit($event)"
+    ></app-star-player-form>
+  </p-panel>
+</div>

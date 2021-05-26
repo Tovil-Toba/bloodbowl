@@ -52,7 +52,7 @@ export class TeamRosterEditorComponent implements OnInit {
   onTeamRosterFormSubmit(teamRoster: TeamRosterModel): void {
     this.teamRoster = teamRoster;
     this.breadcrumbItems = [
-      { label: 'Teams', routerLink: '/team-rosters' },
+      { label: 'Team Rosters', routerLink: '/team-rosters' },
       { label: this.teamRoster.name, routerLink: `/team-rosters/${this.urlId}` },
       { label: 'Edit' }
     ];

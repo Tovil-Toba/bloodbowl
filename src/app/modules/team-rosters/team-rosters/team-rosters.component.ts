@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 
-import { PlayerProfileModel } from '../../shared/player-profile.model'
+import { PlayerProfileModel } from '../../shared/player-profile.model';
 import { TeamRostersService } from '../shared/team-rosters.service';
 import { TeamRosterModel } from '../shared/team-roster.model';
 import { TeamRoster } from '../shared/team-roster';

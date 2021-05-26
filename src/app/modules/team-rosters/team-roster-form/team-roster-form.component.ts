@@ -25,7 +25,6 @@ export class TeamRosterFormComponent implements OnInit {
   clonedTeamRoster: TeamRosterModel;
   clonedPlayerProfiles: { [s: string]: PlayerProfileModel; } = {};
   breadcrumbItems: MenuItem[];
-  statuses: any[];
   editingRowKeys: { [s: string]: boolean; } = {};
   loading = false;
   submitLoading = false;

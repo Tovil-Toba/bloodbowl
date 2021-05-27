@@ -159,7 +159,7 @@
         <td colspan="11">
           <div class="p-d-flex p-ai-center p-jc-between p-px-1">
             <div class="p-col-11">
-              Special Rules: <span class="p-text-normal">{{teamRoster.specialRules}}</span>
+              Special Rules: <app-special-rules-info [specialRules]="teamRoster.specialRules"></app-special-rules-info>
             </div>
             <div class="p-col-1 p-text-right">
               Tier: <span class="p-text-normal">{{teamRoster.tier}}</span>

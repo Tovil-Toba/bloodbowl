@@ -18,7 +18,7 @@
           "skillsAndTraits": "Bombardier, Disturbing Presence, Dodge, Loner (3+), Side Step, Sneaky Git, Stab, Stunty"
         }
       ],
-      "playsFor": "Any team with either the ‘Badlands Brawl’ or ‘Underworld Challenge’ special rules.",
+      "playsFor": "Any team with either the 'Badlands Brawl' or 'Underworld Challenge' special rules.",
       "specialRules": "Sneakiest of the Lot: If your team includes the Black Gobbo, you may commit two Foul actions per team turn, provided one of your Foul actions is committed by the Black Gobbo himself."
     },
     {
@@ -39,7 +39,7 @@
           "skillsAndTraits": "Block, Loner (4+), Mighty Blow (+2), Stand Firm, Strong Arm, Thick Skull, Throw Team-mate, Timmm-ber!"
         }
       ],
-      "playsFor": "Any team with either the ‘Halfling Thimble Cup’ or ‘Old World Classic’ special rules.",
+      "playsFor": "Any team with either the 'Halfling Thimble Cup' or 'Old World Classic' special rules.",
       "specialRules": "Reliable: If Deeproot fumbles a Throw Team-mate action, the player that was to be thrown will bounce as normal but will automatically land safely."
     },
     {
@@ -61,7 +61,7 @@
           "bigGuy": true
         }
       ],
-      "playsFor": "Any team with the ‘Elven Kingdoms League’ special rule.",
+      "playsFor": "Any team with the 'Elven Kingdoms League' special rule.",
       "specialRules": "Mesmerizing Dance: Once per game, Eldril may re-roll a failed Agility test when attempting to use the Hypnotic Gaze trait."
     },
     {
@@ -81,7 +81,7 @@
           "skillsAndTraits": "Block, Claw, Grab, Juggernaut, Loner (4+), Stand Firm"
         }
       ],
-      "playsFor": "Any team with either the ‘Favoured Of...’ or ‘Underworld Challenge’ special rules.",
+      "playsFor": "Any team with either the 'Favoured Of...' or 'Underworld Challenge' special rules.",
       "specialRules": "Frenzied Rush: Once per game, when Glart performs a Blitz action, he may gain the Frenzy skill. You must declare this special rule is being used when Glart is activated. Glart may not use the Grab skill during a turn in which he uses this special rule."
     },
     {
@@ -102,7 +102,7 @@
           "skillsAndTraits": "Accurate, Dodge, Loner (3+), Pass, Side Step, Sure Hands"
         }
       ],
-      "playsFor": "Any team with the ‘Elven Kingdoms League’ special rule.",
+      "playsFor": "Any team with the 'Elven Kingdoms League' special rule.",
       "specialRules": "Shot to Nothing: Once per game, when Gloriel performs a Pass action, she may gain the Hail Mary Pass skill. You must declare this special rule is being used when Gloriel is activated."
     },
     {

@@ -1,0 +1,4 @@
+.special-rules:hover {
+  cursor: pointer;
+  color: var(--primary-color);
+}

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MessageService } from 'primeng/api';
+import * as _ from 'lodash';
 
 import { Crud } from '../../../core/crud';
 import { TeamRosterModel } from './team-roster.model';
@@ -20,6 +21,11 @@ export class TeamRostersService extends Crud<TeamRosterModel> {
     public messageService: MessageService
   ) {
     super('api/teamRosters', http, messageService);
+  }
+
+  getTeamRostersBySpecialRules(specialRules: string): TeamRosterModel[] {
+    specialRules = specialRules.split('...')[0].trim();
+    return _.filter(this.teamRosters, teamRoster => teamRoster.specialRules.includes(specialRules));
   }
 
   getTeamRostersByUrlId$(urlId: string): Observable<TeamRosterModel[]> {

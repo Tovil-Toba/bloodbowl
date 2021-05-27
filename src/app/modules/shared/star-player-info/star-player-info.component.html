@@ -82,7 +82,9 @@
     </ng-template>
     <ng-template pTemplate="footer">
       <tr>
-        <td colspan="8">Plays for: <span class="p-text-normal">{{starPlayer.playsFor}}</span></td>
+        <td colspan="8">
+          Plays for: <app-plays-for-info [playsFor]="starPlayer.playsFor"></app-plays-for-info>
+        </td>
       </tr>
       <tr>
         <td colspan="8">Special rules: <span class="p-text-normal">{{starPlayer.specialRules}}</span></td>

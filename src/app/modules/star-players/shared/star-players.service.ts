@@ -25,6 +25,14 @@ export class StarPlayersService extends Crud<StarPlayerModel> {
 
   getStarPlayersBySpecialRules(teamRosterSpecialRules: string): StarPlayerModel[] {
     const specialRulesArray = teamRosterSpecialRules.split(', ');
+
+    for (let i = 0; i < specialRulesArray.length; i++) {
+      specialRulesArray[i] = specialRulesArray[i].trim();
+      if (specialRulesArray[i].includes('Favoured of')) {
+        specialRulesArray[i] = 'Favoured of...';
+      }
+    }
+
     return _.filter<StarPlayerModel[]>(
       this.starPlayers,
       (starPlayer: StarPlayerModel) => {

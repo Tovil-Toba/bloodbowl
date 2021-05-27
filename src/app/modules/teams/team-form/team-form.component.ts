@@ -77,22 +77,22 @@ export class TeamFormComponent implements OnInit {
     if (!this.clonedTeam.id) {
       this.teamsService.addItem(this.clonedTeam)
         .subscribe((team: TeamModel) => {
-          this.submittedTeam.emit(team);
           this.clonedTeam = _.clone(team);
           const clonedTeams = _.clone(this.teamsService.teams);
           clonedTeams.push(this.clonedTeam);
           this.teamsService.teams = clonedTeams;
+          this.submittedTeam.emit(team);
           this.submitLoading = false;
         });
     } else {
       this.teamsService.updateItem(this.clonedTeam)
         .subscribe(() => {
-          this.submittedTeam.emit(this.clonedTeam);
           this.clonedTeam = _.clone(this.clonedTeam);
           const index = _.findIndex(this.teamsService.teams, { id: this.clonedTeam.id });
           const clonedTeams = _.clone(this.teamsService.teams);
           clonedTeams.splice(index, 1, this.clonedTeam);
           this.teamsService.teams = clonedTeams;
+          this.submittedTeam.emit(this.clonedTeam);
           this.submitLoading = false;
         });
     }

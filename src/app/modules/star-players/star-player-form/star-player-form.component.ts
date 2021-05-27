@@ -82,22 +82,22 @@ export class StarPlayerFormComponent implements OnInit {
     if (!this.starPlayer.id) {
       this.starPlayersService.addItem(this.clonedStarPlayer)
         .subscribe((starPlayer: StarPlayerModel) => {
-          this.submittedStarPlayer.emit(starPlayer);
           this.clonedStarPlayer = _.clone(starPlayer);
           const clonedStarPlayers = _.clone(this.starPlayersService.starPlayers);
           clonedStarPlayers.push(this.clonedStarPlayer);
           this.starPlayersService.starPlayers = clonedStarPlayers;
+          this.submittedStarPlayer.emit(starPlayer);
           this.submitLoading = false;
         });
     } else {
       this.starPlayersService.updateItem(this.clonedStarPlayer)
         .subscribe(() => {
-          this.submittedStarPlayer.emit(this.clonedStarPlayer);
           this.clonedStarPlayer = _.clone(this.clonedStarPlayer);
           const index = _.findIndex(this.starPlayersService.starPlayers, { id: this.clonedStarPlayer.id });
           const clonedStarPlayers = _.clone(this.starPlayersService.starPlayers);
           clonedStarPlayers.splice(index, 1, this.clonedStarPlayer);
           this.starPlayersService.starPlayers = clonedStarPlayers;
+          this.submittedStarPlayer.emit(this.clonedStarPlayer);
           this.submitLoading = false;
         });
     }

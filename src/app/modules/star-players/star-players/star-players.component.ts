@@ -89,6 +89,7 @@ export class StarPlayersComponent implements OnInit {
   }
 
   onStarPlayerFormSubmit(starPlayer: StarPlayerModel): void {
+    this.getStarPlayerTableRows();
     this.starPlayerFormDialog = false;
   }
 

@@ -82,22 +82,22 @@ export class TeamRosterFormComponent implements OnInit {
     if (!this.teamRoster.id) {
       this.teamRostersService.addItem(this.clonedTeamRoster)
         .subscribe((teamRoster: TeamRosterModel) => {
-          this.submittedTeamRoster.emit(teamRoster);
           this.clonedTeamRoster = _.clone(teamRoster);
           const clonedTeamRosters = _.clone(this.teamRostersService.teamRosters);
           clonedTeamRosters.push(this.clonedTeamRoster);
           this.teamRostersService.teamRosters = clonedTeamRosters;
+          this.submittedTeamRoster.emit(teamRoster);
           this.submitLoading = false;
         });
     } else {
       this.teamRostersService.updateItem(this.clonedTeamRoster)
         .subscribe(() => {
-          this.submittedTeamRoster.emit(this.clonedTeamRoster);
           this.clonedTeamRoster = _.clone(this.clonedTeamRoster);
           const index = _.findIndex(this.teamRostersService.teamRosters, { id: this.clonedTeamRoster.id });
           const clonedTeamRosters = _.clone(this.teamRostersService.teamRosters);
           clonedTeamRosters.splice(index, 1, this.clonedTeamRoster);
           this.teamRostersService.teamRosters = clonedTeamRosters;
+          this.submittedTeamRoster.emit(this.clonedTeamRoster);
           this.submitLoading = false;
         });
     }

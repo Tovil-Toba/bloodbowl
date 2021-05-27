@@ -35,15 +35,15 @@ export class SkillFormComponent implements OnInit {
     if (!this.clonedSkill.id) {
       this.skillsService.addItem(this.clonedSkill)
         .subscribe((skill: SkillModel) => {
-          this.submittedSkill.emit(skill);
           this.clonedSkill = _.clone(skill);
+          this.submittedSkill.emit(skill);
           this.submitLoading = false;
         });
     } else {
       this.skillsService.updateItem(this.clonedSkill)
         .subscribe(() => {
-          this.submittedSkill.emit(this.clonedSkill);
           this.clonedSkill = _.clone(this.clonedSkill);
+          this.submittedSkill.emit(this.clonedSkill);
           this.submitLoading = false;
         });
     }

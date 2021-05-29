@@ -28,12 +28,19 @@
       ></button>
     </ng-template>
 
-    <p-button
-      *ngFor="let starPlayer of starPlayersService.starPlayers"
-      (click)="navigateToStarPlayer(starPlayer.urlId)"
-      styleClass="p-button-text"
-      [label]="starPlayer.name"
-    ></p-button>
+    <p-panel
+      *ngIf="starPlayersService.starPlayers.length"
+      header="Star Players"
+      [toggleable]="true"
+      toggler="header"
+    >
+      <p-button
+        *ngFor="let starPlayer of starPlayersService.starPlayers"
+        (click)="navigateToStarPlayer(starPlayer.urlId)"
+        styleClass="p-button-text"
+        [label]="starPlayer.name"
+      ></p-button>
+    </p-panel>
 
     <p-divider></p-divider>
 

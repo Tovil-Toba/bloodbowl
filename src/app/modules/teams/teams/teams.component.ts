@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import * as _ from 'lodash';
 
@@ -32,6 +33,7 @@ export class TeamsComponent implements OnInit {
 
   constructor(
     private confirmationService: ConfirmationService,
+    private router: Router,
     public teamsService: TeamsService,
     private teamRostersService: TeamRostersService
   ) { }
@@ -58,6 +60,10 @@ export class TeamsComponent implements OnInit {
     this.breadcrumbItems = [
       { label: 'Teams' }
     ];
+  }
+
+  navigateToTeam(team: TeamModel): void {
+    this.router.navigate([`teams/${team.urlId}`]);
   }
 
   onTeamFormSubmit(team: TeamModel): void {

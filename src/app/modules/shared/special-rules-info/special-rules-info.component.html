@@ -1,6 +1,9 @@
-<span
-  [pTooltip]="getTeamRosterTooltip(specialRules)"
-  tooltipPosition="top"
-  [escape]="false"
-  class="p-text-normal special-rules"
->{{specialRules}}</span>
+<ng-container *ngFor="let specialRules of specialRulesArray; last as isLast">
+  <span
+    [pTooltip]="getTeamRosterTooltip(specialRules)"
+    tooltipPosition="top"
+    [escape]="false"
+    class="special-rules"
+  >{{specialRules}}</span>
+  <span *ngIf="!isLast">, </span>
+</ng-container>

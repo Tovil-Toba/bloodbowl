@@ -28,12 +28,19 @@
       ></button>
     </ng-template>
 
-    <p-button
-      *ngFor="let teamRoster of teamRostersService.teamRosters"
-      (click)="navigateToTeamRoster(teamRoster.urlId)"
-      styleClass="p-button-text"
-      [label]="teamRoster.name"
-    ></p-button>
+    <p-panel
+      *ngIf="teamRostersService.teamRosters.length"
+      header="Team Rosters"
+      [toggleable]="true"
+      toggler="header"
+    >
+      <p-button
+        *ngFor="let teamRoster of teamRostersService.teamRosters"
+        (click)="navigateToTeamRoster(teamRoster.urlId)"
+        styleClass="p-button-text"
+        [label]="teamRoster.name"
+      ></p-button>
+    </p-panel>
 
     <p-divider></p-divider>
 

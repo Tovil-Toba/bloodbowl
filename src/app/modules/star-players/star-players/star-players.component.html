@@ -43,8 +43,14 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="name" style="min-width: 8rem;">
+          <th pSortableColumn="name" style="width: 8rem;">
             NAME<p-sortIcon field="name"></p-sortIcon>
+          </th>
+          <th pSortableColumn="position" style="width: 9rem;">
+            POSITION<p-sortIcon field="position"></p-sortIcon>
+          </th>
+          <th pSortableColumn="race" style="width: 8rem;">
+            RACE<p-sortIcon field="race"></p-sortIcon>
           </th>
           <th pSortableColumn="movementAllowance" style="width: 5.5rem;" class="p-text-center text-nowrap">
             MA<p-sortIcon field="movementAllowance"></p-sortIcon>
@@ -67,9 +73,9 @@
           <th pSortableColumn="cost" style="width: 11rem;" class="p-text-center">
             GP TO INDUCE<p-sortIcon field="cost"></p-sortIcon>
           </th>
-          <th pSortableColumn="bigGuy" style="width: 8rem;" class="p-text-center">
-            BIG GUY<p-sortIcon field="bigGuy"></p-sortIcon>
-          </th>
+<!--          <th pSortableColumn="bigGuy" style="width: 8rem;" class="p-text-center">-->
+<!--            BIG GUY<p-sortIcon field="bigGuy"></p-sortIcon>-->
+<!--          </th>-->
           <th style="width: 9rem;"></th>
         </tr>
       </ng-template>
@@ -81,8 +87,14 @@
               type="button"
               [label]="playerProfile.name"
               (click)="openStarPlayerInfoDialog(playerProfile.starPlayer)"
-              class="p-button-text p-text-nowrap"
+              class="p-button-text p-text-left"
             ></button>
+          </td>
+          <td class="text-top">
+            {{playerProfile.position}}
+          </td>
+          <td class="text-top">
+            {{playerProfile.race}}
           </td>
           <td class="p-text-center text-top">
             {{playerProfile.movementAllowance}}
@@ -118,9 +130,9 @@
             {{playerProfile.cost | currency:' ':'symbol':'1.0-0'}}
             <span *ngIf="playerProfile.numberOfPlayers > 1"> / {{playerProfile.numberOfPlayers}}</span>
           </td>
-          <td class="p-text-center text-top">
-            {{playerProfile.bigGuy ? 'Yes' : 'No'}}
-          </td>
+<!--          <td class="p-text-center text-top">-->
+<!--            {{playerProfile.bigGuy ? 'Yes' : 'No'}}-->
+<!--          </td>-->
           <td class="p-text-right" style="width: 9rem;">
             <button
               pButton

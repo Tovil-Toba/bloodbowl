@@ -1,16 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, DoCheck } from '@angular/core';
 
 import { TeamRostersService } from '../../team-rosters/shared/team-rosters.service';
-import {TeamRosterModel} from '../../team-rosters/shared/team-roster.model';
+import { TeamRosterModel } from '../../team-rosters/shared/team-roster.model';
 
 @Component({
   selector: 'app-special-rules-info',
   templateUrl: './special-rules-info.component.html',
   styleUrls: ['./special-rules-info.component.css']
 })
-export class SpecialRulesInfoComponent implements OnInit {
+export class SpecialRulesInfoComponent implements OnInit, DoCheck {
 
-  @Input() specialRules;
+  @Input() specialRules: string;
+
+  oldSpecialRules: string;
+  specialRulesArray: string[] = [];
 
   constructor(private teamRostersService: TeamRostersService) { }
 
@@ -21,6 +24,12 @@ export class SpecialRulesInfoComponent implements OnInit {
       teamRosterTooltip += `${teamRoster.name}<br />`;
     });
     return teamRosterTooltip;
+  }
+
+  ngDoCheck(): void {
+    if (this.specialRules !== this.oldSpecialRules) {
+      this.specialRulesArray = this.specialRules.split(', ');
+    }
   }
 
   ngOnInit(): void {

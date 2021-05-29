@@ -258,11 +258,39 @@
         </td>
       </tr>
     </ng-template>
+    <ng-template pTemplate="summary">
+      <div>
+        <div class="p-text-bold">
+          Team Roster Cost:
+          <span [class.text-danger]="teamRosterCost > 1000000">{{teamRosterCost  | currency:' ':'symbol':'1.0-0'}}</span>
+          gold pieces
+          <button
+            *ngIf="teamRosterCost"
+            (click)="resetTeamRoster()"
+            [disabled]="!teamRosterCost"
+            pRipple
+            class="p-button p-button-text p-button-raised p-button-danger p-text-bold quantity-button"
+          >Reset</button>
+        </div>
+        <div class="p-text-bold">
+          Number of Players:
+          <span [ngClass]="{'text-warning': (numberOfPlayers > 0 && numberOfPlayers < 11), 'text-danger': numberOfPlayers > 16}">
+              {{numberOfPlayers}}
+            </span>
+        </div>
+      </div>
+    </ng-template>
   </p-table>
 
   <p></p>
 
-  <p-panel header="Star Players"  [toggleable]="true" [collapsed]="true">
+  <p-panel
+    *ngIf="starPlayers.length"
+    [header]="'Star Players (' + starPlayers.length + ')'"
+    [toggleable]="true"
+    [collapsed]="true"
+    toggler="header"
+  >
     <div *ngFor="let starPlayer of starPlayers">
       <app-star-player-info [starPlayer]="starPlayer"></app-star-player-info>
     </div>

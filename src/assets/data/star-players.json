@@ -9,13 +9,15 @@
           "id": 1,
           "quantity": 1,
           "name": "The Black Gobbo",
+          "position": "Other",
           "cost": 225000,
           "movementAllowance": 6,
           "strength": 2,
           "agility": 3,
           "passingAbility": 3,
           "armourValue": 9,
-          "skillsAndTraits": "Bombardier, Disturbing Presence, Dodge, Loner (3+), Side Step, Sneaky Git, Stab, Stunty"
+          "skillsAndTraits": "Bombardier, Disturbing Presence, Dodge, Loner (3+), Side Step, Sneaky Git, Stab, Stunty",
+          "race": "Goblin"
         }
       ],
       "playsFor": "Any team with either the 'Badlands Brawl' or 'Underworld Challenge' special rules.",
@@ -30,13 +32,16 @@
           "id": 1,
           "quantity": 1,
           "name": "Deeproot Strongbranch",
+          "position": "Big Guy",
           "cost": 280000,
           "movementAllowance": 2,
           "strength": 7,
           "agility": 5,
           "passingAbility": 4,
           "armourValue": 11,
-          "skillsAndTraits": "Block, Loner (4+), Mighty Blow (+2), Stand Firm, Strong Arm, Thick Skull, Throw Team-mate, Timmm-ber!"
+          "skillsAndTraits": "Block, Loner (4+), Mighty Blow (+2), Stand Firm, Strong Arm, Thick Skull, Throw Team-mate, Timmm-ber!",
+          "race": "Treeman",
+          "bigGuy": true
         }
       ],
       "playsFor": "Any team with either the 'Halfling Thimble Cup' or 'Old World Classic' special rules.",
@@ -51,6 +56,7 @@
           "id": 1,
           "quantity": 1,
           "name": "Eldril Sidewinder",
+          "position": "Catcher",
           "cost": 230000,
           "movementAllowance": 8,
           "strength": 3,
@@ -58,7 +64,7 @@
           "passingAbility": 5,
           "armourValue": 8,
           "skillsAndTraits": "Catch, Dodge, Hypnotic Gaze, Loner (4+), Nerves of Steel, On the Ball",
-          "bigGuy": true
+          "race": "Sea Elf"
         }
       ],
       "playsFor": "Any team with the 'Elven Kingdoms League' special rule.",
@@ -73,12 +79,15 @@
           "id": 1,
           "quantity": 1,
           "name": "Glart Smashrip",
+          "position": "Blocker",
           "cost": 195000,
           "movementAllowance": 5,
           "strength": 4,
           "agility": 4,
           "armourValue": 9,
-          "skillsAndTraits": "Block, Claw, Grab, Juggernaut, Loner (4+), Stand Firm"
+          "skillsAndTraits": "Block, Claw, Grab, Juggernaut, Loner (4+), Stand Firm",
+          "race": "Skaven",
+          "bigGuy": true
         }
       ],
       "playsFor": "Any team with either the 'Favoured Of...' or 'Underworld Challenge' special rules.",
@@ -93,13 +102,15 @@
           "id": 1,
           "quantity": 1,
           "name": "Gloriel Summerbloom",
+          "position": "Thrower",
           "cost": 150000,
           "movementAllowance": 7,
           "strength": 2,
           "agility": 2,
           "passingAbility": 2,
           "armourValue": 8,
-          "skillsAndTraits": "Accurate, Dodge, Loner (3+), Pass, Side Step, Sure Hands"
+          "skillsAndTraits": "Accurate, Dodge, Loner (3+), Pass, Side Step, Sure Hands",
+          "race": "Wood Elf"
         }
       ],
       "playsFor": "Any team with the 'Elven Kingdoms League' special rule.",
@@ -114,6 +125,7 @@
           "id": 1,
           "quantity": 1,
           "name": "Grak",
+          "position": "Kicker",
           "cost": 250000,
           "movementAllowance": 5,
           "strength": 5,
@@ -121,23 +133,428 @@
           "passingAbility": 4,
           "armourValue": 10,
           "skillsAndTraits": "Bone Head, Kick Team-mate, Loner (4+), Mighty Blow (+1), Thick Skull",
+          "race": "Ogre",
           "bigGuy": true
         },
         {
           "id": 2,
           "quantity": 1,
           "name": "Crumbleberry",
+          "position": "Other",
           "cost": 0,
           "movementAllowance": 5,
           "strength": 2,
           "agility": 3,
           "passingAbility": 6,
           "armourValue": 7,
-          "skillsAndTraits": "Dodge, Loner (4+), Right Stuff, Stunty, Sure Hands"
+          "skillsAndTraits": "Dodge, Loner (4+), Right Stuff, Stunty, Sure Hands",
+          "race": "Halfling"
         }
       ],
       "playsFor": "Any team.",
       "specialRules": "Two for One: Grak and Crumbleberry must be hired as a pair and count as two Star Players. However, if either Grak or Crumbleberry is removed from play due to suffering a KO’d or Casualty! result on the Injury table, the other replaces the Loner (4+) trait with the Loner (2+) trait."
+    },
+    {
+      "id": 7,
+      "urlId": "gretchen-wachter",
+      "name": "Gretchen Wächter ‘The Blood Bowl Widow’",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Gretchen Wächter ‘The Blood Bowl Widow’",
+          "position": "Other",
+          "cost": 260000,
+          "movementAllowance": 7,
+          "strength": 3,
+          "agility": 2,
+          "armourValue": 9,
+          "skillsAndTraits": "Disturbing Presence, Dodge, Foul Appearance, Jump Up, Loner (4+), No Hands, Regeneration, Shadowing, Side Step",
+          "race": "Banshee"
+        }
+      ],
+      "playsFor": "Any team with the 'Sylvanian Spotlight' special rule.",
+      "specialRules": "Incorporeal: Once per game, after making an Agility test to dodge, Gretchen may choose to modify the dice roll by adding her Strength characteristic to it."
+    },
+    {
+      "id": 8,
+      "urlId": "griff-oberwald",
+      "name": "Griff Oberwald",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Griff Oberwald",
+          "position": "Blitzer",
+          "cost": 280000,
+          "movementAllowance": 7,
+          "strength": 4,
+          "agility": 2,
+          "passingAbility": 3,
+          "armourValue": 9,
+          "skillsAndTraits": "Block, Dodge, Fend, Loner (3+), Sprint, Sure Feet",
+          "race": "Human"
+        }
+      ],
+      "playsFor": "Any team with either the 'Halfling Thimble Cup' or 'Old World Classic' special rules.",
+      "specialRules": "Consummate Professional: Once per game, Griff may re-roll one dice that was rolled either as a single dice roll, as part of a multiple dice roll or as part of a dice pool (this cannot be a dice that was rolled as part of an Armour, Injury or Casualty roll)."
+    },
+    {
+      "id": 9,
+      "urlId": "grim-ironjaw",
+      "name": "Grim Ironjaw",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Grim Ironjaw",
+          "position": "Blitzer",
+          "cost": 200000,
+          "movementAllowance": 5,
+          "strength": 4,
+          "agility": 3,
+          "armourValue": 9,
+          "skillsAndTraits": "Block, Dauntless, Frenzy, Loner (4+), Multiple Block, Thick Skull",
+          "race": "Dwarf"
+        }
+      ],
+      "playsFor": "Any team with either the 'Halfling Thimble Cup', 'Old World Classic' or 'Worlds Edge Superleague' special rules.",
+      "specialRules": "Slayer: Once per game, when an opposition player with a Strength characteristic of 5 or more is Knocked Down as the result of a Block action performed by Grim, you may apply an additional +1 modifier to either the Armour roll or Injury roll. This modifier may be applied after the roll has been made."
+    },
+    {
+      "id": 10,
+      "urlId": "hakflem-skuttlespike",
+      "name": "Hakflem Skuttlespike",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Hakflem Skuttlespike",
+          "position": "Runner",
+          "cost": 180000,
+          "movementAllowance": 9,
+          "strength": 3,
+          "agility": 2,
+          "passingAbility": 3,
+          "armourValue": 8,
+          "skillsAndTraits": "Dodge, Extra Arms, Loner (4+), Prehensile Tail, Two Heads",
+          "race": "Skaven"
+        }
+      ],
+      "playsFor": "Any team with either the 'Favoured Of...' or 'Underworld Challenge' special rules.",
+      "specialRules": "Treacherous: Once per game, if a team-mate in an adjacent square to Hakflem is in possession of the ball when Hakflem is activated, that player may immediately be Knocked Down and Hakflem may take possession of the ball. No Turnover is caused as a result of using this special rule."
+    },
+    {
+      "id": 11,
+      "urlId": "helmut-wulf",
+      "name": "Helmut Wulf",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Helmut Wulf",
+          "position": "Other",
+          "cost": 140000,
+          "movementAllowance": 6,
+          "strength": 3,
+          "agility": 3,
+          "armourValue": 9,
+          "skillsAndTraits": "Chainsaw, Loner (4+), Pro, Secret Weapon, Stand Firm",
+          "race": "Human"
+        }
+      ],
+      "playsFor": "Any team.",
+      "specialRules": "Old Pro: Once per game, Helmut may use his Pro skill to re-roll a single dice rolled as part of an Armour roll."
+    },
+    {
+      "id": 12,
+      "urlId": "karla-von-kill",
+      "name": "Karla Von Kill",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Karla Von Kill",
+          "position": "Blitzer",
+          "cost": 210000,
+          "movementAllowance": 6,
+          "strength": 4,
+          "agility": 3,
+          "passingAbility": 4,
+          "armourValue": 9,
+          "skillsAndTraits": "Block, Dauntless, Dodge, Jump Up, Loner (4+)",
+          "race": "Human"
+        }
+      ],
+      "playsFor": "Any team with either the 'Halfling Thimble Cup', 'Lustrian Superleague' or 'Old World Classic' special rules.",
+      "specialRules": "Indomitable: Once per game, when Karla successfully rolls to use her Dauntless skill, she may increase her Strength characteristic to double that of the nominated target of her Block action."
+    },
+    {
+      "id": 13,
+      "urlId": "lord-borak-the-despoiler",
+      "name": "Lord Borak the Despoiler",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Lord Borak the Despoiler",
+          "position": "Blocker",
+          "cost": 260000,
+          "movementAllowance": 5,
+          "strength": 5,
+          "agility": 3,
+          "passingAbility": 5,
+          "armourValue": 10,
+          "skillsAndTraits": "Block, Dirty Player (+2), Loner (4+), Mighty Blow (+1), Sneaky Git",
+          "race": "Chaos Chosen"
+        }
+      ],
+      "playsFor": "Any team with the 'Favoured of…' special rule.",
+      "specialRules": "Lord of Chaos: A team that includes Lord Borak gains an extra Team re-roll for the first half of the game. If this Team re-roll is not used during the first half, it may be carried over into the second half. However, if Lord Borak is removed from play before this re-roll is used, it is lost."
+    },
+    {
+      "id": 14,
+      "urlId": "mighty-zug",
+      "name": "Mighty Zug",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Mighty Zug",
+          "position": "Blocker",
+          "cost": 220000,
+          "movementAllowance": 4,
+          "strength": 5,
+          "agility": 4,
+          "passingAbility": 6,
+          "armourValue": 10,
+          "skillsAndTraits": "Block, Loner (4+), Mighty Blow (+1)",
+          "race": "Human"
+        }
+      ],
+      "playsFor": "Any team with either the 'Halfling Thimble Cup', 'Lustrian Superleague' or 'Old World Classic' special rules.",
+      "specialRules": "Crushing Blow: Once per game, when an opposition player is Knocked Down as the result of a Block action performed by Zug, you may apply an additional +1 modifier to the Armour roll. This modifier may be applied after the roll has been made."
+    },
+    {
+      "id": 15,
+      "urlId": "morg-n-thorg",
+      "name": "Morg ‘n’ Thorg",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Morg ‘n’ Thorg",
+          "position": "Big Guy",
+          "cost": 340000,
+          "movementAllowance": 6,
+          "strength": 6,
+          "agility": 3,
+          "passingAbility": 4,
+          "armourValue": 11,
+          "skillsAndTraits": "Block, Loner (4+), Mighty Blow (+2), Thick Skull, Throw Team-mate",
+          "race": "Ogre",
+          "bigGuy": true
+        }
+      ],
+      "playsFor": "Any team except those that have the 'Sylvanian Spotlight' special rule.",
+      "specialRules": "The Ballista: Once per game, if Morg fails the Passing Ability test when making a Pass action or a Throw Team-mate action, you may re-roll the D6."
+    },
+    {
+      "id": 16,
+      "urlId": "roxanna-darknail",
+      "name": "Roxanna Darknail",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Roxanna Darknail",
+          "position": "Catcher",
+          "cost": 270000,
+          "movementAllowance": 8,
+          "strength": 3,
+          "agility": 1,
+          "passingAbility": 4,
+          "armourValue": 8,
+          "skillsAndTraits": "Dodge, Frenzy, Jump Up, Juggernaut, Leap, Loner (4+)",
+          "race": "Dark Elf"
+        }
+      ],
+      "playsFor": "Any team with the 'Elven Kingdoms League' special rule.",
+      "specialRules": "Burst of Speed: Once per game, Roxanna may attempt to Rush three times, rather than the usual two. You may declare you are using this special rule after Roxanna has Rushed twice."
+    },
+    {
+      "id": 17,
+      "urlId": "rumbelow-sheepskin",
+      "name": "Rumbelow Sheepskin",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Rumbelow Sheepskin",
+          "position": "Blitzer",
+          "cost": 170000,
+          "movementAllowance": 6,
+          "strength": 3,
+          "agility": 3,
+          "armourValue": 8,
+          "skillsAndTraits": "Block, Horns, Juggernaut, Loner (4+), No Hands, Tackle, Thick Skull",
+          "race": "Halfling"
+        }
+      ],
+      "playsFor": "Any team with either the 'Halfling Thimble Cup', 'Old World Classic' or 'Worlds Edge Superleague' special rules.",
+      "specialRules": "Ram: Once per game, when an opposition player is Knocked Down as the result of a Block action performed by Rumbelow, you may apply an additional +1 modifier to either the Armour roll or Injury roll. This modifier may be applied after the roll has been made."
+    },
+    {
+      "id": 18,
+      "urlId": "skrull-halfheight",
+      "name": "Skrull Halfheight",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Skrull Halfheight",
+          "position": "Thrower",
+          "cost": 150000,
+          "movementAllowance": 6,
+          "strength": 3,
+          "agility": 4,
+          "passingAbility": 4,
+          "armourValue": 9,
+          "skillsAndTraits": "Accurate, Loner (4+), Nerves of Steel, Pass, Regeneration, Sure Hands, Thick Skull",
+          "race": "Skeletal Dwarf"
+        }
+      ],
+      "playsFor": "Any team with either the 'Sylvanian Spotlight' or 'Worlds Edge Superleague' special rules.",
+      "specialRules": "Strong Passing Game: Once per game, after making a Passing Ability test to perform a Pass action, Skrull may choose to modify the dice roll by adding his Strength characteristic to it."
+    },
+    {
+      "id": 19,
+      "urlId": "the-swift-twins",
+      "name": "The Swift Twins",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Lucien Swift",
+          "position": "Blitzer",
+          "cost": 340000,
+          "movementAllowance": 7,
+          "strength": 3,
+          "agility": 2,
+          "passingAbility": 5,
+          "armourValue": 9,
+          "skillsAndTraits": "Block, Loner (4+), Mighty Blow (+1), Tackle",
+          "race": "High Elf"
+        },
+        {
+          "id": 2,
+          "quantity": 1,
+          "name": "Valen Swift",
+          "position": "Thrower",
+          "cost": 0,
+          "movementAllowance": 7,
+          "strength": 3,
+          "agility": 2,
+          "passingAbility": 2,
+          "armourValue": 8,
+          "skillsAndTraits": "Accurate, Loner (4+), Nerves of Steel, Pass, Safe Pass, Sure Hands",
+          "race": "High Elf"
+        }
+      ],
+      "playsFor": "Any team with the 'Elven Kingdoms League' special rule.",
+      "specialRules": "Two for One: The Swift Twins must be hired as a pair and count as two Star Players. However, if either Lucien or Valen is removed from play due to suffering a KO’d or Casualty! result on the Injury table, the other replaces the Loner (4+) trait with the Loner (2+) trait."
+    },
+    {
+      "id": 20,
+      "urlId": "varag-ghoul-chewer",
+      "name": "Varag Ghoul-Chewer",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Varag Ghoul-Chewer",
+          "position": "Blitzer",
+          "cost": 280000,
+          "movementAllowance": 6,
+          "strength": 5,
+          "agility": 3,
+          "passingAbility": 5,
+          "armourValue": 10,
+          "skillsAndTraits": "Block, Jump Up, Loner (4+), Mighty Blow (+1), Thick Skull",
+          "race": "Orc"
+        }
+      ],
+      "playsFor": "Any team with either the 'Badlands Brawl' or 'Underworld Challenge' special rules.",
+      "specialRules": "Crushing Blow: Once per game, when an opposition player is Knocked Down as the result of a Block action performed by Varag, you may apply an additional +1 modifier to the Armour roll. This modifier may be applied after the roll has been made."
+    },
+    {
+      "id": 21,
+      "urlId": "grombrindal-the-white-dwarf",
+      "name": "Grombrindal, the White Dwarf",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Grombrindal, the White Dwarf",
+          "position": "Blitzer",
+          "cost": 210000,
+          "movementAllowance": 5,
+          "strength": 3,
+          "agility": 3,
+          "passingAbility": 4,
+          "armourValue": 10,
+          "skillsAndTraits": "Block, Dauntless, Loner (4+), Mighty Blow (+1), Stand Firm, Thick Skull",
+          "race": "Dwarf"
+        }
+      ],
+      "playsFor": "Any team with either the 'Halfling Thimble Cup', 'Lustrian Superleague', 'Old World Classic' or 'Worlds Edge Superleague' special rules.",
+      "specialRules": "Wisdom of the White Dwarf: Once per team turn, when one of Grombrindal’s team-mates that is in an adjacent square is activated, that player gains either the Break Tackle, Dauntless, Mighty Blow (+1) or Sure Feet skill until the end of their activation."
+    },
+    {
+      "id": 22,
+      "urlId": "willow-rosebark",
+      "name": "Willow Rosebark",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Willow Rosebark",
+          "position": "Blocker",
+          "cost": 150000,
+          "movementAllowance": 5,
+          "strength": 4,
+          "agility": 3,
+          "passingAbility": 6,
+          "armourValue": 9,
+          "skillsAndTraits": "Dauntless, Loner (4+), Side Step, Thick Skull",
+          "race": "Dryad"
+        }
+      ],
+      "playsFor": "Any team with the 'Elven Kingdoms League' special rule.",
+      "specialRules": "Indomitable: Once per game, when Willow successfully rolls to use her Dauntless skill, she may increase her Strength characteristic to double that of the nominated target of her Block action."
+    },
+    {
+      "id": 23,
+      "urlId": "zolcath-the-zoat",
+      "name": "Zolcath the Zoat",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "name": "Zolcath the Zoat",
+          "position": "Blocker",
+          "cost": 230000,
+          "movementAllowance": 5,
+          "strength": 5,
+          "agility": 4,
+          "passingAbility": 5,
+          "armourValue": 10,
+          "skillsAndTraits": "Disturbing Presence, Juggernaut, Loner (4+), Mighty Blow (+1), Prehensile Tail, Regeneration, Sure Feet",
+          "race": "Zoat"
+        }
+      ],
+      "playsFor": "Any team with either the 'Lustrian Superleague' or 'Elven Kingdoms League' special rules.",
+      "specialRules": "“Excuse Me, Are You a Zoat?”: Once per game, when Zolcath is activated, he may gain the Hypnotic Gaze trait. You must declare this special rule is being used when Zolcath is activated."
     }
   ]
 }

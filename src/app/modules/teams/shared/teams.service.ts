@@ -6,6 +6,8 @@ import * as _ from 'lodash';
 
 import { Crud } from '../../../core/crud';
 import { TeamModel } from './team.model';
+import { TeamRosterModel } from '../../team-rosters/shared/team-roster.model';
+import { TeamRostersService } from '../../team-rosters/shared/team-rosters.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,9 +20,30 @@ export class TeamsService extends Crud<TeamModel> {
 
   constructor(
     public http: HttpClient,
-    public messageService: MessageService
+    public messageService: MessageService,
+    private teamRostersService: TeamRostersService
   ) {
     super('api/teams', http, messageService);
+  }
+
+  getTeamsByTiers(): Record<number, TeamModel[]> {
+    const tiersByTeamRosters: Record<string, number> = {};
+    this.teamRostersService.teamRosters.forEach((teamRoster: TeamRosterModel) => {
+      if (!tiersByTeamRosters[teamRoster.name]) {
+        tiersByTeamRosters[teamRoster.name] = teamRoster.tier;
+      }
+    });
+
+    const teamsByTiers: Record<number, TeamModel[]> = {};
+    this.teams.forEach((team: TeamModel) => {
+      const tier = tiersByTeamRosters[team.roster];
+      if (!teamsByTiers[tier]) {
+        teamsByTiers[tier] = [];
+      }
+      teamsByTiers[tier].push(team);
+    });
+
+    return teamsByTiers;
   }
 
   getTeamsByUrlId$(urlId: string): Observable<TeamModel[]> {
@@ -29,6 +52,6 @@ export class TeamsService extends Crud<TeamModel> {
   }
 
   getTeamByName(name: string): TeamModel {
-    return _.find<TeamModel>(this.teams, { name });
+    return _.find<TeamModel>(this.teams, (team: TeamModel) => team.name.toLowerCase() === name.toLowerCase());
   }
 }

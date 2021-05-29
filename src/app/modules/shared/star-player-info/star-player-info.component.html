@@ -5,8 +5,14 @@
   >
     <ng-template pTemplate="header">
       <tr>
-        <th style="min-width: 8rem;">
+        <th style="width: 8rem;">
           NAME
+        </th>
+        <th style="width: 6rem;">
+          POSITION
+        </th>
+        <th style="width: 6rem;">
+          RACE
         </th>
         <th style="width: 5.5rem;" class="p-text-center text-nowrap">
           MA
@@ -23,7 +29,7 @@
         <th style="width: 5.5rem;" class="p-text-center text-nowrap">
           AV
         </th>
-        <th style="min-width: 8rem;">
+        <th style="min-width: 12rem;">
           SKILLS & TRAITS
         </th>
         <th style="width: 9rem;" class="p-text-center">
@@ -37,7 +43,13 @@
     >
       <tr>
         <td class="text-top">
-          <span class="p-text-bold">{{playerProfile.name}}</span>
+          {{playerProfile.name}}
+        </td>
+        <td class="text-top">
+          {{playerProfile.position}}
+        </td>
+        <td class="text-top">
+          {{playerProfile.race}}
         </td>
         <td class="p-text-center text-top">
           {{playerProfile.movementAllowance}}
@@ -82,12 +94,15 @@
     </ng-template>
     <ng-template pTemplate="footer">
       <tr>
-        <td colspan="8">
-          Plays for: <app-plays-for-info [playsFor]="starPlayer.playsFor"></app-plays-for-info>
+        <td colspan="10">
+          Plays for:
+          <span class="p-text-normal">
+            <app-plays-for-info [playsFor]="starPlayer.playsFor"></app-plays-for-info>
+          </span>
         </td>
       </tr>
       <tr>
-        <td colspan="8">Special rules: <span class="p-text-normal">{{starPlayer.specialRules}}</span></td>
+        <td colspan="10">Special rules: <span class="p-text-normal">{{starPlayer.specialRules}}</span></td>
       </tr>
     </ng-template>
   </p-table>

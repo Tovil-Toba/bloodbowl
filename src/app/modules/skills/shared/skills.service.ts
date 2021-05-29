@@ -28,9 +28,9 @@ export class SkillsService extends Crud<SkillModel> {
   }
 
   getSkillByName(name: string): SkillModel {
-    const nameMask = name.split('(')[0].trim();
+    const nameMask = name.split('(')[0].trim().toLowerCase();
     return _.find<SkillModel>(this.skills, (skill: SkillModel) => {
-      return _.startsWith(skill.name, nameMask);
+      return _.startsWith(skill.name.toLowerCase(), nameMask);
     });
   }
 

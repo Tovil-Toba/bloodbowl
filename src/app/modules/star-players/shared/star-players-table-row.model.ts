@@ -4,6 +4,8 @@ export interface StarPlayersTableRowModel {
   id: number;
   starPlayer: StarPlayerModel;
   name: string;
+  position: string;
+  race: string;
   cost: number;
   movementAllowance: number;
   strength: number;

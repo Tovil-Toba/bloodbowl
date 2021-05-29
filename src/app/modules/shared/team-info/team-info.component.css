@@ -2,3 +2,9 @@
   max-width: 650px;
   float: left;
 }
+
+.roster {
+  color: var(--primary-color);
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, DoCheck } from '@angular/core';
+import { Component, DoCheck, Input } from '@angular/core';
 import * as _ from 'lodash';
 
 import { SkillModel } from '../../skills/shared/skill.model';
@@ -10,7 +10,7 @@ import { StarPlayersService } from '../../star-players/shared/star-players.servi
   templateUrl: './star-player-info.component.html',
   styleUrls: ['./star-player-info.component.css']
 })
-export class StarPlayerInfoComponent implements OnInit, DoCheck {
+export class StarPlayerInfoComponent implements DoCheck {
 
   @Input() starPlayer: StarPlayerModel;
 
@@ -26,9 +26,6 @@ export class StarPlayerInfoComponent implements OnInit, DoCheck {
     if (!_.isEqual(this.starPlayer, this.oldStarPlayer)) {
       this.oldStarPlayer = _.clone(this.starPlayer);
     }
-  }
-
-  ngOnInit(): void {
   }
 
   openSkillInfoDialog(skill: SkillModel): void {

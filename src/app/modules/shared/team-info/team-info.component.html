@@ -4,8 +4,12 @@
 </div>
 
 <div>
-  <img *ngIf="team.photo" [src]="team.photo" alt="Team photo" class="photo p-mr-4 p-mb-1" />
+  <img *ngIf="team.photo" [src]="team.photo" alt="Team photo" class="photo p-ml-1 p-mr-4 p-mb-1" />
   <div>
+    <div *ngIf="team.roster" class="p-mb-3">
+      <span class="p-text-bold" [ngStyle]="{color:'var(--primary-color)'}">Team Roster: </span>
+      <span (click)="showTeamRoster(team.roster)" class="p-text-bold roster">{{team.roster}}</span>
+    </div>
     <div *ngIf="team.colours" class="p-mb-3">
       <span class="p-text-bold" [ngStyle]="{color:'var(--primary-color)'}">Team Colours:</span> {{team.colours}}
     </div>
@@ -33,4 +37,17 @@
     <div *ngIf="team.bio" class="bio">{{team.bio}}</div>
   </div>
 </div>
+
+<p-dialog
+  *ngIf="teamRoster"
+  [(visible)]="teamRosterInfoDialog"
+  [header]="teamRoster.name"
+  [modal]="true"
+  [maximizable]="true"
+  [style]="{width: '720px'}"
+>
+  <ng-template pTemplate="content">
+    <app-team-roster-info [teamRoster]="teamRoster"></app-team-roster-info>
+  </ng-template>
+</p-dialog>
 

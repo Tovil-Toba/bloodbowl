@@ -52,7 +52,16 @@
       </ng-template>
       <ng-template pTemplate="body" let-team>
         <tr>
-          <td style="width: 100px;"><img *ngIf="team.logo" [src]="team.logo" [alt]="team.name" width="60" /></td>
+          <td style="width: 100px;">
+            <img
+              *ngIf="team.logo"
+              (click)="navigateToTeam(team)"
+              [src]="team.logo"
+              [alt]="team.name"
+              width="60"
+              style="cursor: pointer;"
+            />
+          </td>
           <td class="p-pl-0">
             <button
               pButton

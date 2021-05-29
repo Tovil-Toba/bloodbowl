@@ -12,5 +12,10 @@ export interface PlayerProfileModel {
   skillsAndTraits: string;
   primary?: string;
   secondary?: string;
+  race?: string;
   bigGuy?: boolean;
+}
+
+export interface PlayerProfileWithUrlIdModel extends PlayerProfileModel {
+  urlId: string;
 }

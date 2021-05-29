@@ -43,6 +43,8 @@ export class StarPlayersComponent implements OnInit {
           id,
           starPlayer,
           name: playerProfile.name,
+          position: playerProfile.position,
+          race: playerProfile.race,
           cost: starPlayer.playerProfiles[0].cost,
           movementAllowance: playerProfile.movementAllowance,
           strength: playerProfile.strength,

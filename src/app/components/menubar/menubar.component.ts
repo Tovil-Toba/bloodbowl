@@ -13,6 +13,8 @@ import { TeamsService } from '../../modules/teams/shared/teams.service';
 import { TeamRostersService } from '../../modules/team-rosters/shared/team-rosters.service';
 import { TeamModel } from '../../modules/teams/shared/team.model';
 import { TeamRosterModel } from '../../modules/team-rosters/shared/team-roster.model';
+import { PlayerProfileWithUrlIdModel } from '../../modules/shared/player-profile.model';
+import { POSITIONS } from '../../constants/positions';
 
 @Component({
   selector: 'app-menubar',
@@ -25,6 +27,7 @@ export class MenubarComponent implements OnInit, DoCheck {
   oldStarPlayers: StarPlayerModel[];
   oldTeams: TeamModel[];
   oldTeamRosters: TeamRosterModel[];
+  oldStarPlayersReloadingTrigger = 0;
 
   constructor(
     public themesService: ThemesService,
@@ -65,13 +68,25 @@ export class MenubarComponent implements OnInit, DoCheck {
       }
     ];
 
-    this.starPlayersService.starPlayers.forEach((starPlayer: StarPlayerModel) => {
-      menuItems.push(
-        {
-          label: starPlayer.name,
-          routerLink: [`/star-players/${starPlayer.urlId}`]
-        }
-      );
+    const starPlayersByPositions: Record<string, PlayerProfileWithUrlIdModel[]> =
+      this.starPlayersService.getStarPlayersByPositions();
+
+    POSITIONS.forEach((position: string) => {
+      if (starPlayersByPositions[position]) {
+        const menuItem: MenuItem = {
+          label: position,
+          items: []
+        };
+        starPlayersByPositions[position].forEach((playerProfile: PlayerProfileWithUrlIdModel) => {
+          menuItem.items.push(
+            {
+              label: playerProfile.name,
+              routerLink: [`/star-players/${playerProfile.urlId}`]
+            }
+          );
+        });
+        menuItems.push(menuItem);
+      }
     });
 
     return menuItems;
@@ -120,33 +135,44 @@ export class MenubarComponent implements OnInit, DoCheck {
       }
     ];
 
-    this.teamsService.teams.forEach((team: TeamModel) => {
-      menuItems.push(
-        {
-          label: team.logo
-            ?
-              `
-                <div class="p-d-flex p-ai-center">
-                  <img
-                    src="${team.logo}"
-                    alt="${team.name}"
-                    class="p-mr-2"
-                    width="30"
-                  />
-                  <span>${team.name}</span>
-                </div>
-              `
-            :
-              `
-                <div class="p-d-flex p-ai-center">
-                  <span>${team.name}</span>
-                </div>
-              `
-          ,
-          escape: false,
-          routerLink: [`/teams/${team.urlId}`]
-        }
-      );
+    const teamsByTiers: Record<number, TeamModel[]> = this.teamsService.getTeamsByTiers();
+
+    [1, 2, 3].forEach(tier => {
+      if (teamsByTiers[tier]) {
+        const menuItem: MenuItem = {
+          label: `Tier ${tier}`,
+          items: []
+        };
+        teamsByTiers[tier].forEach((team: TeamModel) => {
+          menuItem.items.push(
+            {
+              label: team.logo
+                ?
+                `
+                  <div class="p-d-flex p-ai-center">
+                    <img
+                      src="${team.logo}"
+                      alt="${team.name}"
+                      class="p-mr-2"
+                      width="30"
+                    />
+                    <span>${team.name}</span>
+                  </div>
+                `
+                :
+                `
+                  <div class="p-d-flex p-ai-center">
+                    <span>${team.name}</span>
+                  </div>
+                `
+              ,
+              escape: false,
+              routerLink: [`/teams/${team.urlId}`]
+            }
+          );
+        });
+        menuItems.push(menuItem);
+      }
     });
 
     return menuItems;
@@ -163,13 +189,24 @@ export class MenubarComponent implements OnInit, DoCheck {
       }
     ];
 
-    this.teamRostersService.teamRosters.forEach((teamRoster: TeamRosterModel) => {
-      menuItems.push(
-        {
-          label: teamRoster.name,
-          routerLink: [`/team-rosters/${teamRoster.urlId}`]
-        }
-      );
+    const teamRostersByTiers: Record<number, TeamRosterModel[]> = this.teamRostersService.getTeamRostersByTiers();
+
+    [1, 2, 3].forEach(tier => {
+      if (teamRostersByTiers[tier]) {
+        const menuItem: MenuItem = {
+          label: `Tier ${tier}`,
+          items: []
+        };
+        teamRostersByTiers[tier].forEach((teamRoster: TeamRosterModel) => {
+          menuItem.items.push(
+            {
+              label: teamRoster.name,
+              routerLink: [`/team-rosters/${teamRoster.urlId}`]
+            }
+          );
+        });
+        menuItems.push(menuItem);
+      }
     });
 
     return menuItems;
@@ -183,11 +220,13 @@ export class MenubarComponent implements OnInit, DoCheck {
     if (
       !_.isEqual(this.teamsService.teams, this.oldTeams) ||
       !_.isEqual(this.teamRostersService.teamRosters, this.oldTeamRosters) ||
-      !_.isEqual(this.starPlayersService.starPlayers, this.oldStarPlayers)
+      !_.isEqual(this.starPlayersService.starPlayers, this.oldStarPlayers) ||
+      this.starPlayersService.reloadingTrigger !== this.oldStarPlayersReloadingTrigger
     ) {
       this.oldTeams = _.clone(this.teamsService.teams);
       this.oldTeamRosters = _.clone(this.teamRostersService.teamRosters);
       this.oldStarPlayers = _.clone(this.starPlayersService.starPlayers);
+      this.oldStarPlayersReloadingTrigger = this.starPlayersService.reloadingTrigger;
 
       this.items = [
         {

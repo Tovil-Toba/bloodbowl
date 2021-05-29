@@ -31,15 +31,17 @@
   <ng-template pTemplate="header">
     <tr>
       <th style="width: 3rem"></th>
-      <th style="width: 10rem;" class="p-px-1">NAME</th>
+      <th style="width: 8rem;" class="p-px-1">NAME</th>
+      <th style="width: 6rem;" class="p-px-1">POSITION</th>
+      <th style="width: 6rem;" class="p-px-1">RACE</th>
       <th style="width: 5rem;" class="p-text-center p-px-1">MA</th>
       <th style="width: 5rem;" class="p-text-center p-px-1">ST</th>
       <th style="width: 5rem;" class="p-text-center p-px-1">AG</th>
       <th style="width: 5rem;" class="p-text-center p-px-1">PA</th>
       <th style="width: 5rem;" class="p-text-center p-px-1">AV</th>
-      <th style="width: 15rem;" class="p-px-1">SKILLS & TRAITS</th>
+      <th style="width: 12rem;" class="p-px-1">SKILLS & TRAITS</th>
       <th style="width: 6rem;" class="p-text-center p-px-1">GP TO INDUCE</th>
-      <th style="width: 6rem;" class="p-text-center p-px-1">BIG GUY</th>
+<!--      <th style="width: 6rem;" class="p-text-center p-px-1">BIG GUY</th>-->
       <th style="width: 6rem;" class="p-px-0"></th>
     </tr>
   </ng-template>
@@ -67,6 +69,38 @@
           </ng-template>
           <ng-template pTemplate="output">
             {{playerProfile.name}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td pEditableColumn class="p-px-1">
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <p-dropdown
+              inputId="category"
+              [options]="positions"
+              [(ngModel)]="playerProfile.position"
+              name="position"
+            ></p-dropdown>
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{playerProfile.position}}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td pEditableColumn class="p-px-1">
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input
+              pInputText
+              type="text"
+              [(ngModel)]="playerProfile.race"
+              name="race"
+              required
+              style="width: 100%;"
+            >
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{playerProfile.race}}
           </ng-template>
         </p-cellEditor>
       </td>
@@ -203,16 +237,16 @@
           </ng-template>
         </p-cellEditor>
       </td>
-      <td pEditableColumn class="p-text-center p-px-0">
-        <p-cellEditor>
-          <ng-template pTemplate="input">
-            <p-checkbox inputId="bigGuy" [binary]="true" [(ngModel)]="playerProfile.bigGuy" name="bigGuy"></p-checkbox>
-          </ng-template>
-          <ng-template pTemplate="output">
-            {{playerProfile.bigGuy ? 'Yes' : 'No'}}
-          </ng-template>
-        </p-cellEditor>
-      </td>
+<!--      <td pEditableColumn class="p-text-center p-px-0">-->
+<!--        <p-cellEditor>-->
+<!--          <ng-template pTemplate="input">-->
+<!--            <p-checkbox inputId="bigGuy" [binary]="true" [(ngModel)]="playerProfile.bigGuy" name="bigGuy"></p-checkbox>-->
+<!--          </ng-template>-->
+<!--          <ng-template pTemplate="output">-->
+<!--            {{playerProfile.bigGuy ? 'Yes' : 'No'}}-->
+<!--          </ng-template>-->
+<!--        </p-cellEditor>-->
+<!--      </td>-->
       <td class="p-text-center p-px-0 p-text-nowrap">
         <button
           *ngIf="!editing"

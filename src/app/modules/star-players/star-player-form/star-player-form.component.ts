@@ -8,6 +8,7 @@ import { StarPlayerModel } from '../shared/star-player.model';
 import { PlayerProfileModel } from '../../shared/player-profile.model';
 import { PlayerProfile } from '../../shared/player-profile';
 import { StarPlayersService } from '../shared/star-players.service';
+import { POSITIONS } from '../../../constants/positions';
 import { enterPageAnimation } from '../../../shared/animations';
 
 @Component({
@@ -26,6 +27,7 @@ export class StarPlayerFormComponent implements OnInit {
   clonedPlayerProfiles: { [s: string]: PlayerProfileModel; } = {};
   breadcrumbItems: MenuItem[];
   editingRowKeys: { [s: string]: boolean; } = {};
+  positions: string[] = POSITIONS;
   loading = false;
   submitLoading = false;
 
@@ -36,8 +38,10 @@ export class StarPlayerFormComponent implements OnInit {
     public starPlayersService: StarPlayersService
   ) { }
 
-  addNewPlayerProfile(event: MouseEvent): void {
-    event.preventDefault();
+  addNewPlayerProfile(event?: MouseEvent): void {
+    if (event) {
+      event.preventDefault();
+    }
     const newPlayerProfile = new PlayerProfile({ id: this.starPlayer.playerProfiles.length + 1 });
     this.clonedStarPlayer.playerProfiles.push(newPlayerProfile);
     this.onRowEditInit(newPlayerProfile);
@@ -46,6 +50,9 @@ export class StarPlayerFormComponent implements OnInit {
   ngOnInit(): void {
     this.clonedStarPlayer = _.clone(this.starPlayer);
     this.starPlayersService.selectedStarPlayerUrlId = this.starPlayer.urlId;
+    if (!this.clonedStarPlayer.id) {
+      this.addNewPlayerProfile();
+    }
   }
 
   onRowEditInit(playerProfile: PlayerProfileModel): void {
@@ -92,12 +99,12 @@ export class StarPlayerFormComponent implements OnInit {
     } else {
       this.starPlayersService.updateItem(this.clonedStarPlayer)
         .subscribe(() => {
-          this.clonedStarPlayer = _.clone(this.clonedStarPlayer);
-          const index = _.findIndex(this.starPlayersService.starPlayers, { id: this.clonedStarPlayer.id });
           const clonedStarPlayers = _.clone(this.starPlayersService.starPlayers);
+          const index = _.findIndex(clonedStarPlayers, { id: this.clonedStarPlayer.id });
           clonedStarPlayers.splice(index, 1, this.clonedStarPlayer);
-          this.starPlayersService.starPlayers = clonedStarPlayers;
+          this.starPlayersService.starPlayers =  _.clone(clonedStarPlayers);
           this.submittedStarPlayer.emit(this.clonedStarPlayer);
+          this.starPlayersService.activateReloadingTrigger();
           this.submitLoading = false;
         });
     }

@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, DoCheck } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import * as _ from 'lodash';
 
-import { TeamsService } from '../shared/teams.service';
-import { TeamModel } from '../shared/team.model';
 import { enterPageAnimation } from '../../../shared/animations';
+import { TeamModel } from '../shared/team.model';
+import { TeamsService } from '../shared/teams.service';
+import { Team } from '../shared/team';
 
 @Component({
   selector: 'app-team-editor',
@@ -13,22 +14,52 @@ import { enterPageAnimation } from '../../../shared/animations';
   styleUrls: ['./team-editor.component.css'],
   animations: [enterPageAnimation]
 })
-export class TeamEditorComponent implements OnInit {
+export class TeamEditorComponent implements DoCheck {
 
-  team: TeamModel;
-  breadcrumbItems: MenuItem[];
+  breadcrumbItems: MenuItem[] = [];
   loading = false;
+  oldUrlId: string;
+  team: TeamModel;
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private router: Router,
     public teamsService: TeamsService
   ) { }
 
-  get urlId(): string {
+  ngDoCheck(): void {
+    if (this.urlId !== this.oldUrlId) {
+      this.oldUrlId = this.urlId;
+      this.breadcrumbItems = [
+        { label: 'Teams', routerLink: '/teams' }
+      ];
+      if (this.urlId) {
+        this.getTeam(this.urlId);
+      } else {
+        this.breadcrumbItems.push(
+          { label: 'New Team' },
+          { label: 'Add' }
+        );
+        this.team = new Team();
+      }
+    }
+  }
+
+  onTeamFormSubmit(team: TeamModel): void {
+    this.team = _.clone(team);
+    this.router.navigate([`teams/${this.team.urlId}/edit`]);
+    this.breadcrumbItems = [
+      { label: 'Teams', routerLink: '/teams' },
+      { label: this.team.name, routerLink: `/teams/${this.urlId}` },
+      { label: 'Edit' }
+    ];
+  }
+
+  private get urlId(): string {
     return this.activatedRoute.snapshot.paramMap.get('urlId');
   }
 
-  getTeam(urlId: string): void {
+  private getTeam(urlId: string): void {
     const index = _.findIndex(this.teamsService.teams, { urlId });
     if (index !== -1) {
       this.team = this.teamsService.teams[index];
@@ -38,24 +69,6 @@ export class TeamEditorComponent implements OnInit {
         { label: 'Edit' }
       ];
     }
-  }
-
-  ngOnInit(): void {
-    this.breadcrumbItems = [
-      { label: 'Teams' },
-      { label: 'New Team' },
-      { label: 'Add' }
-    ];
-    this.getTeam(this.urlId);
-  }
-
-  onTeamFormSubmit(team: TeamModel): void {
-    this.team = team;
-    this.breadcrumbItems = [
-      { label: 'Teams', routerLink: '/teams' },
-      { label: this.team.name, routerLink: `/teams/${this.urlId}` },
-      { label: 'Edit' }
-    ];
   }
 
 }

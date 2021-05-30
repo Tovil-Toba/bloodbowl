@@ -1,6 +1,68 @@
 import { ThemesModel } from '../models/themes.model';
 
 export const THEMES: ThemesModel = {
+  PrimeOne: [
+    {
+      name: 'Saga Blue',
+      filename: 'saga-blue',
+      image: 'saga-blue.png'
+    },
+    {
+      name: 'Saga Green',
+      filename: 'saga-green',
+      image: 'saga-green.png'
+    },
+    {
+      name: 'Saga Orange',
+      filename: 'saga-orange',
+      image: 'saga-orange.png'
+    },
+    {
+      name: 'Saga Purple',
+      filename: 'saga-purple',
+      image: 'saga-purple.png'
+    },
+    {
+      name: 'Vela Blue',
+      filename: 'vela-blue',
+      image: 'vela-blue.png'
+    },
+    {
+      name: 'Vela Green',
+      filename: 'vela-green',
+      image: 'vela-green.png'
+    },
+    {
+      name: 'Vela Orange',
+      filename: 'vela-orange',
+      image: 'vela-orange.png'
+    },
+    {
+      name: 'Vela Purple',
+      filename: 'vela-purple',
+      image: 'vela-purple.png'
+    },
+    {
+      name: 'Arya Blue',
+      filename: 'arya-blue',
+      image: 'arya-blue.png'
+    },
+    {
+      name: 'Arya Green',
+      filename: 'arya-green',
+      image: 'arya-green.png'
+    },
+    {
+      name: 'Arya Orange',
+      filename: 'arya-orange',
+      image: 'arya-orange.png'
+    },
+    {
+      name: 'Arya Purple',
+      filename: 'arya-purple',
+      image: 'arya-purple.png'
+    }
+  ],
   Bootstrap: [
     {
       name: 'Blue Light',
@@ -72,68 +134,6 @@ export const THEMES: ThemesModel = {
       name: 'Fluent UI',
       filename: 'fluent-light',
       image: 'fluent-light.png'
-    }
-  ],
-  PrimeOne: [
-    {
-      name: 'Saga Blue',
-      filename: 'saga-blue',
-      image: 'saga-blue.png'
-    },
-    {
-      name: 'Saga Green',
-      filename: 'saga-green',
-      image: 'saga-green.png'
-    },
-    {
-      name: 'Saga Orange',
-      filename: 'saga-orange',
-      image: 'saga-orange.png'
-    },
-    {
-      name: 'Saga Purple',
-      filename: 'saga-purple',
-      image: 'saga-purple.png'
-    },
-    {
-      name: 'Vela Blue',
-      filename: 'vela-blue',
-      image: 'vela-blue.png'
-    },
-    {
-      name: 'Vela Green',
-      filename: 'vela-green',
-      image: 'vela-green.png'
-    },
-    {
-      name: 'Vela Orange',
-      filename: 'vela-orange',
-      image: 'vela-orange.png'
-    },
-    {
-      name: 'Vela Purple',
-      filename: 'vela-purple',
-      image: 'vela-purple.png'
-    },
-    {
-      name: 'Arya Blue',
-      filename: 'arya-blue',
-      image: 'arya-blue.png'
-    },
-    {
-      name: 'Arya Green',
-      filename: 'arya-green',
-      image: 'arya-green.png'
-    },
-    {
-      name: 'Arya Orange',
-      filename: 'arya-orange',
-      image: 'arya-orange.png'
-    },
-    {
-      name: 'Arya Purple',
-      filename: 'arya-purple',
-      image: 'arya-purple.png'
     }
   ]
 };

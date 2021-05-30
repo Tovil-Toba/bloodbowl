@@ -1,14 +1,14 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, DoCheck } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import * as _ from 'lodash';
 
-import { SkillsService } from '../shared/skills.service';
-import { SkillCategoryModel } from '../shared/skill-category.model';
-import { SkillModel } from '../shared/skill.model';
-import { Skill } from '../shared/skill';
-import { SKILL_CATEGORIES } from '../shared/skill-categories';
 import { enterPageAnimation } from '../../../shared/animations';
+import { Skill } from '../shared/skill';
+import { SkillModel } from '../shared/skill.model';
+import { SkillCategoryModel } from '../shared/skill-category.model';
+import { SkillsService } from '../shared/skills.service';
+import { SKILL_CATEGORIES } from '../shared/skill-categories';
 
 @Component({
   selector: 'app-skills-category',
@@ -17,28 +17,23 @@ import { enterPageAnimation } from '../../../shared/animations';
   providers: [ConfirmationService],
   animations: [enterPageAnimation]
 })
-export class SkillsCategoryComponent implements OnInit, DoCheck {
+export class SkillsCategoryComponent implements DoCheck {
 
+  breadcrumbItems: MenuItem[] = [];
+  skill: SkillModel;
+  skillFormDialog = false;
   skillCategories: SkillCategoryModel[] = SKILL_CATEGORIES;
   skillCategory: SkillCategoryModel;
   skillsByCategories: Record<string, SkillModel[]> = {};
-  skill: SkillModel;
   oldSkills: SkillModel[];
   oldUrlId: string;
-  breadcrumbItems: MenuItem[];
   tabIndex = 0;
-  skillFormDialog = false;
 
   constructor(
-    private router: Router,
     private activatedRoute: ActivatedRoute,
+    public confirmationService: ConfirmationService,
     public skillsService: SkillsService,
-    public confirmationService: ConfirmationService
   ) { }
-
-  get urlId(): string {
-    return this.activatedRoute.snapshot.paramMap.get('urlId');
-  }
 
   deleteSkill(skill: SkillModel): void {
     this.confirmationService.confirm({
@@ -56,30 +51,6 @@ export class SkillsCategoryComponent implements OnInit, DoCheck {
     this.skillFormDialog = true;
   }
 
-  getBreadcrumbItems(urlId: string): void {
-    this.skillCategory = _.find<SkillCategoryModel>(SKILL_CATEGORIES, { urlId });
-    this.breadcrumbItems = [
-      { label: 'Skills', routerLink: '/skills' },
-      { label: this.skillCategory.name }
-    ];
-  }
-
-  getSkillsByCategories(): void {
-    try {
-      this.skillCategories.forEach((skillCategory: SkillCategoryModel) => {
-        this.skillsByCategories[skillCategory.urlId] = _.sortBy(
-          _.filter(
-            this.skillsService.skills,
-            { category: skillCategory.name }
-          ),
-          ['name']
-        );
-      });
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
   ngDoCheck(): void {
     if (this.skillsService.skills.length && this.urlId !== this.oldUrlId) {
       this.oldUrlId = this.urlId;
@@ -91,9 +62,6 @@ export class SkillsCategoryComponent implements OnInit, DoCheck {
       this.oldSkills = _.clone(this.skillsService.skills);
       this.getSkillsByCategories();
     }
-  }
-
-  ngOnInit(): void {
   }
 
   onSkillFormSubmit(skill: SkillModel): void {
@@ -114,6 +82,34 @@ export class SkillsCategoryComponent implements OnInit, DoCheck {
   openNewSkillDialog(): void {
     this.skill = new Skill();
     this.skillFormDialog = true;
+  }
+
+  private get urlId(): string {
+    return this.activatedRoute.snapshot.paramMap.get('urlId');
+  }
+
+  private getBreadcrumbItems(urlId: string): void {
+    this.skillCategory = _.find<SkillCategoryModel>(SKILL_CATEGORIES, { urlId });
+    this.breadcrumbItems = [
+      { label: 'Skills', routerLink: '/skills' },
+      { label: this.skillCategory.name }
+    ];
+  }
+
+  private getSkillsByCategories(): void {
+    try {
+      this.skillCategories.forEach((skillCategory: SkillCategoryModel) => {
+        this.skillsByCategories[skillCategory.urlId] = _.sortBy(
+          _.filter(
+            this.skillsService.skills,
+            { category: skillCategory.name }
+          ),
+          ['name']
+        );
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
 }

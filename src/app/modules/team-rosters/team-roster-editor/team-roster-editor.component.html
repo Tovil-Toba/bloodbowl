@@ -1,6 +1,6 @@
 <div
-  *ngIf="!teamRostersService.loading && teamRoster"
-  [@pageAnimations]="!teamRostersService.loading && teamRoster"
+  *ngIf="!teamRostersService.loading"
+  [@pageAnimations]="!teamRostersService.loading"
 >
   <p-breadcrumb
     [model]="breadcrumbItems"
@@ -8,10 +8,18 @@
     styleClass="p-mb-3 animation"
   ></p-breadcrumb>
 
-  <p-panel [header]="teamRoster.name" styleClass="animation">
-    <app-team-roster-form
-      [teamRoster]="teamRoster"
-      (submittedTeamRoster)="onTeamRosterFormSubmit($event)"
-    ></app-team-roster-form>
-  </p-panel>
+  <div class="animation">
+    <p-panel  *ngIf="teamRoster; else elseBlock" [header]="teamRoster.name">
+      <app-team-roster-form
+        [teamRoster]="teamRoster"
+        (submittedTeamRoster)="onTeamRosterFormSubmit($event)"
+      ></app-team-roster-form>
+    </p-panel>
+
+    <ng-template #elseBlock>
+      <p-panel>
+        Team roster not found.
+      </p-panel>
+    </ng-template>
+  </div>
 </div>

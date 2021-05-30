@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as _ from 'lodash';
 
+import { Skill } from '../shared/skill';
 import { SkillModel } from '../shared/skill.model';
 import { SkillCategoryModel } from '../shared/skill-category.model';
-import { Skill } from '../shared/skill';
 import { SkillsService } from '../shared/skills.service';
 import { SKILL_CATEGORIES } from '../shared/skill-categories';
 
@@ -18,8 +18,8 @@ export class SkillFormComponent implements OnInit {
   @Output() submittedSkill = new EventEmitter<SkillModel>();
 
   clonedSkill: SkillModel;
-  skillCategories: SkillCategoryModel[] = SKILL_CATEGORIES;
   loading = false;
+  skillCategories: SkillCategoryModel[] = SKILL_CATEGORIES;
   submitLoading = false;
 
   constructor(private skillsService: SkillsService) { }
@@ -42,7 +42,6 @@ export class SkillFormComponent implements OnInit {
     } else {
       this.skillsService.updateItem(this.clonedSkill)
         .subscribe(() => {
-          this.clonedSkill = _.clone(this.clonedSkill);
           this.submittedSkill.emit(this.clonedSkill);
           this.submitLoading = false;
         });

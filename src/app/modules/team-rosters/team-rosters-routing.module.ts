@@ -6,6 +6,7 @@ import { TeamRosterEditorComponent } from './team-roster-editor/team-roster-edit
 import { TeamRosterComponent } from './team-roster/team-roster.component';
 
 const routes: Routes = [
+  { path: 'team-rosters/add', component: TeamRosterEditorComponent },
   { path: 'team-rosters/:urlId/edit', component: TeamRosterEditorComponent },
   { path: 'team-rosters/:urlId', component: TeamRosterComponent },
   { path: 'team-rosters', component: TeamRostersComponent }

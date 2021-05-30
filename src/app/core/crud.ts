@@ -78,8 +78,14 @@ export abstract class Crud<T extends Item> {
   /** POST: add a new item to the server */
   addItem(item: T): Observable<T> {
     return this.http.post<T>(this.apiUrl, item, this.httpOptions).pipe(
-      tap((newItem: T) => this.log(`added item w/ url=${this.apiUrl} id=${newItem.id}`)),
-      catchError(this.handleError<T>(`addItem url=${this.apiUrl}`))
+      tap((newItem: T) => {
+        this.log(`added item w/ url=${this.apiUrl} id=${newItem.id}`);
+        this.showSuccessToast('Data is created');
+      }),
+      catchError(this.handleError<T>(
+        `addItem url=${this.apiUrl}`,
+        'Data is not created'
+      ))
     );
   }
 

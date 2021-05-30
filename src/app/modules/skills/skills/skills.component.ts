@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import * as _ from 'lodash';
 
-import { SkillModel } from '../shared/skill.model';
-import { Skill } from '../shared/skill';
-import { SkillsService } from '../shared/skills.service';
 import { enterPageAnimation } from '../../../shared/animations';
+import { Skill } from '../shared/skill';
+import { SkillModel } from '../shared/skill.model';
+import { SkillsService } from '../shared/skills.service';
 
 @Component({
   selector: 'app-skills',
@@ -19,10 +19,10 @@ import { enterPageAnimation } from '../../../shared/animations';
 })
 export class SkillsComponent implements OnInit {
 
-  skills: SkillModel[] = [];
-  skill: SkillModel;
-  breadcrumbItems: MenuItem[];
+  breadcrumbItems: MenuItem[] = [];
   loading = false;
+  skill: SkillModel;
+  skills: SkillModel[] = [];
   skillFormDialog = false;
 
   constructor(

@@ -3,12 +3,12 @@ import { Router } from '@angular/router';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import * as _ from 'lodash';
 
-import { TeamsService } from '../shared/teams.service';
-import { TeamRostersService } from '../../team-rosters/shared/team-rosters.service';
-import { TeamModel } from '../shared/team.model';
-import { Team } from '../shared/team';
-import { TeamRosterModel } from '../../team-rosters/shared/team-roster.model';
 import { enterPageAnimation } from '../../../shared/animations';
+import { Team } from '../shared/team';
+import { TeamModel } from '../shared/team.model';
+import { TeamRosterModel } from '../../team-rosters/shared/team-roster.model';
+import { TeamRostersService } from '../../team-rosters/shared/team-rosters.service';
+import { TeamsService } from '../shared/teams.service';
 
 @Component({
   selector: 'app-teams',
@@ -22,11 +22,11 @@ import { enterPageAnimation } from '../../../shared/animations';
 })
 export class TeamsComponent implements OnInit {
 
-  teams: TeamModel[];
-  team: TeamModel;
-  teamRoster: TeamRosterModel;
-  breadcrumbItems: MenuItem[];
+  breadcrumbItems: MenuItem[] = [];
   loading = false;
+  team: TeamModel;
+  teams: TeamModel[];
+  teamRoster: TeamRosterModel;
   teamFormDialog = false;
   teamInfoDialog = false;
   teamRosterInfoDialog = false;
@@ -34,8 +34,8 @@ export class TeamsComponent implements OnInit {
   constructor(
     private confirmationService: ConfirmationService,
     private router: Router,
-    public teamsService: TeamsService,
-    private teamRostersService: TeamRostersService
+    private teamRostersService: TeamRostersService,
+    public teamsService: TeamsService
   ) { }
 
   deleteTeam(team: TeamModel): void {

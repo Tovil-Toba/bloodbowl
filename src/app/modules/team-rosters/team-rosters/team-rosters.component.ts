@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 
-import { PlayerProfileModel } from '../../shared/player-profile.model';
-import { TeamRostersService } from '../shared/team-rosters.service';
-import { TeamRosterModel } from '../shared/team-roster.model';
-import { TeamRoster } from '../shared/team-roster';
 import { enterPageAnimation } from '../../../shared/animations';
+import { PlayerProfileModel } from '../../shared/player-profile.model';
+import { TeamRoster } from '../shared/team-roster';
+import { TeamRosterModel } from '../shared/team-roster.model';
+import { TeamRostersService } from '../shared/team-rosters.service';
 
 @Component({
   selector: 'app-team-rosters',
@@ -16,10 +16,10 @@ import { enterPageAnimation } from '../../../shared/animations';
 })
 export class TeamRostersComponent implements OnInit {
 
-  teamRosters: TeamRosterModel[] = [];
-  teamRoster: TeamRosterModel;
-  breadcrumbItems: MenuItem[];
+  breadcrumbItems: MenuItem[] = [];
   loading = false;
+  teamRoster: TeamRosterModel;
+  teamRosters: TeamRosterModel[] = [];
   teamRosterFormDialog = false;
   teamRosterInfoDialog = false;
 

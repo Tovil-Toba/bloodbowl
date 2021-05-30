@@ -1,11 +1,22 @@
-<div *ngIf="!teamsService.loading && team" [@pageAnimations]="!teamsService.loading && team">
+<div
+  *ngIf="!teamsService.loading"
+  [@pageAnimations]="!teamsService.loading"
+>
   <p-breadcrumb
     [model]="breadcrumbItems"
     [home]="{ icon: 'pi pi-home', routerLink: '/' }"
     styleClass="p-mb-3 animation"
   ></p-breadcrumb>
 
-  <p-panel [header]="team.name" styleClass="animation">
-    <app-team-form [team]="team" (submittedTeam)="onTeamFormSubmit($event)"></app-team-form>
-  </p-panel>
+  <div class="animation">
+    <p-panel *ngIf="team; else elseBlock" [header]="team.name">
+      <app-team-form [team]="team" (submittedTeam)="onTeamFormSubmit($event)"></app-team-form>
+    </p-panel>
+
+    <ng-template #elseBlock>
+      <p-panel>
+        Team not found.
+      </p-panel>
+    </ng-template>
+  </div>
 </div>

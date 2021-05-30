@@ -65,8 +65,9 @@ export class TeamRosterInfoComponent implements OnInit, DoCheck {
           teamName = teamName.trim();
           let team: TeamModel = this.teamsService.getTeamByName(teamName);
           if (!team) {
-            team = new Team({ name: teamName });
+            team = new Team();
           }
+          team.name = teamName;
           this.teams.push(team);
         }
       } catch (e) {

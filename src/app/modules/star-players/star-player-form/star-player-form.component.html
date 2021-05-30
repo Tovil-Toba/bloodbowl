@@ -112,6 +112,7 @@
               type="number"
               [(ngModel)]="playerProfile.movementAllowance"
               name="movementAllowance"
+              min="0"
               class="p-text-center"
               style="width: 5rem;"
               required
@@ -130,6 +131,7 @@
               type="number"
               [(ngModel)]="playerProfile.strength"
               name="strength"
+              min="0"
               class="p-text-center"
               style="width: 5rem;"
               required
@@ -148,6 +150,7 @@
               type="number"
               [(ngModel)]="playerProfile.agility"
               name="agility"
+              min="0"
               class="p-text-center"
               style="width: 5rem;"
               required
@@ -168,6 +171,7 @@
               type="number"
               [(ngModel)]="playerProfile.passingAbility"
               name="passingAbility"
+              min="0"
               class="p-text-center"
               style="width: 5rem;"
               required
@@ -188,6 +192,7 @@
               type="number"
               [(ngModel)]="playerProfile.armourValue"
               name="armourValue"
+              min="0"
               class="p-text-center"
               style="width: 5rem;"
               required
@@ -227,6 +232,8 @@
               type="number"
               [(ngModel)]="playerProfile.cost"
               name="cost"
+              min="0"
+              step="5000"
               class="p-text-center"
               style="width: 100%;"
               required

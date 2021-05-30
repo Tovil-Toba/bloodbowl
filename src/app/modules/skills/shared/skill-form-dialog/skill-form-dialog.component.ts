@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SkillModel } from '../skill.model';
 import { SkillsService } from '../skills.service';
 
@@ -7,17 +7,14 @@ import { SkillsService } from '../skills.service';
   templateUrl: './skill-form-dialog.component.html',
   styleUrls: ['./skill-form-dialog.component.css']
 })
-export class SkillFormDialogComponent implements OnInit {
+export class SkillFormDialogComponent {
 
-  @Input() visible!: boolean;
-  @Output() visibleChange = new EventEmitter<boolean>();
   @Input() skill: SkillModel;
+  @Input() visible!: boolean;
   @Output() submittedSkill = new EventEmitter<SkillModel>();
+  @Output() visibleChange = new EventEmitter<boolean>();
 
   constructor(private skillsService: SkillsService) { }
-
-  ngOnInit(): void {
-  }
 
   onHide(): void {
     this.visibleChange.emit(false);

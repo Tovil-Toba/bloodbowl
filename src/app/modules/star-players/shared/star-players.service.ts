@@ -5,17 +5,17 @@ import { MessageService } from 'primeng/api';
 import * as _ from 'lodash';
 
 import { Crud } from '../../../core/crud';
-import { StarPlayerModel } from './star-player.model';
 import { PlayerProfileWithUrlIdModel } from '../../shared/player-profile.model';
+import { StarPlayerModel } from './star-player.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StarPlayersService extends Crud<StarPlayerModel> {
 
-  starPlayers: StarPlayerModel[] = [];
   loading = false;
   selectedStarPlayerUrlId: string;
+  starPlayers: StarPlayerModel[] = [];
   reloadingTrigger = 0;
 
   constructor(
@@ -32,11 +32,14 @@ export class StarPlayersService extends Crud<StarPlayerModel> {
   getStarPlayersByPositions(): Record<string, PlayerProfileWithUrlIdModel[]> {
     const starPlayersByPositions: Record<string, PlayerProfileWithUrlIdModel[]> = {};
     this.starPlayers.forEach((starPlayer: StarPlayerModel) => {
-      starPlayer.playerProfiles.forEach((playerProfile: PlayerProfileWithUrlIdModel) => {
+      starPlayer.playerProfiles.forEach((playerProfile: PlayerProfileWithUrlIdModel, index: number) => {
         if (!starPlayersByPositions[playerProfile.position]) {
           starPlayersByPositions[playerProfile.position] = [];
         }
         playerProfile.urlId = starPlayer.urlId;
+        if (starPlayer.playerProfiles.length > 1) {
+          playerProfile.urlId += `-${index + 1}`;
+        }
         starPlayersByPositions[playerProfile.position].push(playerProfile);
       });
     });

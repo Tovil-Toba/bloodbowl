@@ -1,13 +1,12 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
-import { MenuItem } from 'primeng/api';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 import * as _ from 'lodash';
 
+import { enterPageAnimation } from '../../../shared/animations';
 import { TeamModel } from '../shared/team.model';
 import { TeamsService } from '../shared/teams.service';
-import { enterPageAnimation } from '../../../shared/animations';
 
 @Component({
   selector: 'app-team',
@@ -17,22 +16,19 @@ import { enterPageAnimation } from '../../../shared/animations';
   providers: [ConfirmationService]
 })
 export class TeamComponent implements OnInit, DoCheck {
-  team: TeamModel;
-  oldUrlId: string;
-  breadcrumbItems: MenuItem[];
+
+  breadcrumbItems: MenuItem[] = [];
   carouselPage = 0;
   loading = false;
+  oldUrlId: string;
+  team: TeamModel;
 
   constructor(
-    private router: Router,
     private activatedRoute: ActivatedRoute,
     private confirmationService: ConfirmationService,
+    private router: Router,
     public teamsService: TeamsService
   ) { }
-
-  get urlId(): string {
-    return this.activatedRoute.snapshot.paramMap.get('urlId');
-  }
 
   deleteTeam(): void {
     this.confirmationService.confirm({
@@ -42,7 +38,6 @@ export class TeamComponent implements OnInit, DoCheck {
       accept: () => {
         this.teamsService.deleteItem(this.team.id).subscribe(() => {
           const index = _.findIndex(this.teamsService.teams, { id: this.team.id });
-          // _.remove(this.teamsService.teams, { id: this.team.id });
           this.teamsService.teams.splice(index, 1);
           this.carouselPage = index - 1;
         });
@@ -55,15 +50,21 @@ export class TeamComponent implements OnInit, DoCheck {
   }
 
   getTeam(urlId: string): void {
+    this.breadcrumbItems = [
+      { label: 'Teams', routerLink: '/teams' },
+    ];
     const index = _.findIndex(this.teamsService.teams, { urlId });
     this.carouselPage = index;
     if (index !== -1) {
       this.team = this.teamsService.teams[index];
-      this.breadcrumbItems = [
-        { label: 'Teams', routerLink: '/teams' },
+      this.breadcrumbItems.push(
         { label: this.team.name }
-      ];
+      );
     }
+  }
+
+  newTeam(): void {
+    this.router.navigate(['teams/add']);
   }
 
   ngDoCheck(): void {
@@ -80,6 +81,10 @@ export class TeamComponent implements OnInit, DoCheck {
     const team = this.teamsService.teams[event.page];
     this.getTeam(team.urlId);
     window.history.pushState('', '', `/teams/${team.urlId}`);
+  }
+
+  private get urlId(): string {
+    return this.activatedRoute.snapshot.paramMap.get('urlId');
   }
 
 }

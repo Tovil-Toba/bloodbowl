@@ -18,50 +18,20 @@ import { enterPageAnimation } from '../../../shared/animations';
 })
 export class StarPlayersComponent implements OnInit {
 
-  starPlayers: StarPlayerModel[] = [];
-  starPlayer: StarPlayer;
-  starPlayersTableRows: StarPlayersTableRowModel[] = [];
-  skill: SkillModel;
   breadcrumbItems: MenuItem[];
   loading = false;
+  skill: SkillModel;
   skillInfoDialog = false;
   starPlayerFormDialog = false;
   starPlayerInfoDialog = false;
+  starPlayer: StarPlayer;
+  starPlayers: StarPlayerModel[] = [];
+  starPlayersTableRows: StarPlayersTableRowModel[] = [];
 
   constructor(
     private confirmationService: ConfirmationService,
     public starPlayersService: StarPlayersService
   ) { }
-
-  getStarPlayerTableRows(): void {
-    const starPlayersTableRows = [];
-    let id = 1;
-
-    this.starPlayersService.starPlayers.forEach((starPlayer: StarPlayer) => {
-      starPlayer.playerProfiles.forEach((playerProfile: PlayerProfileModel) => {
-        const starPlayerTableRow: StarPlayersTableRowModel = {
-          id,
-          starPlayer,
-          name: playerProfile.name,
-          position: playerProfile.position,
-          race: playerProfile.race,
-          cost: starPlayer.playerProfiles[0].cost,
-          movementAllowance: playerProfile.movementAllowance,
-          strength: playerProfile.strength,
-          agility: playerProfile.agility,
-          passingAbility: playerProfile.passingAbility,
-          armourValue: playerProfile.armourValue,
-          skillsAndTraits: playerProfile.skillsAndTraits,
-          bigGuy: playerProfile.bigGuy,
-          numberOfPlayers: starPlayer.playerProfiles.length,
-        };
-        id++;
-        starPlayersTableRows.push(starPlayerTableRow);
-      });
-    });
-
-    this.starPlayersTableRows = starPlayersTableRows;
-  }
 
   deleteStarPlayer(starPlayer: StarPlayerModel): void {
     this.confirmationService.confirm({
@@ -108,6 +78,36 @@ export class StarPlayersComponent implements OnInit {
   openStarPlayerInfoDialog(starPlayer: StarPlayerModel): void {
     this.starPlayer = starPlayer;
     this.starPlayerInfoDialog = true;
+  }
+
+  private getStarPlayerTableRows(): void {
+    const starPlayersTableRows = [];
+    let id = 1;
+
+    this.starPlayersService.starPlayers.forEach((starPlayer: StarPlayer) => {
+      starPlayer.playerProfiles.forEach((playerProfile: PlayerProfileModel) => {
+        const starPlayerTableRow: StarPlayersTableRowModel = {
+          id,
+          starPlayer,
+          name: playerProfile.name,
+          position: playerProfile.position,
+          race: playerProfile.race,
+          cost: starPlayer.playerProfiles[0].cost,
+          movementAllowance: playerProfile.movementAllowance,
+          strength: playerProfile.strength,
+          agility: playerProfile.agility,
+          passingAbility: playerProfile.passingAbility,
+          armourValue: playerProfile.armourValue,
+          skillsAndTraits: playerProfile.skillsAndTraits,
+          bigGuy: playerProfile.bigGuy,
+          numberOfPlayers: starPlayer.playerProfiles.length,
+        };
+        id++;
+        starPlayersTableRows.push(starPlayerTableRow);
+      });
+    });
+
+    this.starPlayersTableRows = starPlayersTableRows;
   }
 
 }

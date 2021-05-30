@@ -1,15 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, DoCheck, Input, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import * as _ from 'lodash';
 
-import { StarPlayerModel } from '../shared/star-player.model';
-import { PlayerProfileModel } from '../../shared/player-profile.model';
-import { PlayerProfile } from '../../shared/player-profile';
-import { StarPlayersService } from '../shared/star-players.service';
-import { POSITIONS } from '../../../constants/positions';
 import { enterPageAnimation } from '../../../shared/animations';
+import { PlayerProfile } from '../../shared/player-profile';
+import { POSITIONS } from '../../../constants/positions';
+import { PlayerProfileModel } from '../../shared/player-profile.model';
+import { StarPlayerModel } from '../shared/star-player.model';
+import { StarPlayersService } from '../shared/star-players.service';
 
 @Component({
   selector: 'app-star-player-form',
@@ -18,21 +17,21 @@ import { enterPageAnimation } from '../../../shared/animations';
   providers: [ConfirmationService],
   animations: [enterPageAnimation]
 })
-export class StarPlayerFormComponent implements OnInit {
+export class StarPlayerFormComponent implements DoCheck {
 
   @Input() starPlayer: StarPlayerModel;
   @Output() submittedStarPlayer = new EventEmitter<StarPlayerModel>();
 
+  breadcrumbItems: MenuItem[] = [];
   clonedStarPlayer: StarPlayerModel;
   clonedPlayerProfiles: { [s: string]: PlayerProfileModel; } = {};
-  breadcrumbItems: MenuItem[];
   editingRowKeys: { [s: string]: boolean; } = {};
-  positions: string[] = POSITIONS;
   loading = false;
+  oldStarPlayer: StarPlayerModel;
+  positions: string[] = POSITIONS;
   submitLoading = false;
 
   constructor(
-    private router: Router,
     private activatedRoute: ActivatedRoute,
     private confirmationService: ConfirmationService,
     public starPlayersService: StarPlayersService
@@ -47,11 +46,14 @@ export class StarPlayerFormComponent implements OnInit {
     this.onRowEditInit(newPlayerProfile);
   }
 
-  ngOnInit(): void {
-    this.clonedStarPlayer = _.clone(this.starPlayer);
-    this.starPlayersService.selectedStarPlayerUrlId = this.starPlayer.urlId;
-    if (!this.clonedStarPlayer.id) {
-      this.addNewPlayerProfile();
+  ngDoCheck(): void {
+    if (!_.isEqual(this.starPlayer, this.oldStarPlayer)) {
+      this.oldStarPlayer = _.clone(this.starPlayer);
+      this.clonedStarPlayer = _.clone(this.starPlayer);
+      this.starPlayersService.selectedStarPlayerUrlId = this.starPlayer.urlId;
+      if (!this.clonedStarPlayer.id) {
+        this.addNewPlayerProfile();
+      }
     }
   }
 
@@ -86,7 +88,7 @@ export class StarPlayerFormComponent implements OnInit {
 
   onSubmit(): void {
     this.submitLoading = true;
-    if (!this.starPlayer.id) {
+    if (!this.clonedStarPlayer.id) {
       this.starPlayersService.addItem(this.clonedStarPlayer)
         .subscribe((starPlayer: StarPlayerModel) => {
           this.clonedStarPlayer = _.clone(starPlayer);

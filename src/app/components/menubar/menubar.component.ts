@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import * as _ from 'lodash';
 
@@ -21,13 +21,13 @@ import { POSITIONS } from '../../constants/positions';
   templateUrl: './menubar.component.html',
   styleUrls: ['./menubar.component.css']
 })
-export class MenubarComponent implements OnInit, DoCheck {
+export class MenubarComponent implements DoCheck {
 
   items: MenuItem[];
   oldStarPlayers: StarPlayerModel[];
+  oldStarPlayersReloadingTrigger = 0;
   oldTeams: TeamModel[];
   oldTeamRosters: TeamRosterModel[];
-  oldStarPlayersReloadingTrigger = 0;
 
   constructor(
     public themesService: ThemesService,
@@ -262,6 +262,4 @@ export class MenubarComponent implements OnInit, DoCheck {
     }
   }
 
-  ngOnInit(): void {
-  }
 }

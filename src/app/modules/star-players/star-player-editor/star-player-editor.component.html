@@ -1,6 +1,6 @@
 <div
-  *ngIf="!starPlayersService.loading && starPlayer"
-  [@pageAnimations]="!starPlayersService.loading && starPlayer"
+  *ngIf="!starPlayersService.loading"
+  [@pageAnimations]="!starPlayersService.loading"
 >
   <p-breadcrumb
     [model]="breadcrumbItems"
@@ -8,10 +8,18 @@
     styleClass="p-mb-3 animation"
   ></p-breadcrumb>
 
-  <p-panel [header]="starPlayer.name" styleClass="animation">
-    <app-star-player-form
-      [starPlayer]="starPlayer"
-      (submittedStarPlayer)="onStarPlayerFormSubmit($event)"
-    ></app-star-player-form>
-  </p-panel>
+  <div class="animation">
+    <p-panel *ngIf="starPlayer; else elseBlock" [header]="starPlayer.name">
+      <app-star-player-form
+        [starPlayer]="starPlayer"
+        (submittedStarPlayer)="onStarPlayerFormSubmit($event)"
+      ></app-star-player-form>
+    </p-panel>
+
+    <ng-template #elseBlock>
+      <p-panel>
+        Star player not found.
+      </p-panel>
+    </ng-template>
+  </div>
 </div>

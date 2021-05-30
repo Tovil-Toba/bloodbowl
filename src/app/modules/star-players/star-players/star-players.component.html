@@ -43,7 +43,7 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="name" style="width: 8rem;">
+          <th pSortableColumn="name" style="width: 11rem;">
             NAME<p-sortIcon field="name"></p-sortIcon>
           </th>
           <th pSortableColumn="position" style="width: 9rem;">
@@ -67,7 +67,7 @@
           <th pSortableColumn="armourValue" style="width: 5.5rem;" class="p-text-center text-nowrap">
             AV<p-sortIcon field="armourValue"></p-sortIcon>
           </th>
-          <th style="min-width: 8rem;">
+          <th style="min-width: 11rem;">
             SKILLS & TRAITS
           </th>
           <th pSortableColumn="cost" style="width: 11rem;" class="p-text-center">
@@ -138,7 +138,7 @@
               pButton
               pRipple
               icon="pi pi-pencil"
-              class="p-button-rounded p-button-success p-mr-2"
+              class="p-button-rounded p-button-text p-mr-2"
               (click)="editStarPlayer(playerProfile.starPlayer)"
               pTooltip="Edit Star Player"
               tooltipPosition="top"
@@ -147,7 +147,7 @@
               pButton
               pRipple
               icon="pi pi-trash"
-              class="p-button-rounded p-button-warning"
+              class="p-button-rounded p-button-text"
               (click)="deleteStarPlayer(playerProfile.starPlayer)"
               pTooltip="Delete Star Player"
               tooltipPosition="top"

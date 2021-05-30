@@ -1,14 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { Component, EventEmitter, DoCheck, Input, Output } from '@angular/core';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import * as _ from 'lodash';
 
-import { TeamRosterModel } from '../shared/team-roster.model';
-import { PlayerProfileModel } from '../../shared/player-profile.model';
-import { PlayerProfile } from '../../shared/player-profile';
-import { TeamRostersService } from '../shared/team-rosters.service';
 import { enterPageAnimation } from '../../../shared/animations';
+import { PlayerProfile } from '../../shared/player-profile';
+import { PlayerProfileModel } from '../../shared/player-profile.model';
+import { TeamRosterModel } from '../shared/team-roster.model';
+import { TeamRostersService } from '../shared/team-rosters.service';
 
 @Component({
   selector: 'app-team-roster-form',
@@ -17,35 +15,42 @@ import { enterPageAnimation } from '../../../shared/animations';
   providers: [ConfirmationService],
   animations: [enterPageAnimation]
 })
-export class TeamRosterFormComponent implements OnInit {
+export class TeamRosterFormComponent implements DoCheck {
 
   @Input() teamRoster: TeamRosterModel;
   @Output() submittedTeamRoster = new EventEmitter<TeamRosterModel>();
 
-  clonedTeamRoster: TeamRosterModel;
+  breadcrumbItems: MenuItem[] = [];
   clonedPlayerProfiles: { [s: string]: PlayerProfileModel; } = {};
-  breadcrumbItems: MenuItem[];
+  clonedTeamRoster: TeamRosterModel;
   editingRowKeys: { [s: string]: boolean; } = {};
   loading = false;
+  oldTeamRoster: TeamRosterModel;
   submitLoading = false;
 
   constructor(
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
     private confirmationService: ConfirmationService,
     public teamRostersService: TeamRostersService,
   ) { }
 
-  addNewPlayerProfile(event: MouseEvent): void {
-    event.preventDefault();
-    const newPlayerProfile = new PlayerProfile({ id: this.teamRoster.playerProfiles.length + 1 });
+  addNewPlayerProfile(event?: MouseEvent): void {
+    if (event) {
+      event.preventDefault();
+    }
+    const newPlayerProfile = new PlayerProfile({ id: this.clonedTeamRoster.playerProfiles.length + 1 });
     this.clonedTeamRoster.playerProfiles.push(newPlayerProfile);
     this.onRowEditInit(newPlayerProfile);
   }
 
-  ngOnInit(): void {
-    this.clonedTeamRoster = _.clone(this.teamRoster);
-    this.teamRostersService.selectedTeamRosterUrlId = this.teamRoster.urlId;
+  ngDoCheck(): void {
+    if (!_.isEqual(this.teamRoster, this.oldTeamRoster)) {
+      this.oldTeamRoster = _.clone(this.teamRoster);
+      this.clonedTeamRoster = _.clone(this.teamRoster);
+      this.teamRostersService.selectedTeamRosterUrlId = this.teamRoster.urlId;
+      if (!this.clonedTeamRoster.id) {
+        this.addNewPlayerProfile();
+      }
+    }
   }
 
   onRowEditInit(playerProfile: PlayerProfileModel): void {
@@ -60,7 +65,7 @@ export class TeamRosterFormComponent implements OnInit {
   }
 
   onRowEditCancel(playerProfile: PlayerProfileModel, index: number): void {
-    this.teamRoster.playerProfiles[index] = this.clonedPlayerProfiles[playerProfile.id];
+    this.clonedTeamRoster.playerProfiles[index] = this.clonedPlayerProfiles[playerProfile.id];
     delete this.clonedPlayerProfiles[playerProfile.id];
   }
 
@@ -79,7 +84,7 @@ export class TeamRosterFormComponent implements OnInit {
 
   onSubmit(): void {
     this.submitLoading = true;
-    if (!this.teamRoster.id) {
+    if (!this.clonedTeamRoster.id) {
       this.teamRostersService.addItem(this.clonedTeamRoster)
         .subscribe((teamRoster: TeamRosterModel) => {
           this.clonedTeamRoster = _.clone(teamRoster);
@@ -92,9 +97,8 @@ export class TeamRosterFormComponent implements OnInit {
     } else {
       this.teamRostersService.updateItem(this.clonedTeamRoster)
         .subscribe(() => {
-          this.clonedTeamRoster = _.clone(this.clonedTeamRoster);
-          const index = _.findIndex(this.teamRostersService.teamRosters, { id: this.clonedTeamRoster.id });
           const clonedTeamRosters = _.clone(this.teamRostersService.teamRosters);
+          const index = _.findIndex(clonedTeamRosters, { id: this.clonedTeamRoster.id });
           clonedTeamRosters.splice(index, 1, this.clonedTeamRoster);
           this.teamRostersService.teamRosters = clonedTeamRosters;
           this.submittedTeamRoster.emit(this.clonedTeamRoster);

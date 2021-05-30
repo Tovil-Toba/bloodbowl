@@ -1,12 +1,11 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { Component, DoCheck } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import * as _ from 'lodash';
 
+import { enterPageAnimation } from '../../../shared/animations';
 import { TeamRosterModel } from '../shared/team-roster.model';
 import { TeamRostersService } from '../shared/team-rosters.service';
-import { enterPageAnimation } from '../../../shared/animations';
 
 @Component({
   selector: 'app-team-roster',
@@ -15,43 +14,25 @@ import { enterPageAnimation } from '../../../shared/animations';
   providers: [ConfirmationService],
   animations: [enterPageAnimation]
 })
-export class TeamRosterComponent implements OnInit, DoCheck {
+export class TeamRosterComponent implements DoCheck {
 
-  oldUrlId: string;
-  teamRoster: TeamRosterModel;
   breadcrumbItems: MenuItem[];
   loading = false;
+  oldUrlId: string;
+  teamRoster: TeamRosterModel;
 
   constructor(
-    private router: Router,
     private activatedRoute: ActivatedRoute,
     private confirmationService: ConfirmationService,
+    private router: Router,
     public teamRostersService: TeamRostersService
   ) { }
-
-  get urlId(): string {
-    return this.activatedRoute.snapshot.paramMap.get('urlId');
-  }
-
-  getTeamRoster(urlId: string): void {
-    const index = _.findIndex(this.teamRostersService.teamRosters, { urlId });
-    if (index !== -1) {
-      this.teamRoster = this.teamRostersService.teamRosters[index];
-      this.breadcrumbItems = [
-        { label: 'Team Rosters', routerLink: '/team-rosters' },
-        { label: this.teamRoster.name }
-      ];
-    }
-  }
 
   ngDoCheck(): void {
     if (this.urlId !== this.oldUrlId) {
       this.oldUrlId = this.urlId;
       this.getTeamRoster(this.urlId);
     }
-  }
-
-  ngOnInit(): void {
   }
 
   deleteTeamRoster(): void {
@@ -62,7 +43,6 @@ export class TeamRosterComponent implements OnInit, DoCheck {
       accept: () => {
         this.teamRostersService.deleteItem(this.teamRoster.id).subscribe(() => {
           const index = _.findIndex(this.teamRostersService.teamRosters, { id: this.teamRoster.id });
-          // _.remove(this.teamRostersService.teamRosters, { id: this.teamRoster.id });
           this.teamRostersService.teamRosters.splice(index, 1);
           this.navigateToTeamRoster(this.teamRostersService.teamRosters[0].urlId);
         });
@@ -76,6 +56,27 @@ export class TeamRosterComponent implements OnInit, DoCheck {
 
   navigateToTeamRoster(urlId: string): void {
     this.router.navigate([`team-rosters/${urlId}`]);
+  }
+
+  newTeamRoster(): void {
+    this.router.navigate(['team-rosters/add']);
+  }
+
+  private get urlId(): string {
+    return this.activatedRoute.snapshot.paramMap.get('urlId');
+  }
+
+  private getTeamRoster(urlId: string): void {
+    this.breadcrumbItems = [
+      { label: 'Team Rosters', routerLink: '/team-rosters' },
+    ];
+    const index = _.findIndex(this.teamRostersService.teamRosters, { urlId });
+    if (index !== -1) {
+      this.teamRoster = this.teamRostersService.teamRosters[index];
+      this.breadcrumbItems.push(
+        { label: this.teamRoster.name }
+      );
+    }
   }
 
 }

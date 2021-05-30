@@ -187,6 +187,7 @@
               Team re-rolls:
               <span class="p-text-normal">
                 {{teamRoster.reRollCost | currency:' ':'symbol':'1.0-0'}} gold pieces each
+                ({{teamRoster.reRollCost * 2 | currency:' ':'symbol':'1.0-0'}} during a league season)
               </span>
             </div>
             <div class="p-col-6 p-text-right">
@@ -291,7 +292,7 @@
     [collapsed]="true"
     toggler="header"
   >
-    <div *ngFor="let starPlayer of starPlayers">
+    <div *ngFor="let starPlayer of starPlayers; last as isLast" [class.p-mb-3]="!isLast">
       <app-star-player-info [starPlayer]="starPlayer"></app-star-player-info>
     </div>
   </p-panel>

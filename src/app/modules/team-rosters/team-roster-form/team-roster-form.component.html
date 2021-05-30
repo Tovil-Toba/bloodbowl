@@ -42,7 +42,7 @@
       <th style="width: 10rem;" class="p-px-1">SKILLS & TRAITS</th>
       <th style="width: 5rem;" class="p-text-center p-px-1">PRIMARY</th>
       <th style="width: 7rem;" class="p-text-center p-px-1">SECONDARY</th>
-      <th style="width: 6rem;" class="p-text-center p-px-1">BIG GUY</th>
+<!--      <th style="width: 6rem;" class="p-text-center p-px-1">BIG GUY</th>-->
       <th style="width: 6rem;" class="p-px-0"></th>
     </tr>
   </ng-template>
@@ -98,6 +98,8 @@
               type="number"
               [(ngModel)]="playerProfile.cost"
               name="cost"
+              min="0"
+              step="5000"
               class="p-text-center"
               style="width: 100%;"
               required
@@ -116,6 +118,7 @@
               type="number"
               [(ngModel)]="playerProfile.movementAllowance"
               name="movementAllowance"
+              min="0"
               class="p-text-center"
               style="width: 100%;"
               required
@@ -134,6 +137,7 @@
               type="number"
               [(ngModel)]="playerProfile.strength"
               name="strength"
+              min="0"
               class="p-text-center"
               style="width: 100%;"
               required
@@ -152,6 +156,7 @@
               type="number"
               [(ngModel)]="playerProfile.agility"
               name="agility"
+              min="0"
               class="p-text-center"
               style="width: 100%;"
               required
@@ -172,6 +177,7 @@
               type="number"
               [(ngModel)]="playerProfile.passingAbility"
               name="passingAbility"
+              min="0"
               class="p-text-center"
               style="width: 100%;"
               required
@@ -192,6 +198,7 @@
               type="number"
               [(ngModel)]="playerProfile.armourValue"
               name="armourValue"
+              min="0"
               class="p-text-center"
               style="width: 100%;"
               required
@@ -259,16 +266,16 @@
           </ng-template>
         </p-cellEditor>
       </td>
-      <td pEditableColumn class="p-text-center p-px-0">
-        <p-cellEditor>
-          <ng-template pTemplate="input">
-            <p-checkbox inputId="bigGuy" [binary]="true" [(ngModel)]="playerProfile.bigGuy" name="bigGuy"></p-checkbox>
-          </ng-template>
-          <ng-template pTemplate="output">
-            {{playerProfile.bigGuy ? 'Yes' : 'No'}}
-          </ng-template>
-        </p-cellEditor>
-      </td>
+<!--      <td pEditableColumn class="p-text-center p-px-0">-->
+<!--        <p-cellEditor>-->
+<!--          <ng-template pTemplate="input">-->
+<!--            <p-checkbox inputId="bigGuy" [binary]="true" [(ngModel)]="playerProfile.bigGuy" name="bigGuy"></p-checkbox>-->
+<!--          </ng-template>-->
+<!--          <ng-template pTemplate="output">-->
+<!--            {{playerProfile.bigGuy ? 'Yes' : 'No'}}-->
+<!--          </ng-template>-->
+<!--        </p-cellEditor>-->
+<!--      </td>-->
       <td class="p-text-center p-px-0  p-text-nowrap">
         <button
           *ngIf="!editing"

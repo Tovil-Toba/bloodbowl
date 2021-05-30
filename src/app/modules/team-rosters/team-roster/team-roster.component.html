@@ -1,6 +1,6 @@
 <div
-  *ngIf="!teamRostersService.loading && teamRoster"
-  [@pageAnimations]="!teamRostersService.loading && teamRoster"
+  *ngIf="!teamRostersService.loading"
+  [@pageAnimations]="!teamRostersService.loading"
 >
   <p-breadcrumb
     [model]="breadcrumbItems"
@@ -8,44 +8,59 @@
     styleClass="p-mb-3 animation"
   ></p-breadcrumb>
 
-  <p-panel [header]="teamRoster.name" styleClass="animation">
-    <ng-template pTemplate="icons">
-      <button
-        pButton
-        class="p-panel-header-icon p-link"
-        icon="pi pi-trash"
-        (click)="deleteTeamRoster()"
-        pTooltip="Delete Team Roster"
-        tooltipPosition="top"
-      ></button>
-      <button
-        pButton
-        class="p-panel-header-icon p-link"
-        icon="pi pi-pencil"
-        (click)="editTeamRoster()"
-        pTooltip="Edit Team Roster"
-        tooltipPosition="left"
-      ></button>
-    </ng-template>
+  <div class="animation">
+    <p-panel *ngIf="teamRoster; else elseBlock" [header]="teamRoster.name">
+      <ng-template pTemplate="icons">
+        <button
+          pButton
+          class="p-panel-header-icon p-link"
+          icon="pi pi-plus"
+          (click)="newTeamRoster()"
+          pTooltip="New Team Roster"
+          tooltipPosition="top"
+        ></button>
+        <button
+          pButton
+          class="p-panel-header-icon p-link"
+          icon="pi pi-trash"
+          (click)="deleteTeamRoster()"
+          pTooltip="Delete Team Roster"
+          tooltipPosition="top"
+        ></button>
+        <button
+          pButton
+          class="p-panel-header-icon p-link"
+          icon="pi pi-pencil"
+          (click)="editTeamRoster()"
+          pTooltip="Edit Team Roster"
+          tooltipPosition="left"
+        ></button>
+      </ng-template>
 
-    <p-panel
-      *ngIf="teamRostersService.teamRosters.length"
-      header="Team Rosters"
-      [toggleable]="true"
-      toggler="header"
-    >
-      <p-button
-        *ngFor="let teamRoster of teamRostersService.teamRosters"
-        (click)="navigateToTeamRoster(teamRoster.urlId)"
-        styleClass="p-button-text"
-        [label]="teamRoster.name"
-      ></p-button>
+      <p-panel
+        *ngIf="teamRostersService.teamRosters.length"
+        header="Team Rosters"
+        [toggleable]="true"
+        toggler="header"
+      >
+        <p-button
+          *ngFor="let teamRoster of teamRostersService.teamRosters"
+          (click)="navigateToTeamRoster(teamRoster.urlId)"
+          styleClass="p-button-text"
+          [label]="teamRoster.name"
+        ></p-button>
+      </p-panel>
+
+      <p-divider></p-divider>
+
+      <app-team-roster-info [teamRoster]="teamRoster"></app-team-roster-info>
     </p-panel>
-
-    <p-divider></p-divider>
-
-    <app-team-roster-info [teamRoster]="teamRoster"></app-team-roster-info>
-  </p-panel>
+    <ng-template #elseBlock>
+      <p-panel>
+        Team roster not found.
+      </p-panel>
+    </ng-template>
+  </div>
 
   <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
 </div>

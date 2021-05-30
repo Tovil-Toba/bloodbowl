@@ -13,9 +13,9 @@ import { TeamRosterModel } from './team-roster.model';
 })
 export class TeamRostersService extends Crud<TeamRosterModel> {
 
-  teamRosters: TeamRosterModel[] = [];
   loading = false;
   selectedTeamRosterUrlId: string;
+  teamRosters: TeamRosterModel[] = [];
 
   constructor(
     public http: HttpClient,

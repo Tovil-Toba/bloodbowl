@@ -11,8 +11,8 @@ import { SkillModel } from './skill.model';
 })
 export class SkillsService extends Crud<SkillModel> {
 
-  skills: SkillModel[] = [];
   loading = false;
+  skills: SkillModel[] = [];
 
   constructor(
     public http: HttpClient,
@@ -21,16 +21,16 @@ export class SkillsService extends Crud<SkillModel> {
     super('api/skills', http, messageService);
   }
 
-  deleteSkill(skill: SkillModel): void {
-    this.deleteItem(skill.id).subscribe(() => {
-      this.skills = _.clone(this.skills.filter(val => val.id !== skill.id));
-    });
-  }
-
   getSkillByName(name: string): SkillModel {
     const nameMask = name.split('(')[0].trim().toLowerCase();
     return _.find<SkillModel>(this.skills, (skill: SkillModel) => {
       return _.startsWith(skill.name.toLowerCase(), nameMask);
+    });
+  }
+
+  deleteSkill(skill: SkillModel): void {
+    this.deleteItem(skill.id).subscribe(() => {
+      this.skills = _.clone(this.skills.filter(val => val.id !== skill.id));
     });
   }
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, Output } from '@angular/core';
 import * as _ from 'lodash';
 
 import { base64toFile } from '../../../shared/base64toFile';
@@ -11,17 +11,18 @@ import { TeamRostersService } from '../../team-rosters/shared/team-rosters.servi
   templateUrl: './team-form.component.html',
   styleUrls: ['./team-form.component.css']
 })
-export class TeamFormComponent implements OnInit {
+export class TeamFormComponent implements DoCheck {
 
   @Input() team: TeamModel;
   @Output() submittedTeam = new EventEmitter<TeamModel>();
 
   clonedTeam: TeamModel;
   logo: string;
-  photo: string;
   logos: File[] = [];
-  photos: File[] = [];
   loading = false;
+  oldTeam: TeamModel;
+  photo: string;
+  photos: File[] = [];
   submitLoading = false;
 
   constructor(
@@ -29,16 +30,19 @@ export class TeamFormComponent implements OnInit {
     public teamRostersService: TeamRostersService
   ) { }
 
-  ngOnInit(): void {
-    this.clonedTeam = _.clone(this.team);
-    this.teamsService.selectedTeamUrlId = this.team.urlId;
-    this.logo = this.team.logo;
-    this.photo = this.team.photo;
-    if (this.team.logo) {
-      this.logos.push(base64toFile(this.team.logo, 'logo'));
-    }
-    if (this.team.photo) {
-      this.photos.push(base64toFile(this.team.photo, 'photo'));
+  ngDoCheck(): void {
+    if (!_.isEqual(this.team, this.oldTeam)) {
+      this.oldTeam = _.clone(this.team);
+      this.clonedTeam = _.clone(this.team);
+      this.teamsService.selectedTeamUrlId = this.team.urlId;
+      this.logo = this.team.logo;
+      this.photo = this.team.photo;
+      if (this.team.logo) {
+        this.logos.push(base64toFile(this.team.logo, 'logo'));
+      }
+      if (this.team.photo) {
+        this.photos.push(base64toFile(this.team.photo, 'photo'));
+      }
     }
   }
 
@@ -87,9 +91,8 @@ export class TeamFormComponent implements OnInit {
     } else {
       this.teamsService.updateItem(this.clonedTeam)
         .subscribe(() => {
-          this.clonedTeam = _.clone(this.clonedTeam);
-          const index = _.findIndex(this.teamsService.teams, { id: this.clonedTeam.id });
           const clonedTeams = _.clone(this.teamsService.teams);
+          const index = _.findIndex(clonedTeams, { id: this.clonedTeam.id });
           clonedTeams.splice(index, 1, this.clonedTeam);
           this.teamsService.teams = clonedTeams;
           this.submittedTeam.emit(this.clonedTeam);

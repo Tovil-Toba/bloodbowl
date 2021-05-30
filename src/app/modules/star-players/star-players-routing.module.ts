@@ -6,7 +6,9 @@ import { StarPlayerComponent } from './star-player/star-player.component';
 import { StarPlayerEditorComponent} from './star-player-editor/star-player-editor.component';
 
 const routes: Routes = [
+  { path: 'star-players/add', component: StarPlayerEditorComponent },
   { path: 'star-players/:urlId/edit', component: StarPlayerEditorComponent },
+  { path: 'star-players/:urlId/:profileIndex', component: StarPlayerComponent },
   { path: 'star-players/:urlId', component: StarPlayerComponent },
   { path: 'star-players', component: StarPlayersComponent }
 ];

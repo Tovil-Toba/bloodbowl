@@ -65,6 +65,7 @@
       ],
       "reRollCost": 50000,
       "tier": 1,
+      "race": "Human",
       "specialRules": "Lustrian Superleague",
       "apothecary": true
     },
@@ -121,6 +122,7 @@
       ],
       "reRollCost": 60000,
       "tier": 2,
+      "race": "Greenskins",
       "specialRules": "Badlands Brawl, Bribery and Corruption",
       "apothecary": true
     },
@@ -207,6 +209,7 @@
       "bigGuyRules": "A Chaos Chosen team may include a single Big Guy, chosen from among the following:",
       "reRollCost": 60000,
       "tier": 2,
+      "race": "Chaos",
       "specialRules": "Favoured of... (choose either): Chaos Undivided, Khorne, Nurgle, Slaanesh or Tzeentch",
       "apothecary": true
     },
@@ -275,6 +278,7 @@
       ],
       "reRollCost": 70000,
       "tier": 1,
+      "race": "Chaos",
       "specialRules": "Badlands Brawl, Favoured of…, Worlds Edge Superleague",
       "apothecary": true
     },
@@ -431,6 +435,7 @@
       "bigGuyRules": "A Chaos Renegade team may include up to three Big Guys, chosen from among the following:",
       "reRollCost": 70000,
       "tier": 2,
+      "race": "Chaos",
       "specialRules": "Favoured of... (choose either): Chaos Undivided, Khorne, Nurgle, Slaanesh or Tzeentch",
       "apothecary": true
     },
@@ -514,6 +519,7 @@
       ],
       "reRollCost": 50000,
       "tier": 1,
+      "race": "Elven",
       "specialRules": "Elven Kingdoms League",
       "apothecary": true
     },
@@ -596,6 +602,7 @@
       ],
       "reRollCost": 50000,
       "tier": 1,
+      "race": "Other",
       "specialRules": "Old World Classic, Worlds Edge Superleague",
       "apothecary": true
     },
@@ -665,6 +672,7 @@
       ],
       "reRollCost": 50000,
       "tier": 2,
+      "race": "Elven",
       "specialRules": "Elven Kingdoms League",
       "apothecary": true
     },
@@ -789,6 +797,7 @@
       ],
       "reRollCost": 60000,
       "tier": 3,
+      "race": "Greenskins",
       "specialRules": "Badlands Brawl, Bribery and Corruption, Underworld Challenge",
       "apothecary": true
     },
@@ -859,6 +868,7 @@
       ],
       "reRollCost": 60000,
       "tier": 3,
+      "race": "Other",
       "specialRules": "Halfling Thimble Cup, Old World Classic",
       "apothecary": true
     },
@@ -928,6 +938,7 @@
       ],
       "reRollCost": 50000,
       "tier": 2,
+      "race": "Elven",
       "specialRules": "Elven Kingdoms League",
       "apothecary": true
     },
@@ -1026,6 +1037,7 @@
       ],
       "reRollCost": 50000,
       "tier": 1,
+      "race": "Human",
       "specialRules": "Old World Classic",
       "apothecary": true
     },
@@ -1110,6 +1122,7 @@
       ],
       "reRollCost": 70000,
       "tier": 2,
+      "race": "Human",
       "specialRules": "Old World Classic",
       "apothecary": true
     },
@@ -1179,6 +1192,7 @@
       ],
       "reRollCost": 70000,
       "tier": 1,
+      "race": "Other",
       "specialRules": "Lustrian Superleague",
       "apothecary": true
     },
@@ -1260,6 +1274,7 @@
       ],
       "reRollCost": 70000,
       "tier": 2,
+      "race": "Undead",
       "specialRules": "Masters of Undeath, Sylvanian Spotlight",
       "apothecary": false
     },
@@ -1356,6 +1371,7 @@
       ],
       "reRollCost": 60000,
       "tier": 1,
+      "race": "Human",
       "specialRules": "Lustrian Superleague, Old World Classic",
       "apothecary": true
     },
@@ -1425,6 +1441,7 @@
       ],
       "reRollCost": 70000,
       "tier": 2,
+      "race": "Chaos",
       "specialRules": "Favoured of Nurgle",
       "apothecary": false
     },
@@ -1482,6 +1499,7 @@
       ],
       "reRollCost": 70000,
       "tier": 3,
+      "race": "Other",
       "specialRules": "Badlands Brawl, Low Cost Linemen, Old World Classic",
       "apothecary": true
     },
@@ -1651,6 +1669,7 @@
       "bigGuyRules": "An Old World Alliance team may include a single Big Guy, chosen from among the following:",
       "reRollCost": 70000,
       "tier": 1,
+      "race": "Other",
       "specialRules": "Old World Classic",
       "apothecary": true
     },
@@ -1748,6 +1767,7 @@
       ],
       "reRollCost": 60000,
       "tier": 1,
+      "race": "Greenskins",
       "specialRules": "Badlands Brawl",
       "apothecary": true
     },
@@ -1830,6 +1850,7 @@
       ],
       "reRollCost": 70000,
       "tier": 1,
+      "race": "Undead",
       "specialRules": "Masters of Undeath, Sylvanian Spotlight",
       "apothecary": false
     },
@@ -1913,6 +1934,7 @@
       ],
       "reRollCost": 50000,
       "tier": 1,
+      "race": "Other",
       "specialRules": "Underworld Challenge",
       "apothecary": true
     },
@@ -2011,6 +2033,7 @@
       ],
       "reRollCost": 60000,
       "tier": 3,
+      "race": "Greenskins",
       "specialRules": "Bribery and Corruption, Low Cost Linemen, Underworld Challenge",
       "apothecary": true
     },
@@ -2079,6 +2102,7 @@
       ],
       "reRollCost": 70000,
       "tier": 2,
+      "race": "Undead",
       "specialRules": "Sylvanian Spotlight",
       "apothecary": false
     },
@@ -2206,6 +2230,7 @@
       "bigGuyRules": "An Underworld Denizens team may include a single Big Guy, chosen from among the following:",
       "reRollCost": 70000,
       "tier": 2,
+      "race": "Other",
       "specialRules": "Bribery and Corruption, Underworld Challenge",
       "apothecary": true
     },
@@ -2247,6 +2272,7 @@
       ],
       "reRollCost": 70000,
       "tier": 2,
+      "race": "Undead",
       "specialRules": "Sylvanian Spotlight",
       "apothecary": true
     },
@@ -2331,6 +2357,7 @@
       ],
       "reRollCost": 50000,
       "tier": 1,
+      "race": "Elven",
       "specialRules": "Elven Kingdoms League",
       "apothecary": true
     }

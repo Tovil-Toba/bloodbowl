@@ -33,6 +33,17 @@ export class TeamRostersService extends Crud<TeamRosterModel> {
     return _.filter(this.teamRosters, teamRoster => teamRoster.specialRules.toLowerCase().includes(specialRules));
   }
 
+  getTeamRostersByRaces(): Record<number, TeamRosterModel[]> {
+    const teamRostersByRaces: Record<number, TeamRosterModel[]> = {};
+    this.teamRosters.forEach((teamRoster: TeamRosterModel) => {
+      if (!teamRostersByRaces[teamRoster.race]) {
+        teamRostersByRaces[teamRoster.race] = [];
+      }
+      teamRostersByRaces[teamRoster.race].push(teamRoster);
+    });
+    return teamRostersByRaces;
+  }
+
   getTeamRostersByTiers(): Record<number, TeamRosterModel[]> {
     const teamRostersByTiers: Record<number, TeamRosterModel[]> = {};
     this.teamRosters.forEach((teamRoster: TeamRosterModel) => {

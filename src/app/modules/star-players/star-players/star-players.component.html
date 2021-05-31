@@ -14,7 +14,7 @@
       [value]="starPlayersTableRows"
       [rows]="10"
       [paginator]="true"
-      [globalFilterFields]="['name', 'skillsAndTraits']"
+      [globalFilterFields]="['name', 'position', 'skillsAndTraits']"
       [rowHover]="true"
       dataKey="id"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -22,14 +22,23 @@
     >
       <ng-template pTemplate="caption">
         <div class="p-d-flex p-ai-center p-jc-between">
-          <button
-            pButton
-            pRipple
-            label="New Star Player"
-            icon="pi pi-plus"
-            class="p-button-success p-mr-2"
-            (click)="openNewStarPlayerDialog()"
-          ></button>
+          <div class="p-d-flex p-ai-center">
+            <button
+              pButton
+              pRipple
+              label="New Star Player"
+              icon="pi pi-plus"
+              class="p-button-success p-mr-2"
+              (click)="openNewStarPlayerDialog()"
+            ></button>
+            <p-dropdown
+              [options]="positions"
+              placeholder="Position"
+              [showClear]="true"
+              (onChange)="starPlayersTable.filterGlobal($event.value, 'equals')"
+              class="position"
+            ></p-dropdown>
+          </div>
           <span class="p-input-icon-left">
             <i class="pi pi-search"></i>
             <input

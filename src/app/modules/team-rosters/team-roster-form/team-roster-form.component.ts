@@ -8,6 +8,8 @@ import { PlayerProfileModel } from '../../shared/player-profile.model';
 import { TeamRosterModel } from '../shared/team-roster.model';
 import { TeamRostersService } from '../shared/team-rosters.service';
 
+import { TEAM_ROSTER_RACES } from '../shared/team-roster-races';
+
 @Component({
   selector: 'app-team-roster-form',
   templateUrl: './team-roster-form.component.html',
@@ -27,6 +29,7 @@ export class TeamRosterFormComponent implements DoCheck {
   loading = false;
   oldTeamRoster: TeamRosterModel;
   submitLoading = false;
+  teamRosterRaces: string[] = TEAM_ROSTER_RACES;
 
   constructor(
     private confirmationService: ConfirmationService,

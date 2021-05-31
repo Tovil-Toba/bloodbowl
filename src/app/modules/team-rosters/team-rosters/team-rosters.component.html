@@ -11,10 +11,10 @@
   <p-panel header="Teams" styleClass="animation">
     <p-table
       #teamRostersTable
-      [value]="teamRostersService.teamRosters"
+      [value]="teamRosters"
       [rows]="10"
       [paginator]="true"
-      [globalFilterFields]="['name']"
+      [globalFilterFields]="['name', 'tier', 'race', 'apothecary']"
       [rowHover]="true"
       dataKey="id"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -22,14 +22,42 @@
     >
       <ng-template pTemplate="caption">
         <div class="p-d-flex p-ai-center p-jc-between">
-          <button
-            pButton
-            pRipple
-            label="New Team Roster"
-            icon="pi pi-plus"
-            class="p-button-success p-mr-2"
-            (click)="openNewTeamRosterDialog()"
-          ></button>
+          <div class="p-d-flex p-ai-center">
+            <button
+              pButton
+              pRipple
+              label="New Team Roster"
+              icon="pi pi-plus"
+              class="p-button-success p-mr-2"
+              (click)="openNewTeamRosterDialog()"
+            ></button>
+            <p-dropdown
+              [options]="tiers"
+              placeholder="Tier"
+              name="tier"
+              optionLabel="label"
+              optionValue="value"
+              [showClear]="true"
+              (onChange)="onTierChange($event.value)"
+              class="p-mr-2 tier"
+            ></p-dropdown>
+            <p-dropdown
+              [options]="teamRosterRaces"
+              placeholder="Race"
+              name="race"
+              [showClear]="true"
+              (onChange)="onRaceChange($event.value)"
+              class="p-mr-2 race"
+            ></p-dropdown>
+            <p-dropdown
+              [options]="apothecary"
+              placeholder="Apothecary"
+              name="apothecary"
+              [showClear]="true"
+              (onChange)="onApothecaryChange($event.value)"
+              class="apothecary"
+            ></p-dropdown>
+          </div>
           <span class="p-input-icon-left">
             <i class="pi pi-search"></i>
             <input
@@ -46,6 +74,7 @@
           <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
           <th>Positions</th>
           <th pSortableColumn="tier" class="p-text-center">Tier<p-sortIcon field="tier"></p-sortIcon></th>
+          <th pSortableColumn="race">Race<p-sortIcon field="race"></p-sortIcon></th>
           <th pSortableColumn="reRollCost" class="p-text-center">Re-roll Cost<p-sortIcon field="reRollCost"></p-sortIcon></th>
           <th pSortableColumn="apothecary" class="p-text-center">Apothecary<p-sortIcon field="apothecary"></p-sortIcon></th>
           <th style="width: 9rem;"></th>
@@ -76,6 +105,7 @@
             </ng-container>
           </td>
           <td class="p-text-center text-top">{{teamRoster.tier}}</td>
+          <td class="text-top">{{teamRoster.race}}</td>
           <td class="p-text-center text-top">{{teamRoster.reRollCost | currency:' ':'symbol':'1.0-0'}}</td>
           <td class="p-text-center text-top">
             {{teamRoster.apothecary ? 'Yes' : 'No'}}

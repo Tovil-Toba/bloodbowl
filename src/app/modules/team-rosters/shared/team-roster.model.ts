@@ -10,6 +10,7 @@ export interface TeamRosterModel {
   bigGuyRules?: string;
   reRollCost: number;
   tier: number;
+  race: string;
   specialRules: string;
   apothecary: boolean;
 }

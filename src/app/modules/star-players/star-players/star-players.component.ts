@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 
+import { enterPageAnimation } from '../../../shared/animations';
 import { PlayerProfileModel } from '../../shared/player-profile.model';
 import { SkillModel } from '../../skills/shared/skill.model';
 import { StarPlayersService } from '../shared/star-players.service';
 import { StarPlayerModel } from '../shared/star-player.model';
 import { StarPlayer } from '../shared/star-player';
 import { StarPlayersTableRowModel } from '../shared/star-players-table-row.model';
-import { enterPageAnimation } from '../../../shared/animations';
+
+import { POSITIONS } from '../../../constants/positions';
 
 @Component({
   selector: 'app-star-players',
@@ -18,8 +20,9 @@ import { enterPageAnimation } from '../../../shared/animations';
 })
 export class StarPlayersComponent implements OnInit {
 
-  breadcrumbItems: MenuItem[];
+  breadcrumbItems: MenuItem[] = [];
   loading = false;
+  positions: string[] = POSITIONS;
   skill: SkillModel;
   skillInfoDialog = false;
   starPlayerFormDialog = false;
@@ -57,6 +60,7 @@ export class StarPlayersComponent implements OnInit {
     this.breadcrumbItems = [
       { label: 'Star Players' }
     ];
+    this.positions.splice(0, 1);
     this.getStarPlayerTableRows();
   }
 

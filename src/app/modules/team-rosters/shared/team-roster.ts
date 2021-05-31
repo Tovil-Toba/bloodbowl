@@ -11,6 +11,7 @@ export class TeamRoster implements TeamRosterModel {
   bigGuyRules?: string;
   reRollCost: number;
   tier: number;
+  race: string;
   specialRules: string;
   apothecary: boolean;
 
@@ -24,6 +25,7 @@ export class TeamRoster implements TeamRosterModel {
     this.bigGuyRules = teamRoster?.bigGuyRules;
     this.reRollCost = teamRoster?.reRollCost ?? 0;
     this.tier = teamRoster?.tier ?? 1;
+    this.race = teamRoster?.race ?? 'Other';
     this.specialRules = teamRoster?.specialRules ?? '';
     this.apothecary = !!teamRoster?.name;
   }

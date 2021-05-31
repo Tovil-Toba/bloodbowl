@@ -433,6 +433,18 @@
     </span>
   </div>
 
+  <div class="p-field p-col">
+    <span class="p-float-label">
+      <p-dropdown
+        inputId="race"
+        [options]="teamRosterRaces"
+        [(ngModel)]="clonedTeamRoster.race"
+        name="race"
+      ></p-dropdown>
+      <label for="race">Race</label>
+    </span>
+  </div>
+
   <div class="p-field-checkbox p-col-12">
     <p-checkbox
       inputId="apothecary"

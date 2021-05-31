@@ -26,6 +26,26 @@ export class TeamsService extends Crud<TeamModel> {
     super('api/teams', http, messageService);
   }
 
+  getTeamsByRaces(): Record<string, TeamModel[]> {
+    const racesByTeamRosters: Record<string, string> = {};
+    this.teamRostersService.teamRosters.forEach((teamRoster: TeamRosterModel) => {
+      if (!racesByTeamRosters[teamRoster.name]) {
+        racesByTeamRosters[teamRoster.name] = teamRoster.race;
+      }
+    });
+
+    const teamsByRaces: Record<number, TeamModel[]> = {};
+    this.teams.forEach((team: TeamModel) => {
+      const race = racesByTeamRosters[team.roster];
+      if (!teamsByRaces[race]) {
+        teamsByRaces[race] = [];
+      }
+      teamsByRaces[race].push(team);
+    });
+
+    return teamsByRaces;
+  }
+
   getTeamsByTiers(): Record<number, TeamModel[]> {
     const tiersByTeamRosters: Record<string, number> = {};
     this.teamRostersService.teamRosters.forEach((teamRoster: TeamRosterModel) => {

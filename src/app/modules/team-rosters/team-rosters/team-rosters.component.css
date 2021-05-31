@@ -15,6 +15,18 @@
   margin-block-end: 0;
 }
 
+::ng-deep .apothecary .p-dropdown {
+  width: 10rem;
+}
+
+::ng-deep .race .p-dropdown {
+  width: 10rem;
+}
+
+::ng-deep .tier .p-dropdown {
+  width: 10rem;
+}
+
 .position:hover {
   cursor: pointer;
   color: var(--primary-color);

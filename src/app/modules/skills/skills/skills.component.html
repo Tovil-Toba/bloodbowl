@@ -14,7 +14,7 @@
       [value]="skillsService.skills"
       [rows]="10"
       [paginator]="true"
-      [globalFilterFields]="['name','rank']"
+      [globalFilterFields]="['category', 'name']"
       [rowHover]="true"
       dataKey="id"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -22,14 +22,25 @@
     >
       <ng-template pTemplate="caption">
         <div class="p-d-flex p-ai-center p-jc-between">
-          <button
-            pButton
-            pRipple
-            label="New Skill"
-            icon="pi pi-plus"
-            class="p-button-success p-mr-2"
-            (click)="openNewSkillDialog()"
-          ></button>
+          <div class="p-d-flex p-ai-center">
+            <button
+              pButton
+              pRipple
+              label="New Skill"
+              icon="pi pi-plus"
+              class="p-button-success p-mr-2"
+              (click)="openNewSkillDialog()"
+            ></button>
+            <p-dropdown
+              [options]="skillCategories"
+              placeholder="Category"
+              optionLabel="name"
+              optionValue="name"
+              [showClear]="true"
+              (onChange)="skillsTable.filterGlobal($event.value, 'equals')"
+              class="category"
+            ></p-dropdown>
+          </div>
           <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
           <input

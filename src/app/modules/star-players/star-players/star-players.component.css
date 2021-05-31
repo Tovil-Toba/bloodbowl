@@ -1,3 +1,7 @@
 .text-top {
   vertical-align: top;
 }
+
+::ng-deep .position .p-dropdown {
+  width: 10rem;
+}

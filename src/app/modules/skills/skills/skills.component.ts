@@ -7,6 +7,9 @@ import { Skill } from '../shared/skill';
 import { SkillModel } from '../shared/skill.model';
 import { SkillsService } from '../shared/skills.service';
 
+import { SKILL_CATEGORIES } from '../shared/skill-categories';
+import { SkillCategoryModel } from '../shared/skill-category.model';
+
 @Component({
   selector: 'app-skills',
   templateUrl: './skills.component.html',
@@ -23,6 +26,7 @@ export class SkillsComponent implements OnInit {
   loading = false;
   skill: SkillModel;
   skills: SkillModel[] = [];
+  skillCategories: SkillCategoryModel[] = SKILL_CATEGORIES;
   skillFormDialog = false;
 
   constructor(

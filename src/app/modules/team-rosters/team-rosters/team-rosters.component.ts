@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MenuItem } from 'primeng/api';
+import * as _ from 'lodash';
 
 import { enterPageAnimation } from '../../../shared/animations';
 import { PlayerProfileModel } from '../../shared/player-profile.model';
 import { TeamRoster } from '../shared/team-roster';
 import { TeamRosterModel } from '../shared/team-roster.model';
 import { TeamRostersService } from '../shared/team-rosters.service';
+
+import { TEAM_ROSTER_RACES } from '../shared/team-roster-races';
 
 @Component({
   selector: 'app-team-rosters',
@@ -16,12 +19,25 @@ import { TeamRostersService } from '../shared/team-rosters.service';
 })
 export class TeamRostersComponent implements OnInit {
 
+  apothecary = [
+    { label: 'Yes', value: true },
+    { label: 'No', value: false },
+  ];
   breadcrumbItems: MenuItem[] = [];
   loading = false;
+  selectedApothecary: boolean | null = null;
+  selectedRace: string | null = null;
+  selectedTier: number | null = null;
   teamRoster: TeamRosterModel;
   teamRosters: TeamRosterModel[] = [];
   teamRosterFormDialog = false;
   teamRosterInfoDialog = false;
+  teamRosterRaces: string[] = TEAM_ROSTER_RACES;
+  tiers = [
+    { label: 'Tier 1', value: 1 },
+    { label: 'Tier 2', value: 2 },
+    { label: 'Tier 3', value: 3 }
+  ];
 
   constructor(
     private confirmationService: ConfirmationService,
@@ -84,10 +100,26 @@ export class TeamRostersComponent implements OnInit {
     this.breadcrumbItems = [
       { label: 'Team Rosters' }
     ];
+    this.teamRosters = _.clone(this.teamRostersService.teamRosters);
   }
 
   onTeamRosterFormSubmit(teamRoster: TeamRosterModel): void {
     this.teamRosterFormDialog = false;
+  }
+
+  onApothecaryChange(apothecary: boolean | null) {
+    this.selectedApothecary = apothecary;
+    this.applyFilters();
+  }
+
+  onRaceChange(race: string | null): void {
+    this.selectedRace = race;
+    this.applyFilters();
+  }
+
+  onTierChange(tier: number | null): void {
+    this.selectedTier = tier;
+    this.applyFilters();
   }
 
   openNewTeamRosterDialog(): void {
@@ -99,4 +131,26 @@ export class TeamRostersComponent implements OnInit {
     this.teamRoster = teamRoster;
     this.teamRosterInfoDialog = true;
   }
+
+  private applyFilters(): void {
+    if (this.selectedTier === null && this.selectedRace === null && this.selectedApothecary === null) {
+      this.teamRosters = _.clone(this.teamRostersService.teamRosters);
+      return;
+    }
+
+    let teamRosters = _.clone(this.teamRostersService.teamRosters);
+
+    if (this.selectedTier) {
+      teamRosters = _.filter(teamRosters, { tier: this.selectedTier });
+    }
+    if (this.selectedRace) {
+      teamRosters = _.filter(teamRosters, { race: this.selectedRace });
+    }
+    if (this.selectedApothecary !== null) {
+      teamRosters = _.filter(teamRosters, { apothecary: this.selectedApothecary });
+    }
+
+    this.teamRosters = teamRosters;
+  }
+
 }

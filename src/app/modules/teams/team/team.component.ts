@@ -80,7 +80,7 @@ export class TeamComponent implements OnInit, DoCheck {
   onCarouselPage(event: { page: number }) {
     const team = this.teamsService.teams[event.page];
     this.getTeam(team.urlId);
-    window.history.pushState('', '', `/teams/${team.urlId}`);
+    this.router.navigate([`/teams/${team.urlId}`]);
   }
 
   private get urlId(): string {

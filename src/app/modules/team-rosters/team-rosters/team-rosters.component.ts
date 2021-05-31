@@ -53,6 +53,7 @@ export class TeamRostersComponent implements OnInit {
         this.teamRostersService.deleteItem(teamRoster.id).subscribe(() => {
           this.teamRostersService.teamRosters = this.teamRostersService.teamRosters
             .filter(val => val.id !== teamRoster.id);
+          this.teamRosters = this.teamRosters.filter(val => val.id !== teamRoster.id);
         });
       }
     });

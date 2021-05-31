@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { TeamModel } from '../../teams/shared/team.model';
@@ -10,24 +10,18 @@ import { TeamRostersService } from '../../team-rosters/shared/team-rosters.servi
   templateUrl: './team-info.component.html',
   styleUrls: ['./team-info.component.css']
 })
-export class TeamInfoComponent implements OnInit {
+export class TeamInfoComponent {
 
   @Input() team: TeamModel;
 
   teamRoster: TeamRosterModel;
   teamRosterInfoDialog = false;
-  teamRosterInfoUrl = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private teamRostersService: TeamRostersService
   ) { }
-
-  ngOnInit(): void {
-    this.teamRosterInfoUrl = this.activatedRoute.snapshot.url[0].path === 'teams' &&
-      this.activatedRoute.snapshot.url[1]?.path === this.team.urlId;
-  }
 
   navigateToTeamRoster(teamRosterName: string): void {
     this.teamRoster = this.teamRostersService.getTeamRosterByName(teamRosterName);
@@ -40,7 +34,9 @@ export class TeamInfoComponent implements OnInit {
   }
 
   showTeamRoster(teamRosterName: string): void {
-    if (this.teamRosterInfoUrl) {
+    if (this.activatedRoute.snapshot.url[0].path === 'teams' &&
+      this.activatedRoute.snapshot.url[1]?.path === this.team.urlId
+    ) {
       this.navigateToTeamRoster(teamRosterName);
     } else {
       this.openTeamRosterInfoDialog(teamRosterName);

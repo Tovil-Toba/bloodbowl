@@ -361,7 +361,7 @@
       "id": 52,
       "category": "Strength",
       "name": "Grab",
-      "description": "<p>When this player performs a Block action (on its own or as part of a Blitz action), using this Skill prevents the target of the Block action from using the Side Step skill.</p><p>When this player performs a Block action (on its own or as part of a Blitz action), using this Skill prevents the target of the Block action from using the Side Step skill.</p><p>When this player performs a Block action (on its own or as part of a Blitz action), using this Skill prevents the target of the Block action from using the Side Step skill.</p>",
+      "description": "<p>When this player performs a Block action (on its own or as part of a Blitz action), using this Skill prevents the target of the Block action from using the Side Step skill.</p><p>Additionally, when this player performs a Block Action on its own (but not as part of a Blitz action), if the target is pushed back, this player may choose any unoccupied square adjacent to the target to push that player into. If there are no unoccupied squares, this Skill cannot be used.</p><p>A player with this Skill cannot also have the Frenzy skill.</p>",
       "compulsory": false
     },
     {

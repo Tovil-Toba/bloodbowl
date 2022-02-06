@@ -2360,6 +2360,74 @@
       "race": "Elven",
       "specialRules": "Elven Kingdoms League",
       "apothecary": true
+    },
+    {
+      "id": 28,
+      "urlId": "khorne",
+      "name": "Khorne",
+      "description": "",
+      "playerProfiles": [
+        {
+          "id": 1,
+          "quantity": 16,
+          "position": "Bloodborn Marauder Linemen",
+          "cost": 50000,
+          "movementAllowance": 6,
+          "strength": 3,
+          "agility": 3,
+          "passingAbility": 4,
+          "armourValue": 8,
+          "skillsAndTraits": "Frenzy",
+          "primary": "GM",
+          "secondary": "AS"
+        },
+        {
+          "id": 2,
+          "quantity": 4,
+          "position": "Khorngors",
+          "cost": 70000,
+          "movementAllowance": 6,
+          "strength": 3,
+          "agility": 3,
+          "passingAbility": 4,
+          "armourValue": 9,
+          "skillsAndTraits": "Horns, Juggernaut",
+          "primary": "GMS",
+          "secondary": "AP"
+        },
+        {
+          "id": 3,
+          "quantity": 4,
+          "position": "Bloodseekers",
+          "cost": 110000,
+          "movementAllowance": 5,
+          "strength": 4,
+          "agility": 4,
+          "passingAbility": 6,
+          "armourValue": 10,
+          "skillsAndTraits": "Frenzy",
+          "primary": "GMS",
+          "secondary": "A"
+        },
+        {
+          "id": 4,
+          "quantity": 1,
+          "position": "Bloodspawn",
+          "cost": 160000,
+          "movementAllowance": 5,
+          "strength": 5,
+          "agility": 4,
+          "armourValue": 9,
+          "skillsAndTraits": "Claws, Frenzy, Loner (4+), Mighty Blow (+1), Unchannelled Fury",
+          "primary": "MS",
+          "secondary": "AG"
+        }
+      ],
+      "reRollCost": 60000,
+      "tier": 2,
+      "race": "Chaos",
+      "specialRules": "Favoured of Khorne",
+      "apothecary": true
     }
   ]
 }
